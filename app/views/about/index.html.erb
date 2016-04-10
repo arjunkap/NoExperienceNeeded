@@ -1,44 +1,145 @@
-<div class="container">
-  <div class="slider">
+<section class="big_screen">
+  <ul class="carousel">
+    <li class="items main-pos" id="1"> <%= image_tag "colab.jpg" %> </li>
+    <li class="items right-pos" id="2">
+      <%= image_tag "intern.png" %>
+    </li>
+
+    <li class="items back-pos" id="3">
+      <%= image_tag "workingtogeth.jpg" %>
+    </li>
+    <li class="items back-pos" id="4"> <%= image_tag "JobSearchNewspaper.jpeg" %> </li>
+    <li class="items back-pos" id="5">
+      <%= image_tag "job.jpg" %>
+    </li>
+    <li class="items back-pos" id="6">
+      <%= image_tag "job-seeking-graduates-thumb.jpg" %>
+    </li>
+    <li class="items left-pos" id="7">  <%= image_tag "sign.jpg" %>
+    </li>
+  </ul>
+
+</section>
+<div id="slider" class="small_screen">
     <ul class="slides">
-      <li class="slide"><%= image_tag "02.jpg" %></li>
-      <li class="slide"><%= image_tag "04.jpg" %></li>
-      <li class="slide"><%= image_tag "05.jpg" %></li>
-      <li class="slide"><%= image_tag "09.jpg" %></li>
+       <li class="slide"> <%= image_tag "colab.jpg" %> </li>
+        <li class="slide"> <%= image_tag "intern.png" %></li>
+        <li class="slide"> <%= image_tag "workingtogeth.jpg" %></li>
+        <li class="slide">  <%= image_tag "JobSearchNewspaper.jpeg" %></li>
+        <li class="slide"> <%= image_tag "job.jpg" %> </li>
+        <li class="slide"> <%= image_tag "job-seeking-graduates-thumb.jpg" %> </li>
+        <li class="side"> <%= image_tag "sign.jpg" %></li>
     </ul>
-  </div>
+
 </div>
+<div class="buttons">
+  <button class="btn" id="next">Next</button>
 
-
-<style>
-.slides{
-  display: block;
-  width: 2400px;
-  margin: 0;
-  padding: 0;
-}
-.slide{
-  float: left;
-  list-style-type: none;
-  width: 600px;
-}
-.slider{
-  overflow: hidden;
-  width: 600px;
-  margin: 0 auto;
-}
-
-</style>
+ <button class="btn" id="back">Back</button>
+</div>
 <script>
-  var myInterval = setInterval(function(){
-    console.log(new Date());
-  });
-  $(function(){
-    //set interval
-    //animate margin-left
-    // if it's last slide go to slide1
 
-    //listen to event
-  
-  });
+var items = [];
+var startItem = 1;
+var position = 0;
+var itemCount = $('.carousel li.items').length;
+var leftpos = itemCount;
+var resetCount = itemCount;
+var totalSlides = 7;
+var imageWidth = 485;
+
+$('li.items').each(function(index) {
+    items[index] = $(this).text();
+});
+
+function swap(action) {
+  var direction = action;
+
+
+  if(direction == 'counter-clockwise') {
+    var leftitem = $('.left-pos').attr('id') - 1;
+    if(leftitem == 0) {
+      leftitem = itemCount;
+    }
+
+    $('.right-pos').removeClass('right-pos').addClass('back-pos');
+    $('.main-pos').removeClass('main-pos').addClass('right-pos');
+    $('.left-pos').removeClass('left-pos').addClass('main-pos');
+    $('#'+leftitem+'').removeClass('back-pos').addClass('left-pos');
+
+    startItem--;
+    if(startItem < 1) {
+      startItem = itemCount;
+    }
+  }
+  if(direction == 'clockwise' || direction == '' || direction == null ) {
+    function pos(positionvalue) {
+      if(positionvalue != 'leftposition') {
+        position++;
+        if((startItem+position) > resetCount) {
+          position = 1-startItem;
+        }
+      }
+      if(positionvalue == 'leftposition') {
+        position = startItem - 1;
+        if(position < 1) {
+          position = itemCount;
+        }
+      }
+
+      return position;
+    }
+
+   $('#'+ startItem +'').removeClass('main-pos').addClass('left-pos');
+   $('#'+ (startItem+pos()) +'').removeClass('right-pos').addClass('main-pos');
+   $('#'+ (startItem+pos()) +'').removeClass('back-pos').addClass('right-pos');
+   $('#'+ pos('leftposition') +'').removeClass('left-pos').addClass('back-pos');
+
+    startItem++;
+    position=0;
+    if(startItem > itemCount) {
+      startItem = 1;
+    }
+  }
+}
+
+
+$('li').click(function() {
+
+  if($(this).attr('class') == 'items left-pos') {
+        swap('counter-clockwise');
+
+  }
+  else {
+    swap('clockwise');
+  }
+});
+var currentSlide = 1;
+
+$('#next').click(function(){
+  if(currentSlide == totalSlides){
+    $('#slider .slides').css('margin-left', "0px");
+    currentSlide = 1;
+  }
+  else{
+    $('#slider .slides').css('margin-left', "-=" + imageWidth + "px")
+    currentSlide++;
+  }
+
+}
+);
+$('#back').click(function(){
+  if(currentSlide == 1){
+    $('#slider .slides').css('margin-left', (1-totalSlides)*imageWidth + "px");
+    currentSlide = totalSlides;
+  }
+  else{
+    $('#slider .slides').css('margin-left', "+=" + imageWidth + "px")
+    currentSlide--;
+  }
+  console.log("currentSlide : " + currentSlide + " " + "margin : " + $('#slider .slides').css('margin-left'));
+}
+
+);
+
 </script>

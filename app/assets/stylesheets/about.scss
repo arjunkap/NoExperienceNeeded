@@ -1,3 +1,192 @@
-// Place all the styles related to the About controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.small_screen, .buttons{
+  display: none;
+
+}
+
+@media only screen and (max-width: 768px) {
+
+  li, img{
+    width: 30em;
+  }
+  .big_screen{
+    display: none;
+  }
+
+  .small_screen{
+    display: flex;
+  }
+  .buttons{
+    display: block;
+  }
+
+.main-pos{
+    margin-left: 0;
+  }
+   .left-pos{
+    margin-left: -17em;
+
+  }
+  .right-pos{
+    margin-right: 17em;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+
+  li.main-pos, .main-pos img{
+    width: 18em!important;
+
+  }
+  /*.small_screen{
+    display: block;
+
+  }*/
+
+
+
+  img{
+    height: auto!important;
+  }
+  li{
+    max-height: 159px!important;
+  }
+
+  .left-pos{
+    margin-left: -17em!important;
+    width: 8em;
+  }
+  .right-pos{
+    margin-left: 17em!important;
+    width: 9em;
+  }
+  .main-pos{
+    margin-left: -8px!important;
+  }
+  .left-pos, .right-pos, .back-pos{
+    overflow: hidden!important;
+  }
+  .main-pos{
+    display: block!important;
+  }
+
+}
+section {
+  width: 40em;
+  height: 25em;
+  margin: auto auto;
+  position: relative;
+}
+.container{
+  margin: 20px auto;
+}
+
+li.slide {
+  /*width: 500px;*/
+  height: 250px;
+  background: #333;
+  display: inline-block;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  overflow: hidden;
+  cursor: pointer;
+}
+li.main-pos{
+  cursor: default;
+}
+img{
+  width: 500px;
+}
+.items {
+  position: absolute;
+}
+
+.main-pos {
+  margin-left: 2em;
+  z-index: 3000;
+}
+
+.left-pos {
+  opacity: .3;
+  margin-left: -17em;
+  z-index: 1000;
+  -webkit-transform: scale(.75);
+  -moz-transform: scale(.75);
+  transform: scale(.75);
+}
+
+.back-pos {
+  margin-left: 2em;
+  opacity: .05;
+  -webkit-transform: scale(.5);
+  -moz-transform: scale(.5);
+  transform: scale(.5);
+}
+
+.right-pos {
+  opacity: .3;
+  margin-left:  21em;
+  z-index: 1000;
+  -webkit-transform: scale(.75);
+  -moz-transform: scale(.75);
+  transform: scale(.75);
+}
+
+span {
+  position: relative;
+  margin: 0 auto;
+  left: 17em;
+  top: 20em;
+}
+input[type="button"]{
+  display: none;
+}
+.row{
+  /*max-width: 80%;*/
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+}
+
+h2{
+  color: #78a300;
+  margin: 40px auto;
+  letter-spacing: 1px;
+}
+.row p{
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+#slider {
+width: 485px;
+height: 400px;
+overflow: hidden;
+margin: 0 auto;
+}
+.header{
+margin: 0 auto;
+text-align: center;
+}
+
+#slider .slides {
+display: block;
+width: 3395px;
+height: 400px;
+margin: 0;
+padding: 0;
+}
+
+#slider .slide {
+float: left;
+list-style-type: none;
+width: 485px;
+height: 400px;
+}
+.buttons{
+  text-align: center;
+}
+.container{
+  padding-left: 0;
+}
