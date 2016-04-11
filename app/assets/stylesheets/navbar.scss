@@ -1,0 +1,77 @@
+
+h3 {
+
+    font-size: 72px;
+    text-align: center;
+    line-height: 1.2%;
+}
+
+#navbar {
+    align-content: center;
+    background-color: white;
+
+    font-size: 20px;
+
+    border-radius: 0;
+
+
+}
+
+input[type="text"],input[type="password"] {
+    font-size:auto;
+    text-align:center;
+    background-color: whitesmoke;
+}
+
+.navbar-header {
+
+    font-size: 30px;
+
+}
+
+#menu, #menuOptions, #login {
+    background: rgba(0,0,0,0);
+    border:none;
+    box-shadow: none;
+    padding-left: 18px;
+    padding-top: 11px;
+    font-size : 20px;
+}
+.modal-footer  {
+    border: none;
+    padding-top: none;
+    padding-bottom: none;
+    align-content: center;
+    width: 100%;
+
+
+}
+
+.modal-content {
+    width: 100%;
+    align-content: center;
+    line-height: 35px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+#login {
+    padding-top: 5%;
+}
+
+#submit {
+    font-size: 20px;
+    margin-left: 33%;
+    background-color: rgba(0,0,0,0);
+}
+
+div.modal-backdrop {
+    z-index: 0;
+}
+
+#loginButton {
+    background-color: rgba(0,0,0,0);
+    color: black;
+    border-color: rgba(0,0,0,0);
+}

@@ -6,6 +6,9 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <style>
+
+</style>
 </head>
 <body>
   <nav class="navbar navbar-default">
@@ -26,14 +29,71 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/about">About</a></li>
+          <li><a type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#login" id = "loginButton">LOGIN</a></li>
 
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+  <div class="modal fade" id="login" role="dialog">
+    <div class="modal-dialog">
+
+
+      <div class="modal-content col-sm-10">
+
+          <!-- Form for username and password -->
+          <div class = "container-fluid" id = "existingUser">
+          <p><h3>login:</h3></p><br>
+          <form role = "form" id = "login" method="post">
+            <input type = "text" class="form-control col-sm-6 input-lg" placeholder = "username" name = "username"><br><br>
+            <input type = "password" class="form-control col-sm-6 input-lg" placeholder = "password" name = "password"><br><br>
+              <button type = "submit" disabled class = "btn btn-default" id = "submit"><b>submit</b></button>
+          </form>
+
+            </div>
+
+      <!-- Sign up and forgotten password links-->
+      <div class = "modal-footer">
+          <p>&nbsp;  <a href="/error" > FIRST TIME </a> USER</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/error" id = "forgottenPassword">FORGOT YOUR PASSWORD?</a></p>
+      </div>
+
+      </div>
+
+        </div>
+
+    </ul>
+        </div>
 
 <%= yield %>
+<script>
 
+    /* TEMPORARY: reacts to the submission from the search bar form */
+    $(document).ready(function(){
+        $("form").submit(function(){
+            var search = $('#searchbar').find('input[name="field"]').val();
+            var returnString = "You searched for: " + search.toUpperCase() + "." + "\nThis feature is still under construction.\nBummer."
+
+            alert(returnString);
+
+        });
+    });
+
+    <!-- Changes the navigation bar when hovered over-->
+   $(document).ready(function(){
+
+        $("#brand,#menu,#loginButton,#menuOptions").hover(function(){
+            $(this).css("text-transform", "capitalize");
+            $(this).css("color", "crimson");
+        }, function(){
+            $(this).removeAttr('style');
+        });
+
+
+    });
+
+
+</script>
 </body>
 
 </html>

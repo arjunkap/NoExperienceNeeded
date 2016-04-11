@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/error', to: "error#four_o_four"
+
   get '/about', to: 'about#index'
 
   get 'welcome/index'
