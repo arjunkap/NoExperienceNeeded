@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160428122705) do
+ActiveRecord::Schema.define(version: 20160428131428) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer"
@@ -111,7 +111,10 @@ ActiveRecord::Schema.define(version: 20160428122705) do
     t.date     "last_login"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "super_user_id"
   end
+
+  add_index "logins", ["super_user_id"], name: "index_logins_on_super_user_id"
 
   create_table "members", force: :cascade do |t|
     t.date     "date_joined"
@@ -141,7 +144,10 @@ ActiveRecord::Schema.define(version: 20160428122705) do
     t.text     "about_me"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.integer  "super_user_id"
   end
+
+  add_index "profiles", ["super_user_id"], name: "index_profiles_on_super_user_id"
 
   create_table "questions", force: :cascade do |t|
     t.string   "question"
@@ -156,9 +162,13 @@ ActiveRecord::Schema.define(version: 20160428122705) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "super_user_id"
+    t.integer  "reported_about"
   end
+
+  add_index "reports", ["super_user_id"], name: "index_reports_on_super_user_id"
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "rating"
@@ -176,9 +186,14 @@ ActiveRecord::Schema.define(version: 20160428122705) do
   end
 
   create_table "skill_verifiers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "super_user_id"
+    t.integer  "skill_id"
   end
+
+  add_index "skill_verifiers", ["skill_id"], name: "index_skill_verifiers_on_skill_id"
+  add_index "skill_verifiers", ["super_user_id"], name: "index_skill_verifiers_on_super_user_id"
 
   create_table "skills", force: :cascade do |t|
     t.string   "skill_name"
@@ -210,7 +225,10 @@ ActiveRecord::Schema.define(version: 20160428122705) do
     t.string   "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "login_id"
   end
+
+  add_index "tokens", ["login_id"], name: "index_tokens_on_login_id"
 
   create_table "upvotes", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -218,8 +236,13 @@ ActiveRecord::Schema.define(version: 20160428122705) do
   end
 
   create_table "user_locations", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "super_user_id"
+    t.integer  "location_id"
   end
+
+  add_index "user_locations", ["location_id"], name: "index_user_locations_on_location_id"
+  add_index "user_locations", ["super_user_id"], name: "index_user_locations_on_super_user_id"
 
 end
