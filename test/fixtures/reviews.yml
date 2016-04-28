@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rating: 1
+  description: MyText
+  isAnonymous: false
+  title: MyString
+
+two:
+  rating: 1
+  description: MyText
+  isAnonymous: false
+  title: MyString
