@@ -1,3 +1,3 @@
 class Location < ActiveRecord::Base
-  has_many :user_location
+  has_many :user_locations
 end
