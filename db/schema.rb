@@ -11,13 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160429000020) do
+ActiveRecord::Schema.define(version: 20160429004745) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "question_id"
   end
+
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
 
   create_table "attachments", force: :cascade do |t|
     t.datetime "created_at",        null: false
@@ -38,7 +41,12 @@ ActiveRecord::Schema.define(version: 20160429000020) do
     t.string   "industry_name"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "industry_id"
+    t.integer  "company_id"
   end
+
+  add_index "company_industries", ["company_id"], name: "index_company_industries_on_company_id"
+  add_index "company_industries", ["industry_id"], name: "index_company_industries_on_industry_id"
 
   create_table "content_ratings", force: :cascade do |t|
     t.integer  "rating"
@@ -52,6 +60,11 @@ ActiveRecord::Schema.define(version: 20160429000020) do
   add_index "content_ratings", ["content_id"], name: "index_content_ratings_on_content_id"
   add_index "content_ratings", ["job_seeker_id"], name: "index_content_ratings_on_job_seeker_id"
 
+  create_table "content_types", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "content_views", force: :cascade do |t|
     t.date     "date_viewed"
     t.datetime "created_at",  null: false
@@ -61,12 +74,12 @@ ActiveRecord::Schema.define(version: 20160429000020) do
   create_table "contents", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "contrent_type_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "content_type_id"
   end
 
-  add_index "contents", ["contrent_type_id"], name: "index_contents_on_contrent_type_id"
+  add_index "contents", ["content_type_id"], name: "index_contents_on_content_type_id"
 
   create_table "industries", force: :cascade do |t|
     t.string   "name"
@@ -75,9 +88,14 @@ ActiveRecord::Schema.define(version: 20160429000020) do
   end
 
   create_table "interview_questions", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "interview_review_id"
+    t.integer  "question_id"
   end
+
+  add_index "interview_questions", ["interview_review_id"], name: "index_interview_questions_on_interview_review_id"
+  add_index "interview_questions", ["question_id"], name: "index_interview_questions_on_question_id"
 
   create_table "interview_reviews", force: :cascade do |t|
     t.string   "company_name"
@@ -90,7 +108,10 @@ ActiveRecord::Schema.define(version: 20160429000020) do
     t.integer  "duration"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "company_id"
   end
+
+  add_index "interview_reviews", ["company_id"], name: "index_interview_reviews_on_company_id"
 
   create_table "job_portfolios", force: :cascade do |t|
     t.datetime "created_at",        null: false
@@ -233,9 +254,12 @@ ActiveRecord::Schema.define(version: 20160429000020) do
 
   create_table "sub_industries", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "industry_id"
   end
+
+  add_index "sub_industries", ["industry_id"], name: "index_sub_industries_on_industry_id"
 
   create_table "super_users", force: :cascade do |t|
     t.string   "user_name"
@@ -243,7 +267,10 @@ ActiveRecord::Schema.define(version: 20160429000020) do
     t.string   "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "company_id"
   end
+
+  add_index "super_users", ["company_id"], name: "index_super_users_on_company_id"
 
   create_table "title_types", force: :cascade do |t|
     t.string   "type"
