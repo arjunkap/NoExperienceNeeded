@@ -1,4 +1,4 @@
 class Login < ActiveRecord::Base
-  belongs_to :super_user
+  belongs_to :user
   has_one :token
 end

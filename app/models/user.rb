@@ -1,4 +1,4 @@
-class SuperUser < ActiveRecord::Base
+class User < ActiveRecord::Base
   has_one :login
   has_many :reports
   has_one :profile

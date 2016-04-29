@@ -1,4 +1,4 @@
 class Review < ActiveRecord::Base
-  has_one :super_user
+  has_one :user
   
 end

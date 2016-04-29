@@ -156,10 +156,10 @@ ActiveRecord::Schema.define(version: 20160429004745) do
     t.date     "last_login"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.integer  "super_user_id"
+    t.integer  "user_id"
   end
 
-  add_index "logins", ["super_user_id"], name: "index_logins_on_super_user_id"
+  add_index "logins", ["user_id"], name: "index_logins_on_user_id"
 
   create_table "members", force: :cascade do |t|
     t.date     "date_joined"
@@ -195,10 +195,10 @@ ActiveRecord::Schema.define(version: 20160429004745) do
     t.text     "about_me"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
-    t.integer  "super_user_id"
+    t.integer  "user_id"
   end
 
-  add_index "profiles", ["super_user_id"], name: "index_profiles_on_super_user_id"
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
 
   create_table "questions", force: :cascade do |t|
     t.string   "question"
@@ -215,11 +215,11 @@ ActiveRecord::Schema.define(version: 20160429004745) do
   create_table "reports", force: :cascade do |t|
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "super_user_id"
+    t.integer  "user_id"
     t.integer  "reported_about"
   end
 
-  add_index "reports", ["super_user_id"], name: "index_reports_on_super_user_id"
+  add_index "reports", ["user_id"], name: "index_reports_on_user_id"
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "rating"
@@ -237,14 +237,14 @@ ActiveRecord::Schema.define(version: 20160429004745) do
   end
 
   create_table "skill_verifiers", force: :cascade do |t|
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "super_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
     t.integer  "skill_id"
   end
 
   add_index "skill_verifiers", ["skill_id"], name: "index_skill_verifiers_on_skill_id"
-  add_index "skill_verifiers", ["super_user_id"], name: "index_skill_verifiers_on_super_user_id"
+  add_index "skill_verifiers", ["user_id"], name: "index_skill_verifiers_on_user_id"
 
   create_table "skills", force: :cascade do |t|
     t.string   "skill_name"
@@ -260,17 +260,6 @@ ActiveRecord::Schema.define(version: 20160429004745) do
   end
 
   add_index "sub_industries", ["industry_id"], name: "index_sub_industries_on_industry_id"
-
-  create_table "super_users", force: :cascade do |t|
-    t.string   "user_name"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "company_id"
-  end
-
-  add_index "super_users", ["company_id"], name: "index_super_users_on_company_id"
 
   create_table "title_types", force: :cascade do |t|
     t.string   "type"
@@ -293,14 +282,25 @@ ActiveRecord::Schema.define(version: 20160429004745) do
   end
 
   create_table "user_locations", force: :cascade do |t|
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "super_user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
     t.integer  "location_id"
   end
 
   add_index "user_locations", ["location_id"], name: "index_user_locations_on_location_id"
-  add_index "user_locations", ["super_user_id"], name: "index_user_locations_on_super_user_id"
+  add_index "user_locations", ["user_id"], name: "index_user_locations_on_user_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "user_name"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "company_id"
+  end
+
+  add_index "users", ["company_id"], name: "index_users_on_company_id"
 
   create_table "views", force: :cascade do |t|
     t.date     "date_viewed"
