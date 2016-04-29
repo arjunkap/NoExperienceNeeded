@@ -11,13 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160428131428) do
+ActiveRecord::Schema.define(version: 20160429000020) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "attachments", force: :cascade do |t|
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "portfolio_item_id"
+  end
+
+  add_index "attachments", ["portfolio_item_id"], name: "index_attachments_on_portfolio_item_id"
 
   create_table "companies", force: :cascade do |t|
     t.string   "abn"
@@ -35,9 +43,14 @@ ActiveRecord::Schema.define(version: 20160428131428) do
   create_table "content_ratings", force: :cascade do |t|
     t.integer  "rating"
     t.text     "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "content_id"
+    t.integer  "job_seeker_id"
   end
+
+  add_index "content_ratings", ["content_id"], name: "index_content_ratings_on_content_id"
+  add_index "content_ratings", ["job_seeker_id"], name: "index_content_ratings_on_job_seeker_id"
 
   create_table "content_views", force: :cascade do |t|
     t.date     "date_viewed"
@@ -48,9 +61,12 @@ ActiveRecord::Schema.define(version: 20160428131428) do
   create_table "contents", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "contrent_type_id"
   end
+
+  add_index "contents", ["contrent_type_id"], name: "index_contents_on_contrent_type_id"
 
   create_table "industries", force: :cascade do |t|
     t.string   "name"
@@ -75,6 +91,14 @@ ActiveRecord::Schema.define(version: 20160428131428) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
+
+  create_table "job_portfolios", force: :cascade do |t|
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "portfolio_item_id"
+  end
+
+  add_index "job_portfolios", ["portfolio_item_id"], name: "index_job_portfolios_on_portfolio_item_id"
 
   create_table "job_seekers", force: :cascade do |t|
     t.string   "mobile_number"
@@ -118,9 +142,12 @@ ActiveRecord::Schema.define(version: 20160428131428) do
 
   create_table "members", force: :cascade do |t|
     t.date     "date_joined"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "job_seeker_id"
   end
+
+  add_index "members", ["job_seeker_id"], name: "index_members_on_job_seeker_id"
 
   create_table "port_folio_item_types", force: :cascade do |t|
     t.string   "name"
@@ -133,9 +160,12 @@ ActiveRecord::Schema.define(version: 20160428131428) do
     t.text     "description"
     t.string   "project_type"
     t.text     "url"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "job_seeker_id"
   end
+
+  add_index "portfolio_items", ["job_seeker_id"], name: "index_portfolio_items_on_job_seeker_id"
 
   create_table "profiles", force: :cascade do |t|
     t.string   "profile_pic_location"
@@ -244,5 +274,14 @@ ActiveRecord::Schema.define(version: 20160428131428) do
 
   add_index "user_locations", ["location_id"], name: "index_user_locations_on_location_id"
   add_index "user_locations", ["super_user_id"], name: "index_user_locations_on_super_user_id"
+
+  create_table "views", force: :cascade do |t|
+    t.date     "date_viewed"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "job_seeker_id"
+  end
+
+  add_index "views", ["job_seeker_id"], name: "index_views_on_job_seeker_id"
 
 end

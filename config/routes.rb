@@ -1,12 +1,6 @@
 Rails.application.routes.draw do
 
 
-  get 'users/new'
-
-  get 'users/edit'
-
-  get 'users/create'
-
   get 'sessions/new'
 
   get '/error', to: "error#four_o_four"
