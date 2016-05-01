@@ -4,4 +4,21 @@ class User < ActiveRecord::Base
   has_one :profile
   has_many :skill_verifiers
   has_one :user_location
+
+
+  # attr_accessor :password
+  EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\Z/i
+  validates :first_name, :presence => true
+  validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
+
+  validates_length_of :password, :in => 6..20, :on => :create
+
+  has_secure_password
+  validates :password, :confirmation => true , length: { minimum: 6 }#password_confirmation attr
+   # Returns the hash digest of the given string.
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
 end

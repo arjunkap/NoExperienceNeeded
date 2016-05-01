@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-
+  get 'signup'  => 'users#new'
+  resources :users  
   get 'sessions/new'
 
   get '/error', to: "error#four_o_four"
@@ -8,7 +9,9 @@ Rails.application.routes.draw do
   get '/about', to: 'about#index'
 
   get 'welcome/index'
-
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
   root 'welcome#index'
 
   # login routes
