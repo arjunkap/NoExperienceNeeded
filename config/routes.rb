@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :users  
   get 'sessions/new'
 
+  resources :jobs
+
   get '/error', to: "error#four_o_four"
 
   get '/about', to: 'about#index'
