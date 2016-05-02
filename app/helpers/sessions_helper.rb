@@ -13,4 +13,26 @@ module SessionsHelper
   def logged_in?
     !current_user.nil?
   end
+
+   def log_out
+    session.delete(:user_id)
+    @current_user = nil
+  end
+
+  def job_seeker?
+    u = current_user
+    if u   
+      return u.job_seeker ? true : false
+    end
+    return false
+  end
+
+  def employer?
+    u = current_user
+    if u   
+      return u.company ? true : false
+    end
+    return false
+  end
+
 end

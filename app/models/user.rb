@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   has_one :profile
   has_many :skill_verifiers
   has_one :user_location
-
+  has_one :company
+  has_one :job_seeker
 
   # attr_accessor :password
   EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\Z/i
@@ -21,4 +22,6 @@ class User < ActiveRecord::Base
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+
+  
 end

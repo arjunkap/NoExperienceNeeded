@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
 
+  get 'who' => 'users#who'
+
+  get 'jobseeker' => 'users#job_seeker'
+get 'employer' => 'users#employer'
+
   get 'signup'  => 'users#new'
+
+  post 'employer' => 'users#create_employer'
+
+  post 'jobseeker' => 'users#create_job_seeker'
+
   resources :users  
   get 'sessions/new'
 

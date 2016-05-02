@@ -26,13 +26,26 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
+     
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/about">About</a></li>
-          <li><a type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#login" id = "loginButton">LOGIN</a></li>
+           <% if !logged_in? %>
+          <!-- <li><a type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#login" id = "loginButton">Login</a></li> -->
 
+      
+
+          <li><%= link_to  "Login", "/login"%></li>
+          <% else %>
+    <% if employer? %>
+             <li><%= link_to  "Create Job", new_job_path %></li>
+          <%end%>
+            <li> <%= link_to  "Logout", "/logout", method: :delete %></li>
+           <%end%>
         </ul>
       </div><!-- /.navbar-collapse -->
+
+
+     
     </div><!-- /.container-fluid -->
   </nav>
   <div class="modal fade" id="login" role="dialog">

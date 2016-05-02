@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501084547) do
+ActiveRecord::Schema.define(version: 20160502010644) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer"
@@ -35,7 +35,10 @@ ActiveRecord::Schema.define(version: 20160501084547) do
     t.string   "company"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
+
+  add_index "companies", ["user_id"], name: "index_companies_on_user_id"
 
   create_table "company_industries", force: :cascade do |t|
     t.string   "industry_name"
@@ -125,7 +128,10 @@ ActiveRecord::Schema.define(version: 20160501084547) do
     t.string   "mobile_number"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "user_id"
   end
+
+  add_index "job_seekers", ["user_id"], name: "index_job_seekers_on_user_id"
 
   create_table "jobs", force: :cascade do |t|
     t.text     "description"
@@ -302,6 +308,9 @@ ActiveRecord::Schema.define(version: 20160501084547) do
     t.string   "password"
     t.string   "salt"
     t.string   "password_digest"
+    t.string   "country"
+    t.string   "state"
+    t.string   "city"
   end
 
   add_index "users", ["company_id"], name: "index_users_on_company_id"
