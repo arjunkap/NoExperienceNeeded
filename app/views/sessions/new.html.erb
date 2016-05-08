@@ -1,19 +1,90 @@
 
-<div class="row">
+<div class="row wrapper">
 
   <div class="col-md-6 col-md-offset-3">
-  <h1>Log in</h1>
-    <%= form_for(:session, url: login_path) do |f| %>
+    <%= form_for(:session, url: login_path, html: {class: "form-signin"}) do |f| %>
+      <h2 class="form-signin-heading">Log in</h2>
+     
+      <%= f.email_field :email, class: 'form-control', placeholder: "Email" %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-
-      <%= f.label :password %>
+  
       <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.submit "Log in", class: "btn btn-primary" %>
+      <label class="checkbox">
+        <%= f.check_box :remember_me %> Remember me
+      </label>
+      <%= f.submit "Log in", class: "btn btn-primary", class: "btn btn-lg btn-primary btn-block" %>
+       <p class="new_user_ask">New user? <%= link_to "Sign up now!", who_path  %></p>
     <% end %>
 
-    <p>New user? <%= link_to "Sign up now!", who_path %></p>
+   
   </div>
 </div>
+
+<!--   <div class="wrapper" >
+    <form class="form-signin" method="post" action="/login">       
+      <h2 class="form-signin-heading">Please login</h2>
+      <input type="text" class="form-control" name="email" placeholder="Email Address"  />
+      <input type="password" class="form-control" name="password" placeholder="Password" required=""/>      
+      <label class="checkbox">
+        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+      </label>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
+    </form>
+  </div> -->
+
+<style type="text/css">
+
+.new_user_ask, .form-control{
+  margin-top: 20px;
+}
+body {
+  background: #eee !important;  
+}
+
+.wrapper {  
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.form-signin {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);  
+
+  .form-signin-heading,
+  .checkbox {
+    margin-bottom: 30px;
+  }
+
+  .checkbox {
+    font-weight: normal;
+  }
+
+  .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    @include box-sizing(border-box);
+
+    &:focus {
+      z-index: 2;
+    }
+  }
+
+  input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  input[type="password"] {
+    margin-bottom: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+</style>

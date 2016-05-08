@@ -5,10 +5,14 @@
       <p>GET THE EXPERIENCE YOU NEED</p>
 
 
-      <div class = "form-group col-xs-9 row row-centered" id = "search">
-          <form id = "searchbar" method = "get">
-              <input type="text" class = "form-control" name = "field" placeholder = "field of choice">
-              <button type="button" class="btn btn-default" name="button" style="margin-top:20px;">Find Me Job</button>
+      <div class = "form-group col-xs-9 row row-centered" id="search">
+          <form method="get" action="/search" name="welcome_form">
+              <input type="text" class = "form-control" name="search_query" placeholder="search">
+              <select class="form-control" name="job_option">
+                <option value="jobs">Jobs</option>
+                <option value="interviews">Interviews</option>
+              </select>
+             <button type="submit" class="btn btn-default">Start</button>
           </form>
 
       </div>
@@ -16,3 +20,65 @@
   </div>
 
 </div>
+
+<script type="text/javascript">
+  
+</script>
+
+
+<style type="text/css">
+
+.new_user_ask, .form-control{
+  margin-top: 20px;
+}
+body {
+  background: #eee !important;  
+}
+
+.wrapper {  
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.form-signin {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);  
+
+  .form-signin-heading,
+  .checkbox {
+    margin-bottom: 30px;
+  }
+
+  .checkbox {
+    font-weight: normal;
+  }
+
+  .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    @include box-sizing(border-box);
+
+    &:focus {
+      z-index: 2;
+    }
+  }
+
+  input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  input[type="password"] {
+    margin-bottom: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+</style>

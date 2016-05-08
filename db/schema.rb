@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502010644) do
+ActiveRecord::Schema.define(version: 20160507095802) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer"
@@ -306,11 +306,11 @@ ActiveRecord::Schema.define(version: 20160502010644) do
     t.integer  "company_id"
     t.string   "email"
     t.string   "password"
-    t.string   "salt"
     t.string   "password_digest"
     t.string   "country"
     t.string   "state"
     t.string   "city"
+    t.string   "remember_digest"
   end
 
   add_index "users", ["company_id"], name: "index_users_on_company_id"

@@ -37,6 +37,10 @@ class JobsController < ApplicationController
 		@job = Job.new
 	end
 
+	def find_jobs
+		@jobs = params[:]
+	end
+
 
 	def update
     if @job.update_attributes(job_params)

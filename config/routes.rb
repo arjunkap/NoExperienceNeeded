@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get '/search' => 'welcome#search'
+
   get 'who' => 'users#who'
 
   get 'jobseeker' => 'users#job_seeker'
