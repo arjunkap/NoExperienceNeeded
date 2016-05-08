@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  get '/search' => 'welcome#search'
+  # get 'user_actions/search'
+
+  get '/search' => 'user_actions#search'
 
   get 'who' => 'users#who'
 

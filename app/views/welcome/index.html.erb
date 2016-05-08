@@ -8,22 +8,20 @@
       <div class = "form-group col-xs-9 row row-centered" id="search">
           <form method="get" action="/search" name="welcome_form">
               <input type="text" class = "form-control" name="search_query" placeholder="search">
-              <select class="form-control" name="job_option">
+              <select class="form-control" name="search_category">
                 <option value="jobs">Jobs</option>
                 <option value="interviews">Interviews</option>
               </select>
-             <button type="submit" class="btn btn-default">Start</button>
-          </form>
-
+              <input type="hidden" value="welcome_page_search" name="search_from"></input>
+             <button type="submit" class="btn btn-default">Search</button>
+    
+</form>
       </div>
 
   </div>
 
 </div>
 
-<script type="text/javascript">
-  
-</script>
 
 
 <style type="text/css">
