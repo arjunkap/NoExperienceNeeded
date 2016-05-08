@@ -1,7 +1,7 @@
 class Job < ActiveRecord::Base
   has_many :short_listed_jobs
   belongs_to :user
-  has_one :sub_industry
+  belongs_to :sub_industry
 
   validates :title, :presence => true
   validates_length_of :title, :in => 6..100, :on => :create
@@ -13,5 +13,8 @@ class Job < ActiveRecord::Base
   validates :country, :presence => true
 
  
+ def self.uniq_with_column col
+ 	locations = Job.uniq.pluck(col)
+ end
 
 end

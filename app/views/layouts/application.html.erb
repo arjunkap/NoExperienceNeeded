@@ -26,7 +26,23 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-     
+      <% current_uri = request.env['PATH_INFO'] %>
+
+      <% if current_uri != "/" %>
+         <form class="navbar-form navbar-left" role="search" action="/search">
+        <div class="form-group">
+          <input type="text" class = "form-control" name="search_query" placeholder="search" value='<%=session[:query]%>' >
+        </div>
+         <div class="form-group">
+          <select class="form-control" name="search_category">
+                <option value="jobs">Jobs</option>
+                <option value="interviews">Interviews</option>
+            </select>
+              <input type="hidden" name="search_from" value="navbar"></input>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <%end%>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/about">About</a></li>
            <% if !logged_in? %>

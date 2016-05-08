@@ -3,9 +3,28 @@
 <h4>Refine your search</h4>
 
 <form method="get" action="/search">
-    <% q = "software developer" %>
-	<input type="text" name="refined_query" value='<%=session[:welcome_query]%>' ></input>
-	<input type="hidden" name="search_from" value="refine_search"></input>
+   
+<!-- 	<input type="text" name="refined_query" value='<%=session[:query]%>' ></input>
+	<input type="hidden" name="search_from" value="refine_search"></input> -->
+	   <div class="form-group">
+          <select name="city" id="city">
+               <% (Job.uniq_with_column :city).each do |city| %>
+               		<option value='<%=city %>'><%= city %></option>
+               <%end%>
+            </select>
+              <select name="sub_industry" id="sub_industry">
+               <% (SubIndustry.uniq_with_column :name).each do |si| %>
+               		<option value='<%=city %>'><%= si %></option>
+               <%end%>
+            </select>
+           	<br>
+              <input type="hidden" name="search_from" value="refine_search"></input>
+
+
+
+              <input type="text" name="company" placeholder="company" value='<%=session[:company]%>'></input>
+        </div>
+
 	<button type="submit" class="btn btn-default">Refine</button>
 </form>
 
@@ -16,5 +35,16 @@
 <br>
 <h6>Descripton</h6>
 <%= job.description %>
+
+<%# User.find(job.user_id).company.title %>
+
 <br>
 <%end%>
+
+<script type="text/javascript">
+
+	<% city = session[:city] %>
+ <% if !city %>
+$('#city').val('<%=city%>');
+<%end%>
+</script>

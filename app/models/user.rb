@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_one :user_location
   has_one :company
   has_one :job_seeker
+  has_many :jobs
 
   # attr_accessor :password
   EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\Z/i
@@ -28,6 +29,10 @@ class User < ActiveRecord::Base
 
   def User.new_token
     SecureRandom.urlsafe_base64
+  end
+
+  def self.create_from_console
+
   end
 
  def remember

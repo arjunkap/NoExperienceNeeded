@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160507095802) do
+ActiveRecord::Schema.define(version: 20160508073701) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20160507095802) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "abn"
-    t.string   "company"
+    t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
@@ -143,9 +143,14 @@ ActiveRecord::Schema.define(version: 20160507095802) do
     t.string   "city"
     t.integer  "views"
     t.date     "last_updated"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "user_id"
+    t.integer  "sub_industry_id"
   end
+
+  add_index "jobs", ["sub_industry_id"], name: "index_jobs_on_sub_industry_id"
+  add_index "jobs", ["user_id"], name: "index_jobs_on_user_id"
 
   create_table "locations", force: :cascade do |t|
     t.string   "country"
@@ -303,7 +308,6 @@ ActiveRecord::Schema.define(version: 20160507095802) do
     t.string   "last_name"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "company_id"
     t.string   "email"
     t.string   "password"
     t.string   "password_digest"
@@ -312,8 +316,6 @@ ActiveRecord::Schema.define(version: 20160507095802) do
     t.string   "city"
     t.string   "remember_digest"
   end
-
-  add_index "users", ["company_id"], name: "index_users_on_company_id"
 
   create_table "views", force: :cascade do |t|
     t.date     "date_viewed"
