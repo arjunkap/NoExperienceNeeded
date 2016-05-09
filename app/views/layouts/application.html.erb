@@ -31,7 +31,7 @@
       <% if current_uri != "/" %>
          <form class="navbar-form navbar-left" role="search" action="/search">
         <div class="form-group">
-          <input type="text" class = "form-control" name="search_query" placeholder="search" value='<%=session[:query]%>' >
+          <input type="text" class = "form-control" name="query" placeholder="search" value='<%=session[:query]%>' >
         </div>
          <div class="form-group">
           <select class="form-control" name="search_category">

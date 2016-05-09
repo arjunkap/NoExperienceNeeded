@@ -1,19 +1,25 @@
 class UserActionsController < ApplicationController
   def search
-  	@search_from = params[:search_from]
+  	search_from = params[:search_from]
 
-  	if @search_from == "welcome_page_search" || @search_from == "navbar"
-  		@search_query = params[:search_query]
-  		@search_type = params[:search_category]
-  		
-  		query_words = []
-  		@jobs = search_with_query @search_query, :job
-  		
+  	if search_from == "welcome_page_search" || search_from == "navbar"
+  		query = params[:query]
+  		search_type = params[:search_category]
+      if query == "" || query == nil
+        @jobs = Job.all
+        session[:company] =  ""
+        session[:work_type] =  "any"
+        session[:city] = "any"
+        session[:sub_industry] = "any"
+      else
+        @jobs = search_with_query query.downcase, :job
+      end
 	  	@jobs = @jobs.uniq
-  		session[:query] = @search_query
-  	elsif @search_from == "header_search"
+  		session[:query] = query
+
+	elsif search_from == "header_search"
  	
- 	elsif @search_from ==  "refine_search"
+ 	elsif search_from ==  "refine_search"
 
  		# @refined_query = params[:refined_query]
  		# @jobs = []
@@ -23,96 +29,139 @@ class UserActionsController < ApplicationController
 			# @jobs = search_with_query @refined_query, :job
  		# end
  		# @jobs = @jobs.uniq
- 		@company  = params[:company]
- 		session[:company] = @company
-
- 		companies = search_with_title @company, :company
- 		@jobs  = []
- 		companies.each do |company|
- 			@jobs = @jobs + User.find(company.user_id).jobs
- 		end
-
- 		#session[:query] = @refined_query
- 		query = session[:query]
+    @jobs  = []
+    company = params[:company]
+ 		session[:company] =  company
+    session[:work_type] =  params[:work_type]
  		session[:city] = params[:city]
+    session[:sub_industry] = params[:sub_industry]
+    query = session[:query]
 
- 		session[:sub_industry] = params[:sub_industry]
- 		
- 		@jobs = search_with_query query, nil, {:collection => @jobs}, params[:city]
+    if company == "" || company == nil
+      @jobs = Job.all
+    else
+      companies = search_with_title company.downcase, :company
+      companies.each do |company|
+      @jobs = @jobs + User.find(company.user_id).jobs
+     end
+    end
+    if query != "" and query != nil
+ 		 @jobs = search_with_query query.downcase, :job
+    end
 
- 		@jobs = search_with_query query, nil, {:collection => @jobs}, params[:sub_industry]
+    @jobs1 = refine_with_city @jobs, params[:city]
+
+    @jobs2 = refine_with_work_industry @jobs1, params[:sub_industry]
+
+    @jobs = refine_with_work_type @jobs2, params[:work_type]
+
 
 
   	end
   end
 
   private
-  def search_with_title word, model, options = nil, city=nil
-  	collection = []
-  	if options != nil
-  		collection_ = options[:collection]
-  		collection_.each do |entity|
-  			if city
-	  			if entity.title.include? word and entity.city.include? city
-	  				collection.push entity
-	  			end
-	  		else
-	  			if entity.title.include? word 
-	  				collection.push entity
-	  			end
-	  		end
-  		end
-  		return collection
-  	end
-  	
-  	if model == :job
-  		Job.all.each do |job|
-  			if city
-  				if  job.title.include? word and job.city.include? city
-					collection.push job
-  				end
-  			else
-  				if  job.title.include? word
-  					collection.push job
-  				end
-  			end
-  		end
-  	end
-  	if model == :company
-  		Company.all.each do |company|
-  			if city
-  				if  company.title.include? word and User.find(company.user_id).city.include? city
-					collection.push company
-  				end
-  			else
-  				if  company.title.include? word
-  					collection.push company
-  				end
 
-  			end
-  		end
-  	end
-  	 return collection
+
+  def refine_with_work_type jobs, work_type
+    refined_jobs = []
+    if work_type == "any"
+      return jobs
+    else
+      jobs.each do |job|
+        if job.work_type == work_type
+          refined_jobs.push job
+        end
+      end
+    end
+    return refined_jobs
+  end
+
+
+  def refine_with_city jobs, city
+
+    refined_jobs = []
+
+    if city == "any"
+      return jobs
+    end
+    jobs.each do |job|
+      if job.city == city
+        refined_jobs.push job
+      end
+    end
+
+    return refined_jobs
+
+  end
+
+  def refine_with_work_industry jobs , industry
+
+    if industry == "any"
+      return jobs
+    end
+    refined_jobs = []
+    sub_industry_id = SubIndustry.find_by(name: industry).id
+    jobs.each do |job|
+      if job.sub_industry_id == sub_industry_id
+        refined_jobs.push job
+      end
+    end
+    return refined_jobs
+
   end
 
 
 
-  def search_with_query query, model, options = nil, city=nil
-	query_words = []
-	collection = []
 
-	if query
-		query_words = query.split()
-	end
-	if options != nil
-		query_words.each do |word|
-			collection = collection + (search_with_title(word, nil, options, city))
-		end
-	end
-	query_words.each do |word|
-		collection = collection + (search_with_title(word, model, nil, city))
-	end
-	return collection
+  def search_with_title word, model
+  	collection = []
+  	# if options != nil
+  	# 	collection_ = options[:collection]
+  	# 	collection_.each do |entity|
+  	# 		if city
+	  # 			if entity.title.downcase.include? word.downcase and entity.city and entity.city.downcase.include? city.downcase
+	  # 				collection.push entity
+	  # 			end
+	  # 		else
+	  # 			if entity.title.downcase.include? word.downcase 
+	  # 				collection.push entity
+	  # 			end
+	  # 		end
+  	# 	end
+  	# 	return collection
+  	# end
+  	
+  	if model == :job
+  		Job.all.each do |job|
+  		  if job.title.downcase.include? word
+          collection.push job
+        end
+  		end
+  	end
+  	if model == :company
+  		Company.all.each do |company|
+  		  if company.title.downcase.include? word
+          collection.push company
+        end
+  		end
+  	end
+  	return collection
+  end
+
+
+
+  def search_with_query query, model
+  	query_words = []
+  	collection = []
+
+  	if query
+  		query_words = query.split()
+  	end
+  	query_words.each do |word|
+  		collection = collection + (search_with_title(word, model))
+  	end
+  	return collection
   end
 
 

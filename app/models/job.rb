@@ -14,7 +14,7 @@ class Job < ActiveRecord::Base
 
  
  def self.uniq_with_column col
- 	locations = Job.uniq.pluck(col)
+ 	collection = Job.uniq.pluck(col)
  end
 
 end

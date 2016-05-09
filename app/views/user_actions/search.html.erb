@@ -7,24 +7,43 @@
 <!-- 	<input type="text" name="refined_query" value='<%=session[:query]%>' ></input>
 	<input type="hidden" name="search_from" value="refine_search"></input> -->
 	   <div class="form-group">
+	    <div class="form-control">
+            <label for="city">City</label>
           <select name="city" id="city">
+          		<option value="any">Any</option>
                <% (Job.uniq_with_column :city).each do |city| %>
                		<option value='<%=city %>'><%= city %></option>
+
                <%end%>
+
             </select>
+            </div>
+                        <div class="form-control">
+            <label for="sub_industry">Sub Industry</label>
               <select name="sub_industry" id="sub_industry">
+              	<option value="any">Any</option>
                <% (SubIndustry.uniq_with_column :name).each do |si| %>
-               		<option value='<%=city %>'><%= si %></option>
+               		<option value='<%=si %>'><%= si %></option>
                <%end%>
             </select>
+            </div>
+            <div class="form-control">
+            <label for="work_type">Work type</label>
+               <select name="work_type" id="work_type">
+              <option value="any">Any</option>
+              <option value="FT">Full Time</option>
+              <option value="PT">Part Time</option>
+               <option value="CT">Casual</option>
+              <option value="COT">Contract</option>
+            </select>
+            </div>
            	<br>
               <input type="hidden" name="search_from" value="refine_search"></input>
 
 
 
               <input type="text" name="company" placeholder="company" value='<%=session[:company]%>'></input>
-        </div>
-
+      
 	<button type="submit" class="btn btn-default">Refine</button>
 </form>
 
@@ -36,15 +55,48 @@
 <h6>Descripton</h6>
 <%= job.description %>
 
+<h6>Work Type</h6>
+<%= job.work_type %>
+
+<h6>Industry</h6>
+<%= SubIndustry.find(job.sub_industry_id).name %>
 <%# User.find(job.user_id).company.title %>
 
 <br>
 <%end%>
 
 <script type="text/javascript">
+$(document).on('page:load', function() {
+    // your stuff here
 
-	<% city = session[:city] %>
- <% if !city %>
+});
+
+var ready = function() {
+       console.log("loaded");
+    	<% city = session[:city] %>
+ <% if city %>
 $('#city').val('<%=city%>');
+
 <%end%>
+
+<% si = session[:sub_industry] %>
+	 <% if si %>
+		$('#sub_industry').val('<%=si%>');
+	<%end%>
+
+<% wt = session[:work_type] %>
+	 <% if wt %>
+
+		$('#work_type').val('<%=wt%>');
+
+	<%end%>
+
+
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+
+
 </script>
+
