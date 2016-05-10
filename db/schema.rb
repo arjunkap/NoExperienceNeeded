@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509044624) do
+ActiveRecord::Schema.define(version: 20160510050554) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer"
@@ -112,9 +112,11 @@ ActiveRecord::Schema.define(version: 20160509044624) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "company_id"
+    t.integer  "job_seeker_id"
   end
 
   add_index "interview_reviews", ["company_id"], name: "index_interview_reviews_on_company_id"
+  add_index "interview_reviews", ["job_seeker_id"], name: "index_interview_reviews_on_job_seeker_id"
 
   create_table "job_portfolios", force: :cascade do |t|
     t.datetime "created_at",        null: false
@@ -211,6 +213,16 @@ ActiveRecord::Schema.define(version: 20160509044624) do
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
+
+  create_table "question_answers", force: :cascade do |t|
+    t.string   "question"
+    t.text     "answer"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "interview_review_id"
+  end
+
+  add_index "question_answers", ["interview_review_id"], name: "index_question_answers_on_interview_review_id"
 
   create_table "questions", force: :cascade do |t|
     t.string   "question"
@@ -316,6 +328,9 @@ ActiveRecord::Schema.define(version: 20160509044624) do
     t.string   "state"
     t.string   "city"
     t.string   "remember_digest"
+    t.string   "pic_location"
+    t.string   "web_url"
+    t.text     "about"
   end
 
   create_table "views", force: :cascade do |t|

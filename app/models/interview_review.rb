@@ -1,6 +1,6 @@
 class InterviewReview < ActiveRecord::Base
-  has_many :interview_questions
+  has_many :question_answers
   has_many :upvotes
-  has_one :interview_question
   belongs_to :company
+  belongs_to :job_seeker
 end
