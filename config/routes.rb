@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   post 'jobseeker' => 'users#create_job_seeker'
 
+  get 'seekerprofile/:id' => 'job_cd seekers#index'
+
   resources :users  
   get 'sessions/new'
 
@@ -31,7 +33,7 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
   root 'welcome#index'
 
-  # login routes
+  
   get 'login' => 'sessions#new'
 
   post 'login' => 'sessions#create'

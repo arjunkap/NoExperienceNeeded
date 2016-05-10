@@ -12,12 +12,18 @@
 # Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne")
 # Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne")
 
-
 u = User.create(:first_name => "Yash", email: "4s56sdsd7a8sdfsd@gmail.com", password: "123456", :city => "Sydney")
 u.company = Company.new(:title => "Facebook", :abn => "12345678")
 u.company.save
 s = SubIndustry.create(name: "IT")
 u.jobs.create(:title => "IT Staff", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Sydney", sub_industry_id: s.id, :work_type => "FT")
+
+User.create(:first_name => "Yash", email: "4567a8sdfsd@gmail.com", password: "123456", :city => "Sydney")
+# u.company = Company.new(:title => "Wunderman", :abn => "12345678")
+# u.company.save
+# s = SubIndustry.create(name: "IT")
+# u.jobs.create(:title => "IT Staff", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Sydney", sub_industry_id: s.id, :work_type => "FT")
+
 
 
 
