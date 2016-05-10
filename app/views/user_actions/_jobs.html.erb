@@ -6,9 +6,10 @@
 <br>
 <h6 class="description">Descripton</h6>
 <%= job.description %>
-<% if is_current_user_job_seeker? %>
+<% if is_current_user_job_seeker? and !already_short_listed? job.id %>
 <form data-remote="true" action="/jobs/shortlist" method="post">
 <input type="hidden"  name="job" value='<%= job.id %>'></input>
+
 <button id='btn<%= job.id %>' class="button">Add to short list</button>
 </form>
 <%end%>

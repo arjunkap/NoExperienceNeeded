@@ -67,7 +67,7 @@ class JobsController < ApplicationController
 	def create_application
 		job = params[:job]
 		motivation = params[:motivation]
-		jp = JobApplication.new(motivation_text: motivation, job_id: job.to_i, job_seeker_id: current_user.id)
+		jp = JobApplication.new(motivation_text: motivation, job_id: job.to_i, job_seeker_id: current_user.job_seeker.id)
 		if jp.save
 			flash[:success] = "You successfully applied for this job."
 			respond_to do |format|
@@ -89,6 +89,7 @@ class JobsController < ApplicationController
 		# else
 		# 	redirect_to controller: 'jobs', action: 'show', id: @job.id
 		# end
+
 		respond_to do |format|
 			format.js
 
