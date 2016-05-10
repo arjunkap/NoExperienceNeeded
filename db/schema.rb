@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160510050554) do
+ActiveRecord::Schema.define(version: 20160510061649) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer"
@@ -250,9 +250,13 @@ ActiveRecord::Schema.define(version: 20160510050554) do
     t.text     "description"
     t.boolean  "isAnonymous"
     t.string   "title"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "company_id"
+    t.string   "company_name"
   end
+
+  add_index "reviews", ["company_id"], name: "index_reviews_on_company_id"
 
   create_table "short_listed_jobs", force: :cascade do |t|
     t.date     "date_added"

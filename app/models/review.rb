@@ -1,4 +1,3 @@
 class Review < ActiveRecord::Base
-  has_one :user
-  
+  belongs_to :company
 end

@@ -1,4 +1,6 @@
 class UserActionsController < ApplicationController
+
+
   def search
   	search_from = params[:search_from]
     @search_type = params[:search_type]
@@ -13,11 +15,48 @@ class UserActionsController < ApplicationController
 
     elsif @search_type == "interviews"
       search_interviews search_from
+    elsif @search_type == "comp_reviews"
+      find_companies_reviews search_from
     end
 
   end
 
   private
+
+  def find_companies_reviews search_from
+
+  
+    if search_from == "refine_search"
+      query =  session[:query]
+      company = params[:company]
+      session[:company] = company
+
+      if company == "" and query == ""
+        @reviews = Review.all
+      elsif company == "" and query != ""
+        @reviews = search_with_query query.downcase, :review
+      elsif company != "" and query == ""
+        @reviews =  find_interview_or_review_for_companies company.downcase, :review
+      else
+        @interviews = refine_intervies_with_companies company.downcase, query.downcase
+      end
+    elsif search_from == "navbar" || search_from == "welcome_page_search"
+      query = params[:query]
+      if query == "" || query == nil
+        @interviews = InterviewReview.all
+      else
+        @interviews =  search_with_query query.downcase, :interview
+      
+      end
+       session[:query] = params[:query]
+    end
+  end
+
+  def search_company_review company, query
+    collection = []
+    reviews = Review.all
+    
+  end
 
  
   def search_interviews search_from
@@ -33,18 +72,17 @@ class UserActionsController < ApplicationController
       elsif company == "" and query != ""
         @interviews = search_with_query query.downcase, :interview
       elsif company != "" and query == ""
-        @interviews =  find_interview_for_companies company.downcase
+        @interviews =  find_interview_or_review_for_companies company.downcase, :company
 
       else
-        companies = search_with_query company.downcase, :company
-        @interviews = refine_intervies_with_companies companies, query
-
+        @interviews = refine_intervies_with_companies company.downcase, query.downcase
       end
     elsif search_from == "navbar" || search_from == "welcome_page_search"
-      if params[:query] == "" || params == nil
+      query = params[:query]
+      if query == "" || query == nil
         @interviews = InterviewReview.all
       else
-        @interviews =  search_with_query params[:query], :interview
+        @interviews =  search_with_query query.downcase, :interview
       
       end
        session[:query] = params[:query]
@@ -52,15 +90,18 @@ class UserActionsController < ApplicationController
     
   end
 
-  def refine_intervies_with_companies companies, query
+
+
+  def refine_intervies_with_companies company, query, model
     collection = []
-    
-    companies.each do |company|
-      cr = company.interview_reviews.each do |cir|
-        if cir.description.include? query
-          collection.push cir
-        end
+    if model == :company
+    pre_collection = InterviewReview.all
+    interviews.each do |interview|
+      
+      if interview.company_name.downcase.include? company and interview.description.downcase.include? query
+        collection.push interview
       end
+      
     end
     return collection
   end
@@ -162,13 +203,18 @@ class UserActionsController < ApplicationController
 
   end
 
-  def find_interview_for_companies company
+  def find_interview_or_review_for_companies company, model
 
     collection = []
-    companies = search_with_query company, :company
-
-    companies.each do |company|
-      collection = collection + company.interview_reviews
+    if model == :interview_review
+      pre_collection = InterviewReview.all
+    elsif model == :review
+      pre_collection = Review.all
+    end
+    pre_collection.each do |item|
+      if item.company_name.downcase.include? company
+        collection.push item
+      end
     end
     return collection
   end
@@ -213,6 +259,14 @@ class UserActionsController < ApplicationController
           collection.push ir
         end
       end
+    elsif model == :review
+
+      Review.all.each do |review|
+        if review.title.downcase.include? word || review.description.downcase.include? word
+          collection.push review
+        end
+      end
+      
   	end
 
   	return collection
