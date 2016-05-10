@@ -22,5 +22,12 @@
 </p>
 
 
-<%= link_to 'Edit', edit_job_path(@job) %> |
-<%= link_to 'Back', jobs_path %>
+<% if is_job_creator @job %>
+<%=  link_to 'Edit', edit_job_path(@job), class: "btn btn-default" %> 
+
+<%end%>
+
+<%=  link_to 'Apply', edit_job_path(@job), class: "btn btn-default" %> 
+
+
+<%= link_to 'Back', session[:current_uri], class: 'btn btn-default' %>

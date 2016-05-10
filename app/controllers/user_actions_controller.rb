@@ -2,6 +2,8 @@ class UserActionsController < ApplicationController
 
 
   def search
+    session[:current_uri] = request.fullpath
+
   	search_from = params[:search_from]
     @search_type = params[:search_type]
 
@@ -146,7 +148,7 @@ class UserActionsController < ApplicationController
         @jobs = @jobs + User.find(company.user_id).jobs
        end
       end
-      if query != "" and query_words != nil
+      if query != "" and query != nil
        @jobs = search_with_query query.downcase, :job
       end
 

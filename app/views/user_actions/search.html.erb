@@ -53,27 +53,9 @@
 
 </form>
 
+<%= render partial: 'jobs', collection: @jobs %>
 
-<% if @jobs %>
-<% @jobs.each do |job| %>
-<br>
-<h6>Title</h6>
-<%= job.title %>
-<br>
-<h6>Descripton</h6>
-<%= job.description %>
 
-<h6>Work Type</h6>
-<%= job.work_type %>
-
-<h6>Industry</h6>
-<%= SubIndustry.find(job.sub_industry_id).name %>
-<%# User.find(job.user_id).company.title %>
-
-<br>
-
-<%end%>
-<%end%>
 
 <script type="text/javascript">
 $(document).on('page:load', function() {
@@ -112,40 +94,9 @@ $(document).on('page:load', ready);
 
 <%end%>
 
-     <% if @search_type == "interviews" %>
-       <form method="get" action="/search">
+<%= render partial: 'interviews', locals: {interviews: @interviews, search_type: @search_type} %>
 
-         <input type="hidden" name="search_from" value="refine_search" value='<%=session[:company]%>'></input>
-          <input  type="text" name="company" placeholder="company" value='<%=session[:company]%>'></input>
-          
-  <button type="submit" class="btn btn-default">Refine</button>
+  
 
-          </form>
-
-        <% @interviews.each do |i| %>
-
-          Company: <%= i.company_name %> <br>
-          Description: <%= i.description %> <br>
-          
-
-        <%end%> 
-      <%end%>
-
-         <% if @search_type == "comp_reviews" %>
-       <form method="get" action="/search">
-
-         <input type="hidden" name="search_from" value="refine_search" value='<%=session[:company]%>'></input>
-          <input  type="text" name="company" placeholder="company" value='<%=session[:company]%>'></input>
-          
-  <button type="submit" class="btn btn-default">Refine</button>
-
-          </form>
-
-        <% @reviews.each do |i| %>
-
-          Company: <%= i.company_name %> <br>
-          Description: <%= i.description %> <br>
-          
-
-        <%end%> 
-      <%end%>
+<%= render partial: 'reviews', locals: {reviews: @reviews, search_type: @search_type} %>
+      

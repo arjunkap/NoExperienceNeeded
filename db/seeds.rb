@@ -13,19 +13,19 @@
 # Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne")
 
 
-# u = User.create(:first_name => "Yash", email: "4567a8sdfsd@gmail.com", password: "123456", :city => "Sydney")
-# u.company = Company.new(:title => "Wunderman", :abn => "12345678")
-# u.company.save
-# s = SubIndustry.create(name: "IT")
-# u.jobs.create(:title => "IT Staff", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Sydney", sub_industry_id: s.id, :work_type => "FT")
+u = User.create(:first_name => "Yash", email: "4s56sdsd7a8sdfsd@gmail.com", password: "123456", :city => "Sydney")
+u.company = Company.new(:title => "Facebook", :abn => "12345678")
+u.company.save
+s = SubIndustry.create(name: "IT")
+u.jobs.create(:title => "IT Staff", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Sydney", sub_industry_id: s.id, :work_type => "FT")
 
 
 
-# u = User.create(:first_name => "Yash", email: "456a7890@gmail.com", password: "123456", :city => "Canberra")
-# u.company = Company.new(:title => "Yahoo", :abn => "12345678")
-# u.company.save
-# s = SubIndustry.create(name: "Data Science")
-# u.jobs.create(:title => "Data Sciencetist", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Canberra", sub_industry_id: s.id, :work_type => "PT")
+u = User.create(:first_name => "Yash", email: "4ssd5sdf6a7890@gmail.com", password: "123456", :city => "Canberra")
+u.company = Company.new(:title => "Yahoo", :abn => "12345678")
+u.company.save
+s = SubIndustry.create(name: "Data Science")
+u.jobs.create(:title => "Data Sciencetist", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Canberra", sub_industry_id: s.id, :work_type => "PT")
 
 
 
@@ -53,26 +53,26 @@
 ###################
 
 #Review
-u = User.create(:first_name => "Yash", email: "yash.narwal@gmail.com", password: "123456", :city => "Sydney")
-u.company = Company.create(abn: "12345679", title: "Google")
-u.company.save
+# u = User.create(:first_name => "Yash", email: "yash.narwal@gmail.com", password: "123456", :city => "Sydney")
+# u.company = Company.create(abn: "12345679", title: "Google")
+# u.company.save
 
-c = Company.last
+# c = Company.last
 
-c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Google")
-
-
-c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Google")
+# c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Google")
 
 
-c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Google")
+# c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Google")
+
+
+# c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Google")
 
 
 
-c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Microsoft")
+# c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Microsoft")
 
 
-c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Mocrosoft")
+# c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Mocrosoft")
 
 
 

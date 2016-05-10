@@ -1,0 +1,20 @@
+<% if @jobs %>
+<% @jobs.each do |job| %>
+<br>
+
+<%= link_to job.title, job %>
+<br>
+<h6>Descripton</h6>
+<%= job.description %>
+
+<h6>Work Type</h6>
+<%= job.work_type %>
+
+<h6>Industry</h6>
+<%= SubIndustry.find(job.sub_industry_id).name %>
+<%# User.find(job.user_id).company.title %>
+
+<br>
+
+<%end%>
+<%end%>
