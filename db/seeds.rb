@@ -13,7 +13,7 @@
 # Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne")
 
 
-# u = User.create(:first_name => "Yash", email: "4567a8sdfsd@gmail.com", password: "123456", :city => "Sydney")
+User.create(:first_name => "Yash", email: "4567a8sdfsd@gmail.com", password: "123456", :city => "Sydney")
 # u.company = Company.new(:title => "Wunderman", :abn => "12345678")
 # u.company.save
 # s = SubIndustry.create(name: "IT")
