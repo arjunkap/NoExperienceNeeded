@@ -130,3 +130,22 @@ $(document).on('page:load', ready);
 
         <%end%> 
       <%end%>
+
+         <% if @search_type == "comp_reviews" %>
+       <form method="get" action="/search">
+
+         <input type="hidden" name="search_from" value="refine_search" value='<%=session[:company]%>'></input>
+          <input  type="text" name="company" placeholder="company" value='<%=session[:company]%>'></input>
+          
+  <button type="submit" class="btn btn-default">Refine</button>
+
+          </form>
+
+        <% @reviews.each do |i| %>
+
+          Company: <%= i.company_name %> <br>
+          Description: <%= i.description %> <br>
+          
+
+        <%end%> 
+      <%end%>

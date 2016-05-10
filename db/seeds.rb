@@ -59,15 +59,20 @@ u.company.save
 
 c = Company.last
 
-c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews")
+c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Google")
 
 
-c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews")
+c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Google")
 
 
-c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews")
+c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Google")
 
 
+
+c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Microsoft")
+
+
+c.reviews.create(title: "This is a review", isAnonymous: true, description: "This is a verry good interviews", company_name: "Mocrosoft")
 
 
 
