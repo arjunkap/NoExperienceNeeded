@@ -4,9 +4,14 @@
 
 <%= link_to job.title, job %>
 <br>
-<h6>Descripton</h6>
+<h6 class="description">Descripton</h6>
 <%= job.description %>
-
+<% if is_current_user_job_seeker? %>
+<form data-remote="true" action="/jobs/shortlist" method="post">
+<input type="hidden"  name="job" value='<%= job.id %>'></input>
+<button id='btn<%= job.id %>' class="button">Add to short list</button>
+</form>
+<%end%>
 <h6>Work Type</h6>
 <%= job.work_type %>
 

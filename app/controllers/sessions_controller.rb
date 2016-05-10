@@ -10,7 +10,14 @@ class SessionsController < ApplicationController
       remember user
      
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user
+      if session[:current_job_application]
+        job_id = session[:current_job_application]
+        #redirect_to controller: 'jobs', action: 'apply', id: job_id.to_i
+        redirect_to controller: 'jobs', action: 'show', id: job_id
+      else
+        redirect_to user
+      end 
+      
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'

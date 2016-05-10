@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-	before_action :find_job, only: [:show, :edit, :update, :destroy]
+	before_action :find_job, only: [:show, :edit, :update, :destroy, :apply]
 
 	def index
 		if params[:category].blank?
@@ -37,6 +37,22 @@ class JobsController < ApplicationController
 		@job = Job.new
 	end
 
+	def short_list
+		job = Job.find(params[:job])
+		@button_id = "#btn#{job.id}"
+		job_seeker = current_user.job_seeker
+		job_seeker.short_listed_jobs.create(job_id: job.id)
+		flash[:success] = "Added"
+		puts "%%%%%%%%%%%%%%%%%%555"
+		puts @button_id
+		respond_to do |format|
+			
+			format.js
+		end
+
+	end
+		
+
 
 
 	def update
@@ -46,6 +62,39 @@ class JobsController < ApplicationController
       render 'edit'
     end
 
+	end
+
+	def create_application
+		job = params[:job]
+		motivation = params[:motivation]
+		jp = JobApplication.new(motivation_text: motivation, job_id: job.to_i, job_seeker_id: current_user.id)
+		if jp.save
+			flash[:success] = "You successfully applied for this job."
+			respond_to do |format|
+				format.js
+			end
+		
+
+		else
+			flash[:failure] = "Sorry, something wrong happened."
+			
+		end
+
+	end
+
+	def apply
+		# if !logged_in?
+		# 	session[:was_applying_for] = @job.id
+		# 	render  template: 'sessions/new'
+		# else
+		# 	redirect_to controller: 'jobs', action: 'show', id: @job.id
+		# end
+		respond_to do |format|
+			format.js
+
+		end
+
+		
 	end
 
 

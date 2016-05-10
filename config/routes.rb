@@ -2,7 +2,13 @@ Rails.application.routes.draw do
 
   # get 'user_actions/search'
 
+  get 'jobs/:id/apply' => "jobs#apply"
+
+  post 'jobs/apply' => "jobs#create_application"
+
   get '/search' => 'user_actions#search'
+
+  post '/jobs/shortlist' => 'jobs#short_list'
 
   get 'who' => 'users#who'
 
@@ -16,7 +22,7 @@ Rails.application.routes.draw do
 
   post 'jobseeker' => 'users#create_job_seeker'
 
-  get 'seekerprofile/:id' => 'job_cd seekers#index'
+  get 'seekerprofile/:id' => 'job_seekers#index'
 
   resources :users  
   get 'sessions/new'

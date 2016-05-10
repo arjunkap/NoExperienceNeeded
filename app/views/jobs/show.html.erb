@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
-
+<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash #{key}" %>
+<% end %>
 <p>
   <strong>Title:</strong>
   <%= @job.title %>
@@ -27,7 +29,21 @@
 
 <%end%>
 
-<%=  link_to 'Apply', edit_job_path(@job), class: "btn btn-default" %> 
+
+<% if logged_in? %>
+
+<%=  link_to 'Apply',  {:controller => "jobs", :action => "apply", :job_id => @job.id } , class: "btn btn-default", remote: true %>
+<% else %>
+
+<% session[:current_job_application] = @job.id %>
+<%= link_to "Sign in to apply", login_path%>
+
+<%end%>
+
+<div id="job_application">
+	
+</div>
+
 
 
 <%= link_to 'Back', session[:current_uri], class: 'btn btn-default' %>

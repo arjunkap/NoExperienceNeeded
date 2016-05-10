@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160510061649) do
+ActiveRecord::Schema.define(version: 20160510131924) do
+
+  create_table "answers", force: :cascade do |t|
+    t.string   "answer"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "question_id"
+  end
+
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
 
   create_table "attachments", force: :cascade do |t|
     t.datetime "created_at",        null: false
@@ -81,6 +90,16 @@ ActiveRecord::Schema.define(version: 20160510061649) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "interview_questions", force: :cascade do |t|
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "interview_review_id"
+    t.integer  "question_id"
+  end
+
+  add_index "interview_questions", ["interview_review_id"], name: "index_interview_questions_on_interview_review_id"
+  add_index "interview_questions", ["question_id"], name: "index_interview_questions_on_question_id"
+
   create_table "interview_reviews", force: :cascade do |t|
     t.string   "company_name"
     t.text     "description"
@@ -98,6 +117,17 @@ ActiveRecord::Schema.define(version: 20160510061649) do
 
   add_index "interview_reviews", ["company_id"], name: "index_interview_reviews_on_company_id"
   add_index "interview_reviews", ["job_seeker_id"], name: "index_interview_reviews_on_job_seeker_id"
+
+  create_table "job_applications", force: :cascade do |t|
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "job_seeker_id"
+    t.integer  "job_id"
+    t.text     "motivation_text"
+  end
+
+  add_index "job_applications", ["job_id"], name: "index_job_applications_on_job_id"
+  add_index "job_applications", ["job_seeker_id"], name: "index_job_applications_on_job_seeker_id"
 
   create_table "job_portfolios", force: :cascade do |t|
     t.datetime "created_at",        null: false
@@ -183,9 +213,30 @@ ActiveRecord::Schema.define(version: 20160510061649) do
 
   add_index "portfolio_items", ["job_seeker_id"], name: "index_portfolio_items_on_job_seeker_id"
 
+  create_table "profiles", force: :cascade do |t|
+    t.string   "profile_pic_location"
+    t.string   "website_url"
+    t.date     "last_updated"
+    t.text     "about_me"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "user_id"
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
+
   create_table "question_answers", force: :cascade do |t|
     t.string   "question"
     t.text     "answer"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "interview_review_id"
+  end
+
+  add_index "question_answers", ["interview_review_id"], name: "index_question_answers_on_interview_review_id"
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "question"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -220,9 +271,13 @@ ActiveRecord::Schema.define(version: 20160510061649) do
 
   create_table "short_listed_jobs", force: :cascade do |t|
     t.date     "date_added"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "job_seeker_id"
+    t.integer  "job_id"
   end
+
+  add_index "short_listed_jobs", ["job_seeker_id"], name: "index_short_listed_jobs_on_job_seeker_id"
 
   create_table "skill_verifiers", force: :cascade do |t|
     t.datetime "created_at", null: false

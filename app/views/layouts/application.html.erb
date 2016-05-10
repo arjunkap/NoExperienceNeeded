@@ -26,7 +26,11 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+   
+        <% if !(logged_in? and is_current_user_employer?) %>
+
       <% current_uri = request.env['PATH_INFO'] %>
+
 
       <% if current_uri != "/" %>
          <form class="navbar-form navbar-left" role="search" action="/search">
@@ -43,6 +47,8 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
+      <%end%>
+
       <%end%>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/about">About</a></li>
@@ -98,29 +104,29 @@
 <%= yield %>
 <script>
 
-    /* TEMPORARY: reacts to the submission from the search bar form */
-    $(document).ready(function(){
-        $("form").submit(function(){
-            var search = $('#searchbar').find('input[name="field"]').val();
-            var returnString = "You searched for: " + search.toUpperCase() + "." + "\nThis feature is still under construction.\nBummer."
+   //  /* TEMPORARY: reacts to the submission from the search bar form */
+   //  $(document).ready(function(){
+   //      $("form").submit(function(){
+   //          var search = $('#searchbar').find('input[name="field"]').val();
+   //          var returnString = "You searched for: " + search.toUpperCase() + "." + "\nThis feature is still under construction.\nBummer."
 
-            alert(returnString);
+   //          alert(returnString);
 
-        });
-    });
+   //      });
+   //  });
 
-    <!-- Changes the navigation bar when hovered over-->
-   $(document).ready(function(){
+   //  <!-- Changes the navigation bar when hovered over-->
+   // $(document).ready(function(){
 
-        $("#brand,#menu,#loginButton,#menuOptions").hover(function(){
-            $(this).css("text-transform", "capitalize");
-            $(this).css("color", "crimson");
-        }, function(){
-            $(this).removeAttr('style');
-        });
+   //      $("#brand,#menu,#loginButton,#menuOptions").hover(function(){
+   //          $(this).css("text-transform", "capitalize");
+   //          $(this).css("color", "crimson");
+   //      }, function(){
+   //          $(this).removeAttr('style');
+   //      });
 
 
-    });
+   //  });
 
 
 var ready = function() {
