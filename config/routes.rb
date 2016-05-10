@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   get 'who' => 'users#who'
 
   get 'jobseeker' => 'users#job_seeker'
-get 'employer' => 'users#employer'
+  
+  get 'employer' => 'users#employer'
 
   get 'signup'  => 'users#new'
 
