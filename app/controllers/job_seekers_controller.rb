@@ -7,6 +7,8 @@ class JobSeekersController < ApplicationController
 
 				@jobseeker = JobSeeker.find(params[:id])
 				@user = User.find(@jobseeker.user_id)
+				@portfolio = PortfolioItem.where(job_seeker_id: @jobseeker.id)
+
 				if is_same_as_logged_in_job_seeker @user
 					@showEditFeatures = true
 				end
@@ -17,6 +19,7 @@ class JobSeekersController < ApplicationController
 		elsif current_user
 			@user = current_user
 			@jobseeker = JobSeeker.find_by(user_id: @user.id)
+			@portfolio = PortfolioItem.where(job_seeker_id: @jobseeker.id)
 			@showEditFeatures = true
 
 
@@ -26,20 +29,22 @@ class JobSeekersController < ApplicationController
 
 	end
 
-	
+	def new_portfolio_item
+		@job_seeker_id = params[:id]
+		respond_to do |format|
+			format.js
+		end
+	end
+
+	def save_portfolio_item
+		job_seeker_id = params[:id]
+		PortfolioItem.create(job_seeker_id )
+	end
+
 	def dashboard
 		@user = User.find(params[:user])
 		@job_seeker = JobSeeker.find_by(user_id: @user.id)
 		@shortlisted = ShortListedJob.where(job_seeker_id: @job_seeker.id)
-
-	end
-
-	def edit_description
-		@user = User.find(params[:id])
-
-		respond_to do |format|
-			format.js
-		end
 	end
 
 	def is_same_as_logged_in_job_seeker user

@@ -1,0 +1,31 @@
+<form action="profile/saveportfolioitem", data-remote = "true", method = "post">
+
+	<input name = "id" type = "hidden" value = "id">
+
+	Title:
+	<br> 
+	<input type = "text" name = "title">
+	<br>
+
+	Type:
+	<br>
+	<select name ="itemType">
+	  <option value="Work Experience">Work Experience</option>
+	  <option value="Project">Project</option>
+	  <option value="Research Paper">Research</option>
+	</select>
+	<br>
+
+	Description:
+	<br> 
+	<textarea type = "textarea" rows = "5" cols = "30" name = "description" value = "Description goes here"></textarea>
+	<br>
+
+	URL:
+	<br>
+	<input type = "text" name = "url">
+	<br>
+
+	<button>Save</button>
+
+</form>

@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   get 'profile/description/:id' => 'job_seekers#edit_description'
   post 'dashboard/description' => 'job_seekers#edit_description'
   get '/profile/dashboard/:user' => 'job_seekers#dashboard'
+  post 'profile/newportfolioitem' => 'job_seekers#portfolio'
+  post 'profile/newItem' => 'job_seekers#new_portfolio_item'
+  post 'profile/saveportfolioitem'
 
 
   get 'jobseeker' => 'users#job_seeker'
