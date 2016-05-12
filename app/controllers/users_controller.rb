@@ -17,21 +17,24 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(user_params)
 		 if @user.save
-	      log_in @user
-	      flash[:success] = "Welcome to the NEN!"
-	      redirect_to @user
-    else
-      render 'new'
-    end
-    if @company
-    	abn = params[:abn]
-    	@user.company = Company.new(abn: abn)
-    	@user.save
-    else
-    	@user.job_seeker = JobSeeker.new
-    	@user.save
-    end
-
+		  flash[:success] = "Welcome to the NEN!"
+	 	  if @company
+	    	abn = params[:abn]
+	    	@user.company = Company.new(abn: abn)
+	    	@user.save
+	    	log_in @user
+	    	redirect_to controller: 'employers', action: 'show'
+	     else
+	     	mobile = params[:mobile]
+	    	@user.job_seeker = JobSeeker.new(mobile: mobile)
+	    	@user.save
+	    	log_in @user
+	    	redirect_to controller: 'job_seekers', action: 'show'
+	     end
+	    else
+	      render 'new'
+	    end
+  
 		end
 
 	def job_seeker

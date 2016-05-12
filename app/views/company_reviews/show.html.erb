@@ -1,0 +1,11 @@
+
+
+<% if @review %>
+
+	<%= @review.title %>
+	<%= @review.company_name %>
+	<%= @review.description %>
+
+<%= link_to 'Back', session[:current_uri], class: 'btn btn-default' %>
+<%end%>
+

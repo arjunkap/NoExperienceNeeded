@@ -20,6 +20,22 @@ class UserActionsController < ApplicationController
     elsif @search_type == "comp_reviews"
       find_companies_reviews search_from
     end
+    respond_to do |format|
+      format.html
+      format.js
+
+      if params[:sort_preference]
+        if params[:sort_preference] == "recent"
+          puts "----------------------"
+          @jobs = Job.last
+        elsif params[:sort_preference] == "closing_soon"
+          @jobs = Job.first
+        else
+          @jobs = Job.all
+        end
+      end 
+      
+    end
 
   end
 
@@ -128,6 +144,7 @@ class UserActionsController < ApplicationController
           @jobs = search_with_query query.downcase, :job
         end
         @jobs = @jobs.uniq
+         
         session[:query] = query
       
     elsif search_from ==  "refine_search"
@@ -141,7 +158,8 @@ class UserActionsController < ApplicationController
       query = session[:query]
 
       if company == "" || company == nil
-        @jobs = Job.all
+        @jobs =  Job.all
+    
       else
         companies = search_with_title company.downcase, :company
         companies.each do |company|
@@ -157,6 +175,9 @@ class UserActionsController < ApplicationController
       @jobs2 = refine_with_work_industry @jobs1, params[:sub_industry]
 
       @jobs = refine_with_work_type @jobs2, params[:work_type]
+  
+      # @jobs = @jobs.paginate(:page => params[:page], :per_page => 25)
+
     end
   end
 

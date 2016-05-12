@@ -30,15 +30,16 @@ class JobSeekersController < ApplicationController
 	end
 
 	def new_portfolio_item
-		@job_seeker_id = params[:id]
+		@seeker_id = params[:id]
 		respond_to do |format|
 			format.js
 		end
 	end
 
 	def save_portfolio_item
-		job_seeker_id = params[:id]
-		PortfolioItem.create(job_seeker_id )
+		job_seeker_id = params[:id].to_i
+		PortfolioItem.create(:job_seeker_id => params[:id], :url => params[:URL], :project_type => params[:itemType], :description => params[:description], :name => params[:title] )
+		redirect_to '/profile/'
 	end
 
 	def dashboard

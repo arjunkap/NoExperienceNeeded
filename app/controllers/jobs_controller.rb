@@ -33,8 +33,30 @@ class JobsController < ApplicationController
 
 	end
 
+	def active_jobs
+		if current_user
+			if current_user.company
+				@jobs = current_user.jobs
+
+			end
+		end
+		respond_to do |format|
+			format.js
+		end
+	end
+
+	def create_new_job
+		@job = Job.new
+		respond_to do |format|
+			format.js
+		end
+	end
+
 	def new
 		@job = Job.new
+		respond_to do |format|
+			format.js
+		end
 	end
 
 	def short_list

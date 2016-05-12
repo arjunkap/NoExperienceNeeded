@@ -2,7 +2,7 @@ class Job < ActiveRecord::Base
   has_many :short_listed_jobs
   belongs_to :user
   belongs_to :sub_industry
-
+  # self.per_page = 10
   validates :title, :presence => true
   validates_length_of :title, :in => 6..100, :on => :create
 
