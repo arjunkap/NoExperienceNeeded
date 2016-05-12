@@ -12,6 +12,14 @@ Rails.application.routes.draw do
 
   get 'who' => 'users#who'
 
+  get '/profile/:id' => 'job_seekers#show'
+  get '/profile' => 'job_seekers#show'
+
+  get 'profile/description/:id' => 'job_seekers#edit_description'
+  post 'dashboard/description' => 'job_seekers#edit_description'
+  get '/profile/dashboard/:user' => 'job_seekers#dashboard'
+
+
   get 'jobseeker' => 'users#job_seeker'
   
   get 'employer' => 'users#employer'
