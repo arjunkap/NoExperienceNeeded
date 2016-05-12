@@ -121,6 +121,13 @@ class JobsController < ApplicationController
 	end
 
 
+	def short_listed_jobs
+
+		@sjobs = current_user.job_seeker.short_listed_jobs
+
+	end
+
+
 	private
 		def job_params
 			params.require(:job).permit(:title, :description, :city, :country)

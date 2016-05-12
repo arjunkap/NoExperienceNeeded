@@ -1,14 +1,18 @@
+<div class="content">
+
 <% if @interview %>
 	<br>
-	<br>
-	<h3 id="total_votes">Total raings : <%= @total_votes %> </h3>
+	
 
-	<%= @interview.title %>
-	<%= @interview.company_name %>
-	<%= @interview.description %>
+	<h3><%= @interview.title %></h3>
+	<hr>
+	<p> <strong>Company:</strong> <%= @interview.company_name %> </p>
+	
+	<p><strong>Description:</strong><%= @interview.description %></p>
+	
+	<p id="total_votes">Total ratings : <%= @total_votes %> </p>
 
-<%= link_to 'Back', session[:current_uri], class: 'btn btn-default' %>
-<%end%>
+
 
 <div id="upvoted_message"></div>
 
@@ -22,3 +26,29 @@
 <%= link_to "Upvoted", '#',  class: "btn btn-default", disabled: true %>
 
 <%end%>
+<br> <br>
+<%= link_to 'Back', session[:current_uri], class: 'btn btn-default' %>
+<%end%>
+
+</div>
+
+
+<style type="text/css">
+  .content{
+    margin-left: 10%;
+   
+    margin-top: 6%;
+    margin-right: 10%;
+
+  }
+  .btn-primary{ 
+    width: 25%;
+  }
+  h3{
+    font-size: 30px;
+  }
+  p#total_votes{
+  	float: right;
+  }
+
+</style>

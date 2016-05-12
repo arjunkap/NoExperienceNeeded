@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   post 'jobs/apply' => "jobs#create_application"
 
+  get '/shortlistedjobs' => 'jobs#short_listed_jobs'
 
   get '/search' => 'user_actions#search'
 

@@ -1,5 +1,5 @@
   <div class="content">
-   <% if @search_type == "comp_reviews" %>
+   
        <form method="get" action="/search">
 
          <input type="hidden" name="search_from" value="refine_search" value='<%=session[:company]%>'></input>
@@ -14,16 +14,24 @@
           </form>
 <br>
   <br>
-        <% @reviews.each do |i| %>
+        <% @sjobs.each do |sjob| %>
 
         <div class="item">
-   <h4><%= link_to i.title , {controller: 'company_reviews', action: 'show', id: i.id} %> </h4>
-          Company: <%= i.company_name %> <br> <br> <hr>
-         
-          </div>
+            <% j = Job.find(sjob.job_id) %>
+          <p> <%=  link_to j.title ,  {:controller => "jobs", :action => "show", :id => j.id } %></p >
+          <p> 
+          <% company =  User.find(j.user_id).company %>
+          <% if company %>
+
+           <%= User.find(j.user_id).company.title %> </p>
+
+           <%else%>
+
+          Company title was not found
+
+           <%end%>
           </div>
         <%end%> 
-      <%end%>
 
         <style type="text/css">
       

@@ -1,16 +1,16 @@
+
+<div class="content">
+<br>
 <p id="notice"><%= notice %></p>
 <% flash.each do |key, value| %>
   <%= content_tag :div, value, class: "flash #{key}" %>
 <% end %>
 <p>
-  <strong>Title:</strong>
-  <%= @job.title %>
+  <h3> <%= @job.title %></h3>
+ <hr>
 </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @job.description %>
-</p>
+
 
 
 <p>
@@ -23,9 +23,12 @@
   <%= @job.country %>
 </p>
 
-
+<p>
+  <strong>Description:</strong>
+  <%= @job.description %>
+</p>
 <% if is_job_creator @job %>
-<%=  link_to 'Edit', edit_job_path(@job), class: "btn btn-default" %> 
+<%=  link_to 'Edit', edit_job_path(@job), class: "btn btn-primary" %> 
 
 <%end%>
 
@@ -36,8 +39,7 @@
 
   <% if !already_short_listed? @job.id %>
     <form data-remote="true" action="/jobs/shortlist" method="post">
-<input type="hidden"  name="job" value='<%= job.id %>'></input>
-
+<input type="hidden"  name="job" value='<%= job.id %>' />
 <button id='btn<%= job.id %>' class="button">Add to short list</button>
 </form>
 
@@ -68,5 +70,27 @@
 </div>
 
 
+</div>
+<div class="row"></div>
+<div class="row">
+<div class="col-md-3">
+<%= link_to 'Back', session[:current_uri], class: 'btn btn-primary' %>
+</div>
+</div>
 
-<%= link_to 'Back', session[:current_uri], class: 'btn btn-default' %>
+</div>
+
+
+<style type="text/css">
+  .content{
+    margin-left: 10%;
+
+    margin-top: 6%;
+  }
+  .btn-primary{ 
+    width: 25%;
+  }
+  h3{
+    font-size: 30px;
+  }
+</style>

@@ -1,7 +1,8 @@
-<style type="text/css">
 
-</style>
 <div id="something"><%= @something %></div>
+
+<div class="wrapper">
+
 <form method="get" action="/search">
    
 <!-- 	<input type="text" name="refined_query" value='<%=session[:query]%>' ></input>
@@ -94,7 +95,7 @@
 </form>
 </div>
 </div>
-
+</div>
 
 
 
@@ -103,7 +104,7 @@
 <br>
 <hr>
 </div>
-</div>
+
 
 <%end%>
 <%end%>
@@ -169,6 +170,7 @@ $(document).on('page:load', ready);
       .content{
         margin-left: 10%;
         margin-right: 10%;
+           margin-bottom: 5%;
       }
       .item{
           text-align: center;
@@ -178,5 +180,8 @@ $(document).on('page:load', ready);
       }
       .btn-primary{
         width: 200px;
+      }
+      .wrapper{
+        margin-top :  6%;
       }
       </style>
