@@ -1,11 +1,32 @@
-
-
+<div class="content">
 <% if @review %>
 
-	<%= @review.title %>
-	<%= @review.company_name %>
-	<%= @review.description %>
+	<h3><%= @review.title %></h3>
+	<br>
+ <p>	<%= @review.company_name %></p>
 
-<%= link_to 'Back', session[:current_uri], class: 'btn btn-default' %>
+ <p>	<%= @review.description %></p>
+
+
+
 <%end%>
 
+<br>
+<br>
+<%= link_to 'Back', session[:current_uri], class: 'btn btn-default' %>
+
+</div>
+
+<style type="text/css">
+  .content{
+    margin-left: 10%;
+   
+    margin-top: 6%;
+  }
+  .btn-primary{ 
+    width: 25%;
+  }
+  h3{
+    font-size: 30px;
+  }
+</style>

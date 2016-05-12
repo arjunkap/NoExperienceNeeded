@@ -11,7 +11,7 @@
 </style>
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-inverse">
+  <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -35,7 +35,7 @@
       <% if current_uri != "/" %>
          <form class="navbar-form navbar-left" role="search" action="/search">
         <div class="form-group">
-          <input type="text" class = "form-control" name="query" placeholder="search" value='<%=session[:query]%>' >
+          <input type="text" class = "form-control" name="query" placeholder="search" value='<%=session[:query]%>' />
         </div>
          <div class="form-group">
           <select class="form-control" name="search_type" id="search_type">
@@ -43,7 +43,7 @@
                 <option value="interviews">Interviews</option>
                 <option value="comp_reviews">Companies Reviews</option>
             </select>
-              <input type="hidden" name="search_from" value="navbar"></input>
+              <input type="hidden" name="search_from" value="navbar" />
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
@@ -67,6 +67,7 @@
                   <li><%= link_to "Profile",  {controller: 'employers', action: 'show', id: current_user.company.id} %></li>
               <% elsif is_current_user_job_seeker? %>
                 <li><%= link_to "Profile", {controller: 'job_seekers', action: 'show', id: current_user.job_seeker.id} %></li>
+                <li><%= link_to "Short Listed Jobs", shortlistedjobs_path %></li></li>
               <%end%>
               <li><%= link_to "Settings", '#' %></li>
               <li class="divider"></li>
@@ -87,35 +88,6 @@
      
     </div><!-- /.container-fluid -->
   </nav>
-  <div class="modal fade" id="login" role="dialog">
-    <div class="modal-dialog">
-
-
-      <div class="modal-content col-sm-10">
-
-          <!-- Form for username and password -->
-          <div class = "container-fluid" id = "existingUser">
-          <p><h3>login:</h3></p><br>
-          <form role = "form" id = "login" method="post">
-            <input type = "text" class="form-control col-sm-6 input-lg" placeholder = "username" name = "username"><br><br>
-            <input type = "password" class="form-control col-sm-6 input-lg" placeholder = "password" name = "password"><br><br>
-              <button type = "submit" disabled class = "btn btn-default" id = "submit"><b>submit</b></button>
-          </form>
-
-            </div>
-
-      <!-- Sign up and forgotten password links-->
-      <div class = "modal-footer">
-          <p>&nbsp;  <a href="/error" > FIRST TIME </a> USER</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="/error" id = "forgottenPassword">FORGOT YOUR PASSWORD?</a></p>
-      </div>
-
-      </div>
-
-        </div>
-
-    </ul>
-        </div>
 
 <%= yield %>
 
@@ -170,6 +142,7 @@ $(document).on('page:load', ready);
   }
   .navbar{
     border-radius: 0!important;
+    margin-bottom: 0!important;
   }
 </style>
 </body>
