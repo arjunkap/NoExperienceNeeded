@@ -38,14 +38,14 @@
 
 ###############
 #Interviewas
-u = User.create(:first_name => "Yash", email: "12sssdsd5asd04@gmail.com", password: "123456", :city => "Sydney")
-u.job_seeker = JobSeeker.create(mobile_number: "0416021705")
-u = JobSeeker.first
-c = Company.first
-first = u.interview_reviews.create(title: "Awesome", company_id: c.id, company_name: c.title, description: "The interview was great", position: "Software developer", experience: "Graduate level", offer:  true, difficulty: 5, duration: 1)
-second = u.interview_reviews.create(title: "Bad", company_id: c.id, company_name: c.title, description: "The interview was great", position: "Software engineer", experience: "2 years experience", offer:  true, difficulty: 4, duration: 1)
-third = u.interview_reviews.create(title: "Awesome", company_id: c.id, company_name: c.title, description: "The interview was great", position: "Technological analyst", experience: "Graduate level", offer:  true, difficulty: 5, duration: 1)
-fourth = u.interview_reviews.create(title: "asdfasd", company_id: c.id, company_name: c.title, description: "The interview was great", position: "Software developer", experience: "Graduate level", offer:  true, difficulty: 10, duration: 1)
+# u = User.create(:first_name => "Yash", email: "12sssdsd5asd04@gmail.com", password: "123456", :city => "Sydney")
+# u.job_seeker = JobSeeker.create(mobile_number: "0416021705")
+# u = JobSeeker.first
+# c = Company.first
+# first = u.interview_reviews.create(title: "Awesome", company_id: c.id, company_name: c.title, description: "The interview was great", position: "Software developer", experience: "Graduate level", offer:  true, difficulty: 5, duration: 1)
+# second = u.interview_reviews.create(title: "Bad", company_id: c.id, company_name: c.title, description: "The interview was great", position: "Software engineer", experience: "2 years experience", offer:  true, difficulty: 4, duration: 1)
+# third = u.interview_reviews.create(title: "Awesome", company_id: c.id, company_name: c.title, description: "The interview was great", position: "Technological analyst", experience: "Graduate level", offer:  true, difficulty: 5, duration: 1)
+# fourth = u.interview_reviews.create(title: "asdfasd", company_id: c.id, company_name: c.title, description: "The interview was great", position: "Software developer", experience: "Graduate level", offer:  true, difficulty: 10, duration: 1)
 
 
 # q = Question.create(:question => "How was your interview expereience ?")
@@ -83,3 +83,17 @@ fourth = u.interview_reviews.create(title: "asdfasd", company_id: c.id, company_
 
 
 ####################
+
+
+###################
+##Team member
+
+TeamMember.create(name:"Yash", role: "Full stack developer", about: "Great")
+TeamMember.create(name:"Arjun", role: "Back end developer", about: "Good")
+TeamMember.create(name:"Steph", role: "Front end developer", about: "Good")
+TeamMember.create(name:"Grace", role: "Front end developer", about: "Good")
+TeamMember.create(name:"Tracy", role: "Front end developer", about: "Good")
+
+
+
+######################

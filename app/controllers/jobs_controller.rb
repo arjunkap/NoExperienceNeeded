@@ -34,10 +34,11 @@ class JobsController < ApplicationController
 	end
 
 	def active_jobs
+		@jobs = []
 		if current_user
 			if current_user.company
 				@jobs = current_user.jobs
-
+				puts "-------------------" + @jobs.count
 			end
 		end
 		respond_to do |format|

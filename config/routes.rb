@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get 'jobs/active' => 'jobs#active_jobs'
   get 'jobs/create_new_job' => 'jobs#create_new_job'
 
+  get '/member' => 'about#team_member'
+
+
   post 'jobs/apply' => "jobs#create_application"
 
   get '/shortlistedjobs' => 'jobs#short_listed_jobs'
