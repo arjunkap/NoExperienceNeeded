@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160510131924) do
+ActiveRecord::Schema.define(version: 20160511141012) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20160510131924) do
     t.datetime "updated_at",     null: false
     t.integer  "company_id"
     t.integer  "job_seeker_id"
+    t.string   "title"
   end
 
   add_index "interview_reviews", ["company_id"], name: "index_interview_reviews_on_company_id"
@@ -320,9 +321,13 @@ ActiveRecord::Schema.define(version: 20160510131924) do
   add_index "tokens", ["login_id"], name: "index_tokens_on_login_id"
 
   create_table "upvotes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "interview_review_id"
+    t.integer  "job_seeker_id"
   end
+
+  add_index "upvotes", ["interview_review_id"], name: "index_upvotes_on_interview_review_id"
 
   create_table "user_locations", force: :cascade do |t|
     t.datetime "created_at",  null: false

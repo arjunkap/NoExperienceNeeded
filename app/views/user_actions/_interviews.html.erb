@@ -1,17 +1,50 @@
+
+<div class="content">
+
    <% if search_type == "interviews" %>
        <form method="get" action="/search">
 
          <input type="hidden" name="search_from" value="refine_search" value='<%=session[:company]%>'></input>
-          <input  type="text" name="company" placeholder="company" value='<%=session[:company]%>'></input>
-          
-  <button type="submit" class="btn btn-default">Refine</button>
+         <div class="row">
+         <div class="col-md-3">
+          <input  type="text" name="company" placeholder="company" value='<%=session[:company]%>' class="form-control" />
+          </div>          
+         
+         <div class="col-md-3">
+  <button type="submit" class="btn btn-primary">Refine</button>
+  </div>
+   </div>
 
           </form>      
+<br>
+  <br>
+          
             <% interviews.each do |i| %>
-
+            <div class="item">
+            <h4>
+          <%= link_to i.title , {controller: 'interview_reviews', action: 'show', id: i.id} %></h4>
           Company: <%= i.company_name %> <br>
           Description: <%= i.description %> <br>
-          
+        
+
+          <br>
+           </div>
+          <hr>
 
         <%end%> 
-      <%end%>
+      <%end%></div>
+
+      
+      <style type="text/css">
+      
+      .content{
+        margin-left: 10%;
+        margin-right: 10%;
+      }
+      .item{
+          text-align: center;
+      }
+       .btn-primary{
+        width: 200px;
+      }
+      </style>

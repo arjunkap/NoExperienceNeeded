@@ -50,5 +50,16 @@ class User < ActiveRecord::Base
     update_attribute(:remember_digest, nil)
   end
 
+   def self.update_user_from_console (params, id)
+      user = User.find(id).update(params)
+    
 
+      # if user.password.present?
+      #   user.salt = BCrypt::Engine.generate_salt
+      #   user.encrypted_password= BCrypt::Engine.hash_secret(user.password, user.salt)
+      # end
+
+      # Return the user for future use
+      user
+   end
 end

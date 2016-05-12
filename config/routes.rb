@@ -3,14 +3,18 @@ Rails.application.routes.draw do
   # get 'user_actions/search'
 
   get 'jobs/:id/apply' => "jobs#apply"
+  get 'jobs/active' => 'jobs#active_jobs'
+  get 'jobs/create_new_job' => 'jobs#create_new_job'
 
   post 'jobs/apply' => "jobs#create_application"
+
 
   get '/search' => 'user_actions#search'
 
   post '/jobs/shortlist' => 'jobs#short_list'
 
   get 'who' => 'users#who'
+
 
   get 'jobseeker' => 'users#job_seeker'
   
@@ -22,7 +26,15 @@ Rails.application.routes.draw do
 
   post 'jobseeker' => 'users#create_job_seeker'
 
-  get 'seekerprofile/:id' => 'job_seekers#index'
+  get 'jobseeker/:id' => 'job_seekers#show'
+
+
+  get 'cr/:id' => 'company_reviews#show'
+  get 'ir/:id' => 'interview_reviews#show'
+  get 'ir/:id/upvote' => 'interview_reviews#upvote'
+
+
+  get 'employer/:id' => 'employers#show'
 
   resources :users  
   get 'sessions/new'

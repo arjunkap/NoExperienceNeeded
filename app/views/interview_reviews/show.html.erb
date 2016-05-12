@@ -1,0 +1,24 @@
+<% if @interview %>
+	<br>
+	<br>
+	<h3 id="total_votes">Total raings : <%= @total_votes %> </h3>
+
+	<%= @interview.title %>
+	<%= @interview.company_name %>
+	<%= @interview.description %>
+
+<%= link_to 'Back', session[:current_uri], class: 'btn btn-default' %>
+<%end%>
+
+<div id="upvoted_message"></div>
+
+<% if is_current_user_job_seeker? and can_upvote? @interview.id %>
+
+<div id="active_button"></div>
+<%= link_to "Upvote", {controller: 'interview_reviews', action: 'upvote', id: @interview.id}, id: "upvote_button",  class: "btn btn-default", remote: true %>
+
+<%else%>
+	
+<%= link_to "Upvoted", '#',  class: "btn btn-default", disabled: true %>
+
+<%end%>

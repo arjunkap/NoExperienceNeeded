@@ -11,7 +11,7 @@
 </style>
 </head>
 <body>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default navbar-inverse">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -55,14 +55,30 @@
            <% if !logged_in? %>
           <!-- <li><a type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#login" id = "loginButton">Login</a></li> -->
 
-      
-
           <li><%= link_to  "Login", "/login"%></li>
           <% else %>
-    <% if employer? %>
+
+      <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Account <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <% if is_current_user_employer? %>
+                  <li><%= link_to "Profile",  {controller: 'employers', action: 'show', id: current_user.company.id} %></li>
+              <% elsif is_current_user_job_seeker? %>
+                <li><%= link_to "Profile", {controller: 'job_seekers', action: 'show', id: current_user.job_seeker.id} %></li>
+              <%end%>
+              <li><%= link_to "Settings", '#' %></li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to "Log out", logout_path, method: "delete" %>
+              </li>
+            </ul>
+          </li>
+
+    <% if is_current_user_employer? %>
              <li><%= link_to  "Create Job", new_job_path %></li>
           <%end%>
-            <li> <%= link_to  "Logout", "/logout", method: :delete %></li>
            <%end%>
         </ul>
       </div><!-- /.navbar-collapse -->
@@ -102,6 +118,7 @@
         </div>
 
 <%= yield %>
+
 <script>
 
    //  /* TEMPORARY: reacts to the submission from the search bar form */
@@ -146,6 +163,15 @@ $(document).on('page:load', ready);
 
 
 </script>
+<style type="text/css">
+  body{
+    margin: 0;
+    padding: 0;
+  }
+  .navbar{
+    border-radius: 0!important;
+  }
+</style>
 </body>
 
 </html>

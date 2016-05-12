@@ -1,18 +1,17 @@
 <style type="text/css">
 
 </style>
-
+<div id="something"><%= @something %></div>
 <form method="get" action="/search">
    
 <!-- 	<input type="text" name="refined_query" value='<%=session[:query]%>' ></input>
 	<input type="hidden" name="search_from" value="refine_search"></input> -->
 
      <% if @search_type == "jobs" %>
-
-    Jobs
-
+     <div class="row">
+     <div class="col-md-3">
             <label for="city">City</label>
-          <select name="city" id="city">
+          <select name="city" id="city" class="form-control">
           		<option value="any">Any</option>
                <% (Job.uniq_with_column :city).each do |city| %>
                		<option value='<%=city %>'><%= city %></option>
@@ -20,19 +19,19 @@
                <%end%>
 
             </select>
-            </div>
-                        <div class="form-control sidebar_div">
+    </div>
+                        <div class="col-md-3">
             <label for="sub_industry">Sub Industry</label>
-              <select name="sub_industry" id="sub_industry">
+              <select name="sub_industry" id="sub_industry" class="form-control">
               	<option value="any">Any</option>
                <% (SubIndustry.uniq_with_column :name).each do |si| %>
                		<option value='<%=si %>'><%= si %></option>
                <%end%>
             </select>
             </div>
-            <div class="form-control sidebar_div">
+            <div class="col-md-3">
             <label for="work_type">Work type</label>
-               <select name="work_type" id="work_type">
+               <select name="work_type" id="work_type" class="form-control">
               <option value="any">Any</option>
               <option value="FT">Full Time</option>
               <option value="PT">Part Time</option>
@@ -40,24 +39,88 @@
               <option value="COT">Contract</option>
             </select>
             </div>
-           	<br>
-              <input type="hidden" name="search_from" value="refine_search"></input>
+       
+              <input type="hidden" name="search_from" value="refine_search" />
 
 
- <div class="form-control sidebar_div">
-              <input  type="text" name="company" placeholder="company" value='<%=session[:company]%>'></input>
+ <div class="col-md-3">
+ <label for="sub_industry" type="hidden"></label>
+              <input  type="text" name="company" placeholder="company" value='<%=session[:company]%>' class="form-control" />
               </div>
               <br>
-      
-	<button type="submit" class="btn btn-default">Refine</button>
+        
+        <div class="row"></div>
+      <div class="row">
+	<button type="submit" class="btn btn-primary">Refine</button>
+  </div>
+        </div>
+</form>
+<br>
+
+<div class="row">
+<div class="col-md-3">
+  <select id="sort_preference" name="sort_preference" class="form-control">
+    <option value="no">No Preference</option>
+    <option value="recent">Recent</option>
+    <option value="closing_soon">Closing soon</option>
+  </select>
+</div>
+</div>
+<br>
+
+<div id="jobs">
+<%#= render partial: 'jobs', collection: @jobs %>
+<% if @jobs %>
+
+<div class="content">
+
+<% @jobs.each do |job| %>
+<br>
+<div class="item">  
+<h4> <%= link_to job.title, job %></h4> 
+<br>
+<h6 class="description">Descripton</h6>
+<%= job.description %>
+<h6>Work Type</h6>
+<%= job.work_type %>
+
+<h6>Industry</h6>
+<% if is_current_user_job_seeker? and !already_short_listed? job.id %>
+<form data-remote="true" action="/jobs/shortlist" method="post">
+<input type="hidden"  name="job" value='<%= job.id %>' />
+
+<button id='btn<%= job.id %>' class="button">Add to short list</button>
 
 </form>
+</div>
+</div>
 
-<%= render partial: 'jobs', collection: @jobs %>
 
 
 
-<script type="text/javascript">
+<%end%>
+
+<br>
+<hr>
+</div>
+</div>
+
+<%end%>
+<%end%>
+
+<script>
+  $(document).ready(function() {
+    $('#sort_preference').change(function() {
+        $.ajax({
+           url: "<%=  '/search' %>",
+           data: {
+               preference: $("#sort_preference option:selected").val()
+           },
+           dataType: "script"
+        });
+    });
+  });
+
 $(document).on('page:load', function() {
     // your stuff here
 
@@ -99,4 +162,21 @@ $(document).on('page:load', ready);
   
 
 <%= render partial: 'reviews', locals: {reviews: @reviews, search_type: @search_type} %>
+  
+           
+      <style type="text/css">
       
+      .content{
+        margin-left: 10%;
+        margin-right: 10%;
+      }
+      .item{
+          text-align: center;
+      }
+      .filter{
+
+      }
+      .btn-primary{
+        width: 200px;
+      }
+      </style>
