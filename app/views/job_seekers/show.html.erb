@@ -1,49 +1,43 @@
 <div id="Profile">
 	<h1 class="text-center profile_name"><%= @user.first_name %></h1>
 	<div class="col-md-4">
-		<img src="generic-profile-pic.png" alt="Profile Picture" style="width:304px;height:228px;">
+		<!--<img src="http://coparentcoalition.org/wp-content/uploads/2012/09/blank-profile-of-woman.jpg" alt="Profile Picture" style="width:304px;height:228px;">-->
+		<!-- Side Bar-->
 		<div class="skills_bar">
 			<div>
+				<h4>Website</h4>
+				<%=@user.web_url %>
+				<br>
+				<h4>Location</h4>
 	  			<%= "#{@user.state} / #{@user.city}"%><br>
-	  			<%=@user.web_url %>
-			</div>
-			<h3>Skills</h3>
-			Photoshop
-			<div class="progress" style="width:80%">
-	  			<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-	 			 </div>
-			</div>
-			Photoshop
-			<div class="progress" style="width:80%">
-	  			<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-	 			 </div>
-			</div>
-			Photoshop
-			<div class="progress" style="width:80%">
-	  			<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
-	 			 </div>
+	  	
 			</div>
 		</div>
 	</div>
 	
-	
+	<!-- About Section -->
 	<div class="col-md-8"> 
 	<p><%= @user.about%></p> 
+	<!-- Profile Section-->
 	<div class="portfolio">
 		<h3 >Portfolio</h3>
 		<%= render partial: "jobportfolio", locals: {items: @portfolio, iftrue: @showEditFeatures}%>
-	</div>
+		<div id = "portfolio">
+		<div id = "form_spot">
+		<%if @showEditFeatures%>
+			<%=link_to "", "/profile/newItem", :id => @jobseeker.id ,remote:true, method: :post, class: "btn btn-default btn-large glyphicon glyphicon-plus"%>
+		<%end %>
+		</div>
 	</div>
 	
-	
-
-</div>
-
-
-<div id = "portfolio">
-	<div id = "form_spot">
-	<%if @showEditFeatures%>
-		<%=link_to "New", "/profile/newItem", :id => @jobseeker.id ,remote:true, method: :post%>
-	<%end %>
+	</div>
 	</div>
 </div>
+
+<style type="text/css">
+	.glyphicon {
+		font-size:3em;
+		height:90px;
+		padding-top:10px;
+	}
+</style>
