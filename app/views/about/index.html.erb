@@ -7,42 +7,50 @@
 <div class="container">
 
   <div class="text">
-    <h1>OUR SERVICES</h1>
+    <h2>US</h2>
   </div>
 <section class="big_screen">
   <ul class="carousel">
-    <li class="items main-pos" id="1"> <%= image_tag "teamCollaboration.jpg" %> </li>
-    <li class="items right-pos" id="2">
-      <%= image_tag "intern.png" %>
+   <li class="items main-pos" id="1"> <%= image_tag "yash.jpg",id: "Yash" %> </li>
+   
+   <li class="items left-pos" id="2">
+      <%= image_tag "grace.jpg",id: "Grace"  %>
     </li>
+   
 
-    <li class="items back-pos" id="3">
-      <%= image_tag "teaching.jpg" %>
+    <li class="items right-pos" id="3">
+      <%= image_tag "steph.jpg", id: "Steph" %>
     </li>
-    <li class="items back-pos" id="4"> <%= image_tag "JobSearchNewspaper.jpeg" %> </li>
+    <li class="items back-pos" id="4"> <%= image_tag "arjun.jpg",id: "Arjun" %> </li>
     <li class="items back-pos" id="5">
-      <%= image_tag "job.jpg" %>
+      <%= image_tag "tracy.jpg", id: "Tracy" %>
     </li>
-    <li class="items back-pos" id="6">
-      <%= image_tag "employer.jpg" %>
-    </li>
-    <li class="items left-pos" id="7">  <%= image_tag "sign.jpg" %>
-    </li>
+  
   </ul>
 
 </section>
-<div id="slider" class="small_screen">
+<!-- <div id="slider" class="small_screen">
     <ul class="slides">
-       <li class="slide"> <%= image_tag "teamCollaboration.jpg" %> </li>
-        <li class="slide"> <%= image_tag "intern.png" %></li>
-        <li class="slide"> <%= image_tag "teaching.jpg" %></li>
-        <li class="slide">  <%= image_tag "JobSearchNewspaper.jpeg" %></li>
-        <li class="slide"> <%= image_tag "job.jpg" %> </li>
-        <li class="slide"> <%= image_tag "employer.jpg" %> </li>
-        <li class="slide"> <%= image_tag "sign.jpg" %></li>
+       <li class="slide"> <%= image_tag "teamCollaboration.jpg", id: "Yash" %> </li>
+        <li class="slide"> <%= image_tag "intern.png", id: "Grace" %></li>
+        <li class="slide"> <%= image_tag "teaching.jpg",id: "Steph" %></li>
+        <li class="slide">  <%= image_tag "JobSearchNewspaper.jpeg", id: "Arjun" %></li>
+        <li class="slide"> <%= image_tag "job.jpg", id: "Tracy" %> </li>
+  
     </ul>
 
-</div>
+
+</div> -->
+    <div id="name"></div>
+
+    <br>
+
+    <div id="role"></div>
+
+    <br>
+
+    <div id="about"></div>
+
 <div class="buttons">
   <button class="btn" id="next">Next</button>
 
@@ -57,7 +65,7 @@ var position = 0;
 var itemCount = $('.carousel li.items').length;
 var leftpos = itemCount;
 var resetCount = itemCount;
-var totalSlides = 7;
+var totalSlides = 5;
 var imageWidth = 485;
 
 $('li.items').each(function(index) {
@@ -120,10 +128,11 @@ $('.items').click(function() {
 
   if($(this).attr('class') == 'items left-pos') {
         swap('counter-clockwise');
-
+        getInfo();
   }
   else {
     swap('clockwise');
+    getInfo();
   }
 });
 var currentSlide = 1;
@@ -154,4 +163,19 @@ $('#back').click(function(){
 
 );
 
+function getInfo(){
+   var a =  $('.main-pos')[0];
+  var memberName = $($(a).children()[0]).attr('id')
+  $.ajax({
+           url: "<%=  '/member' %>",
+           data: {
+               name: memberName
+           },
+           dataType: "script"
+        });
+};
+  $(document).ready(function() {
+    getInfo();
+   
+  });
 </script>

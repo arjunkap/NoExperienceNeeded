@@ -9,10 +9,10 @@
 <% end %>
       <h2 class="form-signin-heading">Log in</h2>
      
-      <%= f.email_field :email, class: 'form-control', placeholder: "Email" %>
+      <%= f.email_field :email, class: 'form-control formi', placeholder: "Email" %>
 
   
-      <%= f.password_field :password, class: 'form-control' %>
+      <%= f.password_field :password, class: 'form-control formp' %>
       <label class="checkbox">
         <%= f.check_box :remember_me %> Remember me
       </label>
@@ -24,26 +24,13 @@
   </div>
 </div>
 
-<!--   <div class="wrapper" >
-    <form class="form-signin" method="post" action="/login">       
-      <h2 class="form-signin-heading">Please login</h2>
-      <input type="text" class="form-control" name="email" placeholder="Email Address"  />
-      <input type="password" class="form-control" name="password" placeholder="Password" required=""/>      
-      <label class="checkbox">
-        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
-      </label>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
-    </form>
-  </div> -->
 
 <style type="text/css">
 
-.new_user_ask, .form-control{
+.new_user_ask, .formi, .formp{
   margin-top: 20px;
 }
-body {
-  background: #eee !important;  
-}
+
 
 .wrapper {  
   margin-top: 80px;
@@ -56,6 +43,7 @@ body {
   margin: 0 auto;
   background-color: #fff;
   border: 1px solid rgba(0,0,0,0.1);  
+}
 
   .form-signin-heading,
   .checkbox {
@@ -66,7 +54,7 @@ body {
     font-weight: normal;
   }
 
-  .form-control {
+  .formp, .formi {
     position: relative;
     font-size: 16px;
     height: auto;
@@ -78,13 +66,13 @@ body {
     }
   }
 
-  input[type="text"] {
+  input.formi {
     margin-bottom: -1px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
 
-  input[type="password"] {
+  input.formp {
     margin-bottom: 20px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
