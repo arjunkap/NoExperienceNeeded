@@ -18,13 +18,17 @@
 
 </div>
 
-<%=@company.id%>
 
-<%=link_to "Jobs", "/employerprofile/job"(compid: @company.id), remote:true,method: :get%>
+
+<%=link_to "Jobs", {:controller => "employerprofile", :action => "jobs", id: @company.id}, remote:true%>
 <br />
 
-<%=link_to "Interview Reviews","/employerprofile/interview"(compid: @company.id), remote:true, method: :get%>
+
+<%=link_to "Interview Reviews",{:controller => "employerprofile", :action => "interview", id: @company.id}, remote:true%>
 <br />
-<%=link_to "Company Reviews", "/employerprofile/review"(compid: @company.id), remote:true, method: :get%>
+
+
+<%=link_to "Company Reviews", {:controller => "employerprofile", :action => "review", id: @company.id}, remote:true%>
+
 <div id = "result">
 </div>

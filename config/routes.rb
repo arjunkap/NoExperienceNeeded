@@ -30,10 +30,12 @@ Rails.application.routes.draw do
   post '/profile/newItem' => 'job_seekers#new_portfolio_item'
   post 'profile/saveportfolioitem' => 'job_seekers#save_portfolio_item'
   post '/profile/profile/saveportfolioitem' => 'job_seekers#save_portfolio_item'
-  get '/employer/profile/:id' => 'employerprofile#show'
-  get '/employerprofile/job' => 'employerprofile#jobs'
-  get '/employerprofile/interview' => 'employerprofile#interview'
-  get '/employerprofile/review' => 'employerprofile#review'
+  
+  get '/employerprofile/:id' => 'employerprofile#show'
+  
+  get '/employerprofile/jobs/:id' => 'employerprofile#jobs'
+  get '/employerprofile/interview/:id' => 'employerprofile#interview'
+  get '/employerprofile/review/:id' => 'employerprofile#review'
 
 
   get 'jobseeker' => 'users#job_seeker'

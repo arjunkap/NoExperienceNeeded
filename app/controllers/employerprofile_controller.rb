@@ -1,6 +1,6 @@
 class EmployerprofileController < ApplicationController
 
-  	public
+  
 	def show
   		if params.has_key?(:id) 
 
@@ -16,25 +16,22 @@ class EmployerprofileController < ApplicationController
 		end
 	end
 
-	public
 	def jobs
-		@jobs = Job.where(user_id: Company.find(params[:compid]).user_id)
+		@jobs = Job.where(user_id: Company.find(params[:id]).user_id)
 		respond_to do |format|
 			format.js
 		end
 	end
 
-	public
 	def review
-		@review = Review.where(:company_id => params[:compid])
+		@review = Review.where(:company_id => params[:id])
 		respond_to do |format|
 			format.js
 		end
 	end
 
-public
 	def interview
-		@interview = InterviewReview.where(:company_id => params[:compid])
+		@interview = InterviewReview.where(:company_id => params[:id])
 		respond_to do |format|
 			format.js
 		end
