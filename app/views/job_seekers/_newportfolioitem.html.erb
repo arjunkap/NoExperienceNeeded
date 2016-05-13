@@ -1,10 +1,11 @@
-<form action="/profile/saveportfolioitem", method = "post">
+<form action="/profile/saveportfolioitem", method = "post" class="col-md-8">
 
 	<input name="authenticity_token" value='<%= form_authenticity_token %>' type="hidden">
-	Title:
-	<br> 
-	<input type = "text" name = "title">
-	<br>
+	<div class="form-group">
+		<label>Title</label><br>
+		<input type ="text" name = "title">
+	</div>
+
 
 	Type:
 	<br>
