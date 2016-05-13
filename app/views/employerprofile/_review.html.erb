@@ -1,0 +1,12 @@
+<div id = "review">
+			<%#review = Review.where(:company_id => session[:comp_id])%>
+			<%if review != nil%>
+			<% review.each do |r|%>
+			<div>
+				<%=r.title%>
+				<%=r.description%>
+				<%=@company.title%>
+			</div>
+			<%end%>
+			<%end%>
+		</div>

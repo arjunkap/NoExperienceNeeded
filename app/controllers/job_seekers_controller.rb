@@ -1,5 +1,11 @@
 class JobSeekersController < ApplicationController
      @showEditFeatures = false
+
+
+
+
+
+###############################################
 	def show
 		if params.has_key?(:id) 
 
@@ -28,9 +34,13 @@ class JobSeekersController < ApplicationController
 		end
 
 	end
+######################################################
 
 
 
+
+
+######################################################
 	def new_portfolio_item
 		respond_to do |format|
 			format.js
@@ -42,8 +52,13 @@ class JobSeekersController < ApplicationController
 		PortfolioItem.create(:job_seeker_id => seeker_id, :url => params[:URL], :project_type => params[:itemType], :description => params[:description], :name => params[:title] )
 		redirect_to '/profile/'
 	end
+##########################################################
 
 
+
+
+
+##########################################################
 	def is_same_as_logged_in_job_seeker user
 		return user == current_user
 	end
@@ -58,5 +73,5 @@ class JobSeekersController < ApplicationController
 		end
 		return false
 	end
-
+###########################################################
 end
