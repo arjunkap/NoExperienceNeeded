@@ -1,14 +1,15 @@
 <div class="content">
 <% if @review %>
 
-	<h3><%= @review.title %></h3>
-	<br>
- <p>	<%= @review.company_name %></p>
-
- <p>	<%= @review.description %></p>
-
-
-
+<h1><%= @review.title %></h1>
+<div class="col-md-3 col-md-offset-1">
+  <h3><strong>Company:</strong><%= @review.company_name %></h3>
+</div>
+<div class="col-md-7">
+	  
+	<div><strong>Description:</strong><p><%= @review.description %></p></p></div>
+	<div>Create date:<%= @review.created_at %></div>
+     </div>
 <%end%>
 
 <br>
