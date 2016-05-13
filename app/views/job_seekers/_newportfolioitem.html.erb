@@ -1,5 +1,5 @@
 <form action="/profile/saveportfolioitem", method = "post" class="col-md-8 panel">
-
+	<!-- Add new project form-->
 	<input name="authenticity_token" value='<%= form_authenticity_token %>' type="hidden">
 	<h2>Add A New Project</h2>
 	<feildset class="form-group">
@@ -7,6 +7,8 @@
 		<input type ="text" name = "title" class="long">
 	</feildset>
 	<br>
+	
+	<!--Type of work-->
 	<feildset class="form-group">
 		<label for="itemType">Type</label><br>
 		<select name ="itemType" class="long">
