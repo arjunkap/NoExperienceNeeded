@@ -1,9 +1,4 @@
 
-<%if @showEditFeatures%>
-	<%=link_to "Dashboard", action: "dashboard", user: @user %>
-<%end %>
-
-<br />
 
 <div id="Profile">
 
@@ -26,7 +21,7 @@
 <div id = "portfolio">
 	<div id = "form_spot">
 	<%if @showEditFeatures%>
-		<%=link_to "New", "/profile/newItem", id: @jobseeker.id ,remote:true, method: :post%>
+		<%=link_to "New", "/profile/newItem", :id => @jobseeker.id ,remote:true, method: :post%>
 	<%end %>
 	</div>
 	<%= render partial: "jobportfolio", locals: {items: @portfolio, iftrue: @showEditFeatures}%>

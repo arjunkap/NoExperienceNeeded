@@ -29,28 +29,26 @@ class JobSeekersController < ApplicationController
 
 	end
 
+
+
 	def new_portfolio_item
-		@seeker_id = params[:id]
 		respond_to do |format|
 			format.js
 		end
 	end
 
 	def save_portfolio_item
-		job_seeker_id = params[:id].to_i
-		PortfolioItem.create(:job_seeker_id => params[:id], :url => params[:URL], :project_type => params[:itemType], :description => params[:description], :name => params[:title] )
+		seeker_id = JobSeeker.find_by(user_id: current_user.id).id
+		PortfolioItem.create(:job_seeker_id => seeker_id, :url => params[:URL], :project_type => params[:itemType], :description => params[:description], :name => params[:title] )
 		redirect_to '/profile/'
 	end
 
-	def dashboard
-		@user = User.find(params[:user])
-		@job_seeker = JobSeeker.find_by(user_id: @user.id)
-		@shortlisted = ShortListedJob.where(job_seeker_id: @job_seeker.id)
-	end
 
 	def is_same_as_logged_in_job_seeker user
 		return user == current_user
 	end
+
+
 
 	def is_valid_id id
 		JobSeeker.all.each do |seeker|

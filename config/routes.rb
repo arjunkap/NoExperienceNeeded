@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get '/profile/dashboard/:user' => 'job_seekers#dashboard'
   post '/profile/newItem' => 'job_seekers#new_portfolio_item'
   post 'profile/saveportfolioitem' => 'job_seekers#save_portfolio_item'
+  post '/profile/profile/saveportfolioitem' => 'job_seekers#save_portfolio_item'
 
   get 'jobseeker' => 'users#job_seeker'
   

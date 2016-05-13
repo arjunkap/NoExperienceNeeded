@@ -1,7 +1,6 @@
-<form action="profile/saveportfolioitem", method = "post">
+<form action="/profile/saveportfolioitem", method = "post">
 
-	<input name = "id" type = "hidden" value = '<%=id%>'>
-	<%=params[:id]%>
+	<input name="authenticity_token" value='<%= form_authenticity_token %>' type="hidden">
 	Title:
 	<br> 
 	<input type = "text" name = "title">
@@ -13,17 +12,20 @@
 	  <option value="Work Experience">Work Experience</option>
 	  <option value="Project">Project</option>
 	  <option value="Research Paper">Research</option>
+	  <option value="Extra-Curricular">Extra-curricular</option>
+	  <option value="Volunteer">Volunteer</option>
+	  <option value="Award">Award</option>
 	</select>
 	<br>
 
 	Description:
 	<br> 
-	<textarea type = "textarea" rows = "5" cols = "30" name = "description" value = "Description goes here"></textarea>
+	<textarea type = "textarea" rows = "5" cols = "30" name = "description" placeholder="Description goes here"></textarea>
 	<br>
 
 	URL:
 	<br>
-	<input type = "text" name = "url">
+	<input type = "url" name = "url" >
 	<br>
 
 	<button>Save</button>
