@@ -3,15 +3,28 @@
 <% if @interview %>
 	<br>
 	
-
-	<h3><%= @interview.title %></h3>
+<h1><strong>Company:</strong><%= @interview.company_name %></h1>
+	
 	<hr>
-	<p> <strong>Company:</strong> <%= @interview.company_name %> </p>
+	<div class="col-md-3 col-md-offset-1">
+	  <div class="intervewee"><p><strong>Interviewee id:</strong><%= @interview.job_seeker_id %></p></div>
+	  <!--<div>-->
+	  <!--  %= job_seeker.id = "@interview.job_seeker" %>-->
+	  <!--  <p>%= link_to "Interviewee", '/profile/job_seeker.id' %>-->
+	  <!--</p>-->
+   <!--     </div>-->
+	  </div>
 	
-	<p><strong>Description:</strong><%= @interview.description %></p>
-	
-	<p id="total_votes">Total ratings : <%= @total_votes %> </p>
-
+	<div class="col-md-7">
+	  <h3><%= @interview.title %></h3>
+			<div><strong>Description:</strong><p><%= @interview.description %></p></div>
+            <div><strong>Create date</strong>:<p><%= @interview.created_at %></p></div>
+            <div><strong>Duration:</strong><p><%= @interview.duration %></p></div>
+            <!--<div>Location:<p>address detail with post code</p></div>-->
+            <div><strong>Difficulty:<p><%= @total_votes %></strong></p></div>
+            <!--<div>Suggestion for other interviewees:<p>Paragraph of suggestion or expierence.</p></div>     	-->
+           <div><strong>Voted by:<p><%=  @interview.upvotes.count %></strong></p></div>
+     </div>
 
 
 <div id="upvoted_message"></div>
@@ -29,11 +42,16 @@
 <br> <br>
 <%= link_to 'Back', session[:current_uri], class: 'btn btn-default' %>
 <%end%>
-
 </div>
 
 
 <style type="text/css">
+.intervewee{
+	padding-top: 30%;
+}
+.button{
+  float:inherit;
+}
   .content{
     margin-left: 10%;
    
@@ -48,7 +66,7 @@
     font-size: 30px;
   }
   p#total_votes{
-  	float: right;
+  	float: inherit;
   }
 
 </style>
