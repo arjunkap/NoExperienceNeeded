@@ -4,7 +4,7 @@
             <div class="item">
             <h4>
           <%# link_to i.title , {controller: 'companyProfile', action: 'show', id: i.id} %></h4>
-          Company: <%=  %> <br>
+          Company: <%=i.title %> <br>
           Description: <%= User.find(i.user_id).about %> <br>
         
 

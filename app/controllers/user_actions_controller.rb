@@ -20,7 +20,11 @@ class UserActionsController < ApplicationController
     elsif @search_type == "comp_reviews"
       find_companies_reviews search_from
     elsif @search_type == "company"
-      search_companies params[:search_query]
+      if search_from == "navbar"
+        search_companies params[:query]
+      elsif search_from = "welcome_page_search"
+        search_companies params[:search_query]
+      end
     end
     respond_to do |format|
       format.html

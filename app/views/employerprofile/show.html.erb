@@ -1,0 +1,30 @@
+<div id = "profile">
+	
+	<%= @user.first_name %><br />
+	<%= @user.last_name %><br />
+
+	<p>About me:</p>
+	<%= @user.about%>
+
+	<br />
+	<p>location:<p>
+	<%= "#{@user.state} / #{@user.city}"%>
+
+	<p>My website:</p>
+	<%=@user.web_url %>
+
+	<p>ABN:</p>
+	<%=@company.abn %>
+
+</div>
+
+<%=@company.id%>
+
+<%=link_to "Jobs", "/employerprofile/job"(compid: @company.id), remote:true,method: :get%>
+<br />
+
+<%=link_to "Interview Reviews","/employerprofile/interview"(compid: @company.id), remote:true, method: :get%>
+<br />
+<%=link_to "Company Reviews", "/employerprofile/review"(compid: @company.id), remote:true, method: :get%>
+<div id = "result">
+</div>

@@ -1,0 +1,14 @@
+<div id = "jobs">
+<%#jobs = Job.where(user_id: Company.find(session[:comp_id]).user_id)%>
+			<%if jobs != nil%>
+			<% jobs.each do |j|%>
+			<div id = '<%=j.id%>'>
+				<%=j.title%>
+				<%=j.city%>
+				<%=j.closing_date%>
+				<%=j.description%>
+				<%=@company.title%>
+			</div>
+			<%end%>
+			<%end%>
+	</div>
