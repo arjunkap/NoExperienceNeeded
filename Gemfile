@@ -33,7 +33,7 @@ group :development do
 end
 # Use Unicorn as the app server
 # gem 'unicorn'
-
+gem 'responders', '~>2.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
