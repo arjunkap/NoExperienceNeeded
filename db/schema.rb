@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512090600) do
+ActiveRecord::Schema.define(version: 20160513124935) do
 
   create_table "attachments", force: :cascade do |t|
     t.datetime "created_at",        null: false
@@ -143,6 +143,9 @@ ActiveRecord::Schema.define(version: 20160512090600) do
     t.integer  "user_id"
     t.integer  "sub_industry_id"
     t.string   "work_type"
+    t.string   "question1"
+    t.string   "question2"
+    t.string   "question3"
   end
 
   add_index "jobs", ["sub_industry_id"], name: "index_jobs_on_sub_industry_id"
