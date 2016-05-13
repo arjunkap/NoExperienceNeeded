@@ -1,19 +1,24 @@
-<div class="container">
+<div class="row wrapper">
+	<div class="user-type">
+		<h2>Who am I?</h2>
 
-	<h2>Let's start telling, who are you ?</h2>
+		<h3><%= link_to "I am a job seeker", jobseeker_path, class: 'btn btn-default btn-large' %></h3>
 
-
-
-
-	<h3><%= link_to "I am a job seeker", jobseeker_path, class: '' %></h3>
-
-	<h3><%= link_to "I am an employer", employer_path, class: '' %></h3>
-
+		<h3><%= link_to "I am an employer", employer_path, class: 'btn btn-default btn-large' %></h3>
+	</div>
 </div>
 
 
 <style type="text/css">
 	.container{
 		text-align: center;
+	}
+	
+	.user-type{
+	  max-width: 380px;
+	  padding: 15px 35px 45px;
+	  margin: 0 auto;
+	  background-color: #fff;
+	  border: 1px solid rgba(0,0,0,0.1);  
 	}
 </style>

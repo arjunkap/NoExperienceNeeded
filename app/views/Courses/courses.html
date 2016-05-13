@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+//  Check Radio-box
+    $(".rating input:radio").attr("checked", false);
+    $('.rating input').click(function () {
+        $(".rating span").removeClass('checked');
+        $(this).parent().addClass('checked');
+    });
+});
+</script>
+
+<link rel="stylesheet" type="text/css" href="stylez.css">
+
+<title>Courses</title>
+</head>
+
+<body>
+
+<div class="container-fluid">
+	<div class="col-md-6">
+		<iframe  class="video-container" width="560" height="315" src="https://www.youtube.com/embed/mvK0UzFNw1Q" frameborder="0" allowfullscreen></iframe>
+
+		<div class="panel">
+			<div class="row">		
+				<h3 class="col-md-4">How to Code</h3>
+				<div class="rating col-md-8">
+			    	<span><input type="radio" name="rating" id="str5" value="5"><label for="str5"></label></span>
+			    	<span><input type="radio" name="rating" id="str4" value="4"><label for="str4"></label></span>
+			    	<span><input type="radio" name="rating" id="str3" value="3"><label for="str3"></label></span>
+			    	<span><input type="radio" name="rating" id="str2" value="2"><label for="str2"></label></span>
+			    	<span><input type="radio" name="rating" id="str1" value="1"><label for="str1"></label></span>
+				</div>
+			</div>
+
+			<div class="row">			
+				<img src="generic-profile-pic.png" alt="Profile Picture" class="profilePic col-md-2">
+				<textarea class="col-md-6" name="comment"></textarea>
+				<input class="btn btn-default col-md-2 postComment" type="submit" value="Post">	
+			</div>
+			
+			<div id="comment">		
+				<img src="sloth-sunglasses.jpg" alt="Profile Picture" class="commentPic col-xs-3">
+				<div class="col-md-8 description col-xs-9">
+					<p>Best viedo eva!!1!!!</p>
+				</div>
+			</div>
+
+			<div id="secondComment">		
+				<img src="generic-profile-pic.png" alt="Profile Picture" class="commentPic col-xs-3">
+				<div class="col-md-8 description col-xs-9">
+					<p>Very informative.</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	
+	<div class="panel2">
+	<div class="text-center ratingTitle explanation">
+	<h3 class="title"> Description</h3>
+	<p>
+		A staring guide for programming.<br>
+		"Learning "programming" is like practicing scales. It’s going to make you a very strong musician, but if you do that for years without ever playing a song, you’re going to get very frustrated. It’s a lot easier to learn something when you have a reason to want to know it. I’m here to tell you that you don’t actually want to learn to program. What you want to do is solve a problem. Maybe there’s an app on your phone that you don’t like, and you want to come up with a better solution. Maybe you’ve decided that you want to have a website. Or maybe you want to build a game. So before you look at programming at all, figure out a problem that you’re excited about. Something that’s going to motivate you to learn about the languages and tools available. And once you’ve built that really cool thing, you’re going to discover that you accidentally picked up a lot of skills along the way."
+	</p>
+		
+	</div>
+	
+	<div>
+		<h3 class="text-center ratingTitle">Top Rated</h3>
+		<div>
+			<section class="col-md-5 video">
+				<iframe width="100" height="75" 
+				src="https://www.youtube.com/watch?v=pvAsqPbz9Ro">
+				</iframe>	
+			</section>
+			<section class="col-md-6 description">
+				<p><b> Is Programming hard to learn?</b></p>
+			</section>
+		</div>
+
+		<div class="videoNext">
+			<section class="col-md-5 video">
+				<iframe width="100" height="75" 
+				src="https://www.youtube.com/watch?v=T0qAjgQFR4c">
+				</iframe>	
+			</section>
+			<section class="col-md-6 description">
+				<p><b> How to teach yourself to code</b></p>
+			</section>
+		</div>
+
+		<div class="videoNext">
+			<section class="col-md-5 video">
+				<iframe width="100" height="75" 
+				src="https://www.youtube.com/watch?v=f5tQ_nZeGKw">
+				</iframe>	
+			</section>
+			<section class="col-md-6 description">
+				<p><b> Can you learn to code in 1 Day?</b></p>
+			</section>
+		</div>
+		
+	</div>
+	</div>
+	
+</div> 
+	
+
+
+
+
+
+</body>
+</html> 
