@@ -1,0 +1,34 @@
+<div class="content">
+<% if search_type == "company" %>
+            <% company.each do |i| %>
+            <div class="item">
+            <h4>
+          <%# link_to i.title , {controller: 'companyProfile', action: 'show', id: i.id} %></h4>
+          Company: <%=  %> <br>
+          Description: <%= User.find(i.user_id).about %> <br>
+        
+
+          <br>
+           </div>
+          <hr>
+
+        <%end%> 
+        <%end%> 
+
+      </div>
+
+      
+      <style type="text/css">
+      
+      .content{
+        margin-left: 10%;
+        margin-right: 10%;
+           margin-bottom: 5%;
+      }
+      .item{
+          text-align: center;
+      }
+       .btn-primary{
+        width: 200px;
+      }
+      </style>

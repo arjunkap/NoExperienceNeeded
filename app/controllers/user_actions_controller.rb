@@ -41,8 +41,21 @@ class UserActionsController < ApplicationController
 
   end
 
-  private
+def search_companies word
+      
+      @company = []
+      if word == ""
+        @company = Company.all
+      else 
+         Company.all.each do |c|
+            if c.title.downcase.include? word.downcase
+              @company.push c
+            end
+          end
+      end
+  end  
 
+  private
   def find_companies_reviews search_from
 
   
@@ -72,14 +85,7 @@ class UserActionsController < ApplicationController
     end
   end
 
-  def search_companies word
       
-      if word == ""
-        @company = Company.all
-      else 
-        @company = search_with_query word.downcase, :company
-      end
-  end      
 
   def search_company_review company, query
     collection = []
