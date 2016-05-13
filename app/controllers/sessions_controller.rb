@@ -24,7 +24,8 @@ class SessionsController < ApplicationController
       
     else
 
-      flash[:danger] = 'Invalid email/password combination'
+      flash.now[:danger] = 'Invalid email/password combination'
+      @messages_rendered = false
       render 'new'
     end
   end

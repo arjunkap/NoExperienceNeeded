@@ -1,46 +1,75 @@
-<style>
-.text{
-  text-align: center;
-}
 
-</style>
 <div class="container">
 
   <div class="text">
-    <h2>US</h2>
+    <h2>Us</h2>
   </div>
 <section class="big_screen">
-  <ul class="carousel">
-   <li class="items main-pos" id="1"> <%= image_tag "yash.jpg",id: "Yash" %> </li>
-   
-   <li class="items left-pos" id="2">
-      <%= image_tag "grace.jpg",id: "Grace"  %>
-    </li>
-   
 
-    <li class="items right-pos" id="3">
-      <%= image_tag "steph.jpg", id: "Steph" %>
+
+   <ul class="carousel">
+    <li class="items main-pos" id="1"> <%= image_tag "yash.jpg",id: "Yash"  %> </li>
+    <li class="items right-pos" id="2">
+    <%= image_tag "grace.jpg",id: "Grace"  %>
     </li>
-    <li class="items back-pos" id="4"> <%= image_tag "arjun.jpg",id: "Arjun" %> </li>
-    <li class="items back-pos" id="5">
-      <%= image_tag "tracy.jpg", id: "Tracy" %>
+
+    <li class="items back-pos" id="3">
+     <%= image_tag "steph.jpg", id: "Steph" %>
     </li>
-  
+    <li class="items back-pos" id="4">
+     <%= image_tag "arjun.jpg",id: "Arjun" %>
+    </li>
+    <li class="items left-pos" id="5">  <%= image_tag "tracy.jpg", id: "Tracy" %>
+    </li>
   </ul>
 
+
 </section>
-<!-- <div id="slider" class="small_screen">
-    <ul class="slides">
-       <li class="slide"> <%= image_tag "teamCollaboration.jpg", id: "Yash" %> </li>
-        <li class="slide"> <%= image_tag "intern.png", id: "Grace" %></li>
-        <li class="slide"> <%= image_tag "teaching.jpg",id: "Steph" %></li>
-        <li class="slide">  <%= image_tag "JobSearchNewspaper.jpeg", id: "Arjun" %></li>
-        <li class="slide"> <%= image_tag "job.jpg", id: "Tracy" %> </li>
+<div class='dots'>
   
-    </ul>
+    
+<div class="row">
+<div class="col-md-4"></div>
+    <div class="col-md-4">
+      <nav class="carousel">
+        <input id="carousel-item-1" type="radio" name="carousel-dots" checked disabled="true">
+        <label for="carousel-item-1">Go to item 1</label>
+
+        <input id="carousel-item-2" type="radio" name="carousel-dots" disabled="true">
+        <label for="carousel-item-2">Go to item 2</label>
+
+        <input id="carousel-item-3" type="radio" name="carousel-dots" disabled="true"> 
+        <label for="carousel-item-3">Go to item 3</label>
+
+        <input id="carousel-item-4" type="radio" name="carousel-dots" disabled="true">
+        <label for="carousel-item-4">Go to item 4</label>
+
+        <input id="carousel-item-5" type="radio" name="carousel-dots" disabled="true">
+        <label for="carousel-item-5">Go to item 5</label>
+
+      </nav>
+
+    </div>
+    <div class="col-md-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-4"></div>
+       <div class="col-md-2">
+       <div class="col-md-4 col-md-offset-1" id="left">
+      <p class="glyphicon glyphicon-chevron-left"></p>
+    </div>
+    </div>
+    <div class="col-md-2">
+      <div class="col-md-4 col-md-offset-4" id="right">  
+    <p class="glyphicon glyphicon-chevron-right"></p>
+  </div>
+</div>
+</div>
+     <div class="col-md-4"></div>
+    </div>
 
 
-</div> -->
+
     <div id="name"></div>
 
     <br>
@@ -71,6 +100,11 @@ var imageWidth = 485;
 $('li.items').each(function(index) {
     items[index] = $(this).text();
 });
+
+$(document).ready(function(){
+  var slideCheck = 1;
+  $('#carousel-item-'+ slideCheck).prop("checked", true);
+})
 
 function swap(action) {
   var direction = action;
@@ -121,6 +155,8 @@ function swap(action) {
       startItem = 1;
     }
   }
+    slideCheck = $('.main-pos').attr('id');
+  $('#carousel-item-'+ slideCheck).prop("checked", true);
 }
 
 
@@ -135,6 +171,14 @@ $('.items').click(function() {
     getInfo();
   }
 });
+$('#left').click(function() {
+     swap('clockwise');
+        getInfo();
+  });
+$('#right').click(function() {
+     swap('counter-clockwise');
+        getInfo();
+  });
 var currentSlide = 1;
 
 $('#next').click(function(){
@@ -178,4 +222,18 @@ function getInfo(){
     getInfo();
    
   });
+
+$(document).keydown(function(e){
+  switch(e.which) {
+    case 37: 
+      swap('counter-clockwise');
+      break;
+    case 39:
+      swap('clockwise');
+      break;
+  }
+
+
+});
+
 </script>
