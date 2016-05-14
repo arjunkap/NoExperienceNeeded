@@ -42,7 +42,16 @@
 				<div id = "portfolio">
 					<%= render partial: "jobportfolio", locals: {items: @portfolio, iftrue: @showEditFeatures}%>
 				</div>
-		</div>
+			</div>
+			
+			<div class="row">
+				<form>
+					<textarea class="message"> 
+					
+					</textarea>
+					<button class="btn btn-default sendButton"> Send </button>
+				</form>
+			</div>
 	</div>
 </div>
 
@@ -58,12 +67,7 @@
 		<% end %>
 		<%end%>
 	
-	<!--<form>-->
-	<!--	<textarea class="message"> -->
-		
-	<!--	</textarea>-->
-	<!--	<button class="btn btn-default"> Send </button>-->
-	<!--</form>-->
+
 
 	
 
@@ -74,6 +78,10 @@
 	.glyphicon {
 		font-size:1em;
 		color:#78a300;
+	}
+	
+	.sendButton {
+		margin-bottom:6%;
 	}
 	
 	.profile_name {
