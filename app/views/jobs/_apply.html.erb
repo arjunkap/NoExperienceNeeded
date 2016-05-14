@@ -1,9 +1,13 @@
 <% if @job %>
 
 <form class="" method="post" action="/jobs/apply" data-remote="true">
-	<label>Motivation</label>
-	<textarea name="motivation" class="form-control"></textarea>
-	<input type="hidden" name="job" value='<%=@job.id%>'></input>
+	<label><%= @job.question1 %></label>
+	<textarea name="question1" class="form-control"></textarea>
+	<label><%= @job.question2 %></label>
+	<textarea name="question2" class="form-control"></textarea>
+	<label><%= @job.question3 %></label>
+	<textarea name="question3" class="form-control"></textarea>
+	<input type="hidden" name="job_id" value='<%=@job.id%>' />
 	<button type="submit" class="btn btn-default">Submit</button>
 </form>
 

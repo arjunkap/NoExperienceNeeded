@@ -1,37 +1,77 @@
 class JobSeekersController < ApplicationController
+     @showEditFeatures = false
 
-	def index
 
-		user = User.find_by(id: params[:id])
-		@message = "this is generic user profile"
-		if is_same_as_logged_in_user user
-			@message = "Hi #{user.first_name}"
+
+
+
+###############################################
+	def show
+		if params.has_key?(:id) 
+
+			if is_valid_id params[:id].to_i
+
+				@jobseeker = JobSeeker.find(params[:id])
+				@user = User.find(@jobseeker.user_id)
+				@portfolio = PortfolioItem.where(job_seeker_id: @jobseeker.id)
+
+				if is_same_as_logged_in_job_seeker @user
+					@showEditFeatures = true
+				end
+			else
+				redirect_to login_path
+			end
+
+		elsif current_user
+			@user = current_user
+			@jobseeker = JobSeeker.find_by(user_id: @user.id)
+			@portfolio = PortfolioItem.where(job_seeker_id: @jobseeker.id)
+			@showEditFeatures = true
+
+
+		else
+			redirect_to login_path
+		end
+
+	end
+######################################################
+
+
+
+
+
+######################################################
+	def new_portfolio_item
+		respond_to do |format|
+			format.js
 		end
 	end
 
-
-	def show
-
+	def save_portfolio_item
+		seeker_id = JobSeeker.find_by(user_id: current_user.id).id
+		PortfolioItem.create(:job_seeker_id => seeker_id, :url => params[:URL], :project_type => params[:itemType], :description => params[:description], :name => params[:title] )
+		redirect_to '/profile/'
 	end
-
-
-	def destroy
-
-	end
+##########################################################
 
 
 
-	def create
-
-	end
 
 
-	def update
-
-	end
-
-	def is_same_as_logged_in_user user
+##########################################################
+	def is_same_as_logged_in_job_seeker user
 		return user == current_user
 	end
 
+
+
+	def is_valid_id id
+		JobSeeker.all.each do |seeker|
+			if seeker.id == id
+				return true
+			end
+		end
+		return false
+	end
+###########################################################
 end

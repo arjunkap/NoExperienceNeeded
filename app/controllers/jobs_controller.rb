@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-	before_action :find_job, only: [:show, :edit, :update, :destroy, :apply]
+	before_action :find_job, only: [:show, :edit, :update, :destroy, :apply, :applications]
 
 	def index
 		if params[:category].blank?
@@ -11,18 +11,19 @@ class JobsController < ApplicationController
 	end
 
 	def create
-		@job = Job.new(job_params)
-
+		@job = current_user.jobs.new(job_params)
 		if @job.save
-			redirect_to @job
+			 flash[:success] = "Job created!"
+			 redirect_to controller: 'employers', action: 'show', id: current_user.company.id
 		else
-			render "new"
+			render 'new'
 		end
+		
 	end
 
 	def destroy
 		@job.destroy
-		redirect_to jobs_path
+		redirect_to controller: 'employers', action: 'show', id: current_user.company.id
 	end
 
 	def show
@@ -54,10 +55,12 @@ class JobsController < ApplicationController
 	end
 
 	def new
-		@job = Job.new
-		respond_to do |format|
-			format.js
+		if is_current_user_employer?
+			@job = Job.new
+		else
+
 		end
+
 	end
 
 	def short_list
@@ -80,18 +83,32 @@ class JobsController < ApplicationController
 
 	def update
     if @job.update_attributes(job_params)
-      redirect_to jobs_path
+      redirect_to controller: 'employers', action: 'show', id: current_user.company.id
     else
       render 'edit'
     end
 
 	end
 
+	def applications
+		@applications = JobApplication.where(job_id: @job.id)
+
+	end
+
 	def create_application
-		job = params[:job]
-		motivation = params[:motivation]
-		jp = JobApplication.new(motivation_text: motivation, job_id: job.to_i, job_seeker_id: current_user.job_seeker.id)
+		job_id = params[:job_id]
+		question1 = params[:question1]
+		question2 = params[:question2]
+		question3 = params[:question3]
+		job_seeker = current_user.job_seeker
+
+		jp = JobApplication.new(question1: question1,question2: question2,question3: question3, job_id: job_id, job_seeker_id: job_seeker.id)
+		puts "------------cool"
 		if jp.save
+			
+			if  job_seeker.short_listed_jobs.exists?(job_id)
+				job_seeker.short_listed_jobs.delete(job_id)
+			end
 			flash[:success] = "You successfully applied for this job."
 			respond_to do |format|
 				format.js
@@ -131,7 +148,7 @@ class JobsController < ApplicationController
 
 	private
 		def job_params
-			params.require(:job).permit(:title, :description, :city, :country)
+			params.require(:job).permit(:title, :description, :city, :country, :question1, :question2, :question3)
 		end
 
 		def find_job

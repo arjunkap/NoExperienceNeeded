@@ -1,0 +1,14 @@
+<div id = "interview">
+	<%#interview = InterviewReview.where(:company_id => session[:comp_id])%>
+			<%if interview != nil%>
+			<%interview.each do |i|%>
+			<div id = '<%=i.id%>'>
+				<%=i.title%>
+				<%=i.interview_date%>
+				<%=i.description%>
+				<%=i.company_name%>
+			</div>
+			<%end%>
+			<%end%>
+			
+</div>

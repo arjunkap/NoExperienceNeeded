@@ -1,0 +1,43 @@
+<div id="Profile">
+	<h1 class="text-center profile_name"><%= @user.first_name %></h1>
+	<div class="col-md-4">
+		<!--<img src="http://coparentcoalition.org/wp-content/uploads/2012/09/blank-profile-of-woman.jpg" alt="Profile Picture" style="width:304px;height:228px;">-->
+		<!-- Side Bar-->
+		<div class="skills_bar">
+			<div>
+				<h4>Website</h4>
+				<%=@user.web_url %>
+				<br>
+				<h4>Location</h4>
+	  			<%= "#{@user.state} / #{@user.city}"%><br>
+	  	
+			</div>
+		</div>
+	</div>
+	
+	<!-- About Section -->
+	<div class="col-md-8"> 
+	<p><%= @user.about%></p> 
+	<!-- Profile Section-->
+	<div class="portfolio">
+		<h3 >Portfolio</h3>
+		<%= render partial: "jobportfolio", locals: {items: @portfolio, iftrue: @showEditFeatures}%>
+		<div id = "portfolio">
+		<div id = "form_spot">
+		<%if @showEditFeatures%>
+			<%=link_to "", "/profile/newItem", :id => @jobseeker.id ,remote:true, method: :post, class: "btn btn-default btn-large glyphicon glyphicon-plus"%>
+		<%end %>
+		</div>
+	</div>
+	
+	</div>
+	</div>
+</div>
+
+<style type="text/css">
+	.glyphicon {
+		font-size:3em;
+		height:90px;
+		padding-top:10px;
+	}
+</style>

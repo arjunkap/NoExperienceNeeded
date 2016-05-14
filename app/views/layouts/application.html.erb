@@ -3,7 +3,7 @@
 <head>
   <title>NoExperienceNeeded</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>-->
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <style>
@@ -42,6 +42,7 @@
                 <option value="jobs">Jobs</option>
                 <option value="interviews">Interviews</option>
                 <option value="comp_reviews">Companies Reviews</option>
+                <option value="company">Company</option>
             </select>
               <input type="hidden" name="search_from" value="navbar" />
         </div>
@@ -80,42 +81,17 @@
   
            <%end%>
         </ul>
-      </div><!-- /.navbar-collapse -->
+      </div>
 
 
      
-    </div><!-- /.container-fluid -->
+    </div>
   </nav>
 
 <div class="partial">
 <%= yield %>
 </div>
 <script>
-
-   //  /* TEMPORARY: reacts to the submission from the search bar form */
-   //  $(document).ready(function(){
-   //      $("form").submit(function(){
-   //          var search = $('#searchbar').find('input[name="field"]').val();
-   //          var returnString = "You searched for: " + search.toUpperCase() + "." + "\nThis feature is still under construction.\nBummer."
-
-   //          alert(returnString);
-
-   //      });
-   //  });
-
-   //  <!-- Changes the navigation bar when hovered over-->
-   // $(document).ready(function(){
-
-   //      $("#brand,#menu,#loginButton,#menuOptions").hover(function(){
-   //          $(this).css("text-transform", "capitalize");
-   //          $(this).css("color", "crimson");
-   //      }, function(){
-   //          $(this).removeAttr('style');
-   //      });
-
-
-   //  });
-
 
 var ready = function() {
     

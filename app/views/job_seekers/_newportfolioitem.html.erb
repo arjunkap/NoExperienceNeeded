@@ -1,0 +1,53 @@
+<form action="/profile/saveportfolioitem", method = "post" class="col-md-8 panel">
+	<!-- Add new project form-->
+	<input name="authenticity_token" value='<%= form_authenticity_token %>' type="hidden">
+	<h2>Add A New Project</h2>
+	<feildset class="form-group">
+		<label>Title</label><br>
+		<input type ="text" name = "title" class="long">
+	</feildset>
+	<br>
+	
+	<!--Type of work-->
+	<feildset class="form-group">
+		<label for="itemType">Type</label><br>
+		<select name ="itemType" class="long">
+		  <option value="Work Experience">Work Experience</option>
+		  <option value="Project">Project</option>
+		  <option value="Research Paper">Research</option>
+		  <option value="Extra-Curricular">Extra-curricular</option>
+		  <option value="Volunteer">Volunteer</option>
+		  <option value="Award">Award</option>
+		</select>	
+	</feildset>
+	<br>
+	<feildset class="form-group">
+		<label>Description</label>
+		<br> 
+		<textarea type = "textarea" rows = "5" cols = "30" name = "description" placeholder="Description goes here" class="long"></textarea>
+	</feildset>
+	<br>
+	
+	<feildset>
+		<label>URL</label>
+		<br>
+		<input type = "url" name = "url"  class="long">
+	</feildset>
+
+	<br>
+
+	<button class="btn btn-default long">Add to Portfolio</button>
+
+</form>
+
+<style type="text/css">
+	.panel{
+		margin-top:5%;
+	}
+	
+	.long {
+		width:100%;
+		margin-bottom:5%;
+	}
+	
+</style>

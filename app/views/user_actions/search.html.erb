@@ -196,7 +196,7 @@ $(document).on('page:load', ready);
   
 
 <%= render partial: 'reviews', locals: {reviews: @reviews, search_type: @search_type} %>
-  
+<%= render partial: 'company', locals: {company: @company, search_type: @search_type} %> 
            
 <style type="text/css">
     @import url(https://fonts.googleapis.com/css?family=Oswald);

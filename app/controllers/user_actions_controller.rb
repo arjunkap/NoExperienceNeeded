@@ -19,6 +19,12 @@ class UserActionsController < ApplicationController
       search_interviews search_from
     elsif @search_type == "comp_reviews"
       find_companies_reviews search_from
+    elsif @search_type == "company"
+      if search_from == "navbar"
+        search_companies params[:query]
+      elsif search_from = "welcome_page_search"
+        search_companies params[:search_query]
+      end
     end
     respond_to do |format|
       format.html
@@ -39,8 +45,21 @@ class UserActionsController < ApplicationController
 
   end
 
-  private
+def search_companies word
+      
+      @company = []
+      if word == ""
+        @company = Company.all
+      else 
+         Company.all.each do |c|
+            if c.title.downcase.include? word.downcase
+              @company.push c
+            end
+          end
+      end
+  end  
 
+  private
   def find_companies_reviews search_from
 
   
@@ -69,6 +88,8 @@ class UserActionsController < ApplicationController
        session[:query] = params[:query]
     end
   end
+
+      
 
   def search_company_review company, query
     collection = []
