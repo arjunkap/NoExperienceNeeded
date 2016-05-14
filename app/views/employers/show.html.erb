@@ -1,8 +1,42 @@
 <div class="container">
 	
-	<%= link_to "Create Job", jobs_create_new_job_path, class: "btn btn-primary", remote: true %>
+	<%= link_to "Create Job", new_job_path, id: "new", class: "btn btn-primary" %>
 
-	<%= link_to "Active Jobs", jobs_active_path, class: "btn btn-primary", remote: true %> 
+	<%#= link_to "Active Jobs", jobs_active_path, class: "btn btn-primary", remote: true %>
+	<h2>Your active jobs</h2>
 
-	<div id="content"></div>
+	<div id="active_jobs">
+		<% if @active_jobs %>
+<p id="notice"><%= notice %></p>
+
+
+<table width="500">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @active_jobs.each do |job| %>
+      <tr>
+        <td><%= job.title %></td>
+        <td><%= job.description %></td>
+        <td><%= link_to 'Show', job %></td>
+        <td><%= link_to 'Applications', {controller: "jobs", action: "applications", id: job.id} %></td>
+        <td><%= link_to 'Edit', edit_job_path(job) %></td>
+        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+		<%end%>
+	</div> 
+
+	<div id="content">
+		
+	</div>
 </div>

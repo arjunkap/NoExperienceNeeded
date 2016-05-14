@@ -23,7 +23,7 @@
           <% company =  User.find(j.user_id).company %>
           <% if company %>
 
-           <%= User.find(j.user_id).company.title %> </p>
+           <%= company.title %> </p>
 
            <%else%>
 

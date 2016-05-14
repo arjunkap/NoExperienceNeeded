@@ -1,0 +1,9 @@
+<% if @applications %>
+	
+	<% @applications.each do |application| %>
+		<% seeker  = JobSeeker.find(application.job_seeker_id) %>
+		<%= link_to seeker.first_name, {controller: "jobs", action: "show", id: } %>
+		<%= seeker.user.first_name %>
+	<% end %>
+
+<%end%>

@@ -4,6 +4,11 @@ class Job < ActiveRecord::Base
   belongs_to :sub_industry
   # self.per_page = 10
   validates :title, :presence => true
+  validates :question1, :presence => true
+  validates :question2 , :presence => true
+  validates :question3, :presence => true
+
+
   validates_length_of :title, :in => 6..100, :on => :create
 
 

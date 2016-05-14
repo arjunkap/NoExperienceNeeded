@@ -5,7 +5,7 @@ class EmployersController < ApplicationController
 	end
 
 	def show
-
+		@active_jobs = current_user.jobs
 	end
 
 	def destroy

@@ -1,3 +1,40 @@
+<!-- 
+  cache
+ -->
+ <% user_logged_in = false %>
+ <% job_creator = false %>
+ <% job_seeker = false %>
+ <% employer = false %>
+ <% already_applied_for_job = false %>
+
+ <% already_short_listed_job = false %>
+
+
+<% if logged_in? %>
+  <% user_logged_in = true %>
+  <% if is_job_creator @job %>
+    <%job_creator = true %> 
+  <%end%>
+  <% if is_current_user_job_seeker? %>
+    <% job_seeker = true %>
+  <%end%>
+  <% if job_seeker and already_applied? @job.id %>
+    <% already_applied_for_job = true %>
+  <%end%>
+  <% if job_seeker and already_short_listed? @job.id %>
+  <% already_short_listed_job = true %>
+  <%end%>
+
+  <% if is_current_user_employer? %>
+
+  <% employer = true %>
+
+  <%end%>
+
+<% end %>
+
+
+
 
 <div class="content">
 <br>
@@ -28,42 +65,46 @@
   <%= @job.description %>
 </p>
 <% if is_job_creator @job %>
-<%=  link_to 'Edit', edit_job_path(@job), class: "btn btn-primary" %> 
+<%=  link_to 'Edit', edit_job_path(@job), class: "btn btn-default" %> 
 
 <%end%>
 
+<% if !user_logged_in %>
+<%= link_to "Sign in to apply", login_path%>
+  
+<% end %>
 
-<% if logged_in? and is_current_user_job_seeker? %>
-
- <% if !already_applied? @job.id  %>
-
-  <% if !already_short_listed? @job.id %>
-    <form data-remote="true" action="/jobs/shortlist" method="post">
-<input type="hidden"  name="job" value='<%= job.id %>' />
-<button id='btn<%= job.id %>' class="button">Add to short list</button>
-</form>
-
-
+<% if job_seeker %>
+  
+  <% if already_applied_for_job %>
+      <button class="btn btn-default" disabled>Already applied</button>
   <%else %>
+
+  <%=  link_to 'Apply',  {:controller => "jobs", :action => "apply", :job_id => @job.id } , class: "btn btn-default", remote: true, id: "apply_button" %>
+
+  <%end %>
+
+  <% if already_short_listed_job and !already_applied_for_job %>
 
   <button class="btn btn-default" disabled="">Short listed</button>
 
+  <% end %>
+
+  <% if !already_applied_for_job  and !already_short_listed_job %>
+
+     <form data-remote="true" action="/jobs/shortlist" method="post">
+<input type="hidden"  name="job" value='<%= @job.id %>' />
+<button id='btn<%= @job.id %>' class="button">Add to short list</button>
+</form>
+
   <%end%>
 
-<%=  link_to 'Apply',  {:controller => "jobs", :action => "apply", :job_id => @job.id } , class: "btn btn-default", remote: true %>
+<%end %>
 
-<% else %>
-  <button class="btn btn-default" disabled>Already applied</button>
-<%end%>
+<% if job_creator %>
+  
+<%end %>
 
-
-
-<% else %>
-
-<% session[:current_job_application] = @job.id %>
-<%= link_to "Sign in to apply", login_path%>
-
-<%end%>
 
 <div id="job_application">
 	
@@ -74,7 +115,24 @@
 <div class="row"></div>
 <div class="row">
 <div class="col-md-3">
+<% if !user_logged_in %>
 <%= link_to 'Back', session[:current_uri], class: 'btn btn-primary' %>
+
+<% else %>
+
+  <% if job_seeker %>
+
+  <%= link_to 'Back', session[:current_uri], class: 'btn btn-primary' %>
+
+  <% end %>
+
+  <% if job_creator %>
+     <%= link_to 'Back', {controller: "employers", action: "show", id: current_user.company.id }, class: "btn btn-default"  %>
+  <%end%>
+
+<%end%>
+
+
 </div>
 </div>
 

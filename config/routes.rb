@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   get 'jobs/active' => 'jobs#active_jobs'
   get 'jobs/create_new_job' => 'jobs#create_new_job'
 
+  get 'jobs/new' => 'jobs#new'
+
   get '/member' => 'about#team_member'
 
-
+  get 'jobs/:id/applications' => 'jobs#applications'
 
   post 'jobs/apply' => "jobs#create_application"
 
