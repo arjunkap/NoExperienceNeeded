@@ -42,10 +42,17 @@ u.jobs.create(:title => "Data Sciencetist", :description => "This sis aasdfadsfa
  u.job_seeker = JobSeeker.create(mobile_number: "0416021705")
  u = JobSeeker.first
 c = Company.first
+<<<<<<< HEAD
 first = u.interview_reviews.create(title: "Awesome", company_id: 3, company_name: c.title, description: "The interview was great", position: "Software developer", experience: "Graduate level", offer:  true, difficulty: 5, duration: 1)
 second = u.interview_reviews.create(title: "Bad", company_id: 3, company_name: c.title, description: "The interview was great", position: "Software engineer", experience: "2 years experience", offer:  true, difficulty: 4, duration: 1)
 third = u.interview_reviews.create(title: "Awesome", company_id: 3, company_name: c.title, description: "The interview was great", position: "Technological analyst", experience: "Graduate level", offer:  true, difficulty: 5, duration: 1)
 fourth = u.interview_reviews.create(title: "asdfasd", company_id: 3, company_name: c.title, description: "The interview was great", position: "Software developer", experience: "Graduate level", offer:  true, difficulty: 10, duration: 1)
+=======
+first = u.interview_reviews.create(title: "Awesome", company_id: c.id, company_name: c.title, description: "The interview was great", position: "Software developer", experience: "Graduate level", offer:  true, difficulty: 5, duration: 1)
+second = u.interview_reviews.create(title: "Bad", company_id: c.id, company_name: c.title, description: "The interview was great", position: "Software engineer", experience: "2 years experience", offer:  true, difficulty: 4, duration: 1)
+third = u.interview_reviews.create(title: "Awesome", company_id: c.id, company_name: c.title, description: "The interview was great", position: "Technological analyst", experience: "Graduate level", offer:  true, difficulty: 5, duration: 1)
+fourth = u.interview_reviews.create(title: "asdfasd", company_id: c.id, company_name: c.title, description: "The interview was great", position: "Software developer", experience: "Graduate level", offer:  true, difficulty: 10, duration: 1)
+>>>>>>> 834c588995781b6dca13ce6cf049f14912dece76
 first = u.interview_reviews.create(title: "Awesome", company_id: 1, company_name: "aCompany", description: "The interview was great", position: "Software developer", experience: "Graduate level", offer:  true, difficulty: 5, duration: 1)
 second = u.interview_reviews.create(title: "Awesome", company_id: 2, company_name: "bCompany", description: "The interview was great", position: "Software developer", experience: "Graduate level", offer:  true, difficulty: 5, duration: 1)
 

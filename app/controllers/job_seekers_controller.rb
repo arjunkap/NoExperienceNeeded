@@ -8,7 +8,9 @@ class JobSeekersController < ApplicationController
 ###############################################
 	def show
 		if params.has_key?(:id) 
-
+			if params.has_key?(:job_id)
+				@job = Job.find(params[:job_id])
+			end
 			if is_valid_id params[:id].to_i
 
 				@jobseeker = JobSeeker.find(params[:id])
@@ -73,5 +75,10 @@ class JobSeekersController < ApplicationController
 		end
 		return false
 	end
+
+	def messages
+		@messages = InterviewMessage.where(job_seeker_id: current_user.job_seeker.id)
+	end
+
 ###########################################################
 end
