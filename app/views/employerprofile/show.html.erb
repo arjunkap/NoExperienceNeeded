@@ -1,34 +1,38 @@
 <div id = "profile">
 	
-	<%= @user.first_name %><br />
-	<%= @user.last_name %><br />
-
-	<p>About me:</p>
-	<%= @user.about%>
-
-	<br />
-	<p>location:<p>
-	<%= "#{@user.state} / #{@user.city}"%>
-
-	<p>My website:</p>
-	<%=@user.web_url %>
-
-	<p>ABN:</p>
-	<%=@company.abn %>
-
+	<div class="companyname"><h1><%= @user.first_name %></div>
+	<%= @user.last_name %><br /></h1>
+<div class="col-md-3 col-md-offset-1">
+	<div><strong>location:</strong><p><%= "#{@user.state} / #{@user.city}"%><p>
+	</div>
+	<div><strong>My website:</strong>
+	<p><%=@user.web_url %></p>
+	</div>
+	<div><strong>ABN:</strong><p><%=@company.abn %></p>
+	</div>
 </div>
 
+	<div class="col-md-7"><p>About me:</p>
+	<%= @user.about%>
 
 
-<%=link_to "Jobs", {:controller => "employerprofile", :action => "jobs", id: @company.id}, remote:true%>
-<br />
 
+<div id = "directory"><h3><ul class="nav nav-tabs">
+   <li><%=link_to "Jobs", {:controller => "employerprofile", :action => "jobs", id: @company.id}, remote:true%></li>
+   <li><%=link_to "Interview Reviews",{:controller => "employerprofile", :action => "interview", id: @company.id}, remote:true%></li>
+   <li><%=link_to "Company Reviews", {:controller => "employerprofile", :action => "review", id: @company.id}, remote:true%></li>
+   </ul></h3></div>
 
-<%=link_to "Interview Reviews",{:controller => "employerprofile", :action => "interview", id: @company.id}, remote:true%>
-<br />
-
-
-<%=link_to "Company Reviews", {:controller => "employerprofile", :action => "review", id: @company.id}, remote:true%>
 
 <div id = "result">
 </div>
+
+</div>
+</div>
+<style type="text/css">
+.companyname{
+	font-family: 'Montserrat', sans-serif;
+	font-size: 50px;
+	text-align: center;
+}
+</style>

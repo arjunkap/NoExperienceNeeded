@@ -3,7 +3,7 @@
 
 <h1><%= @review.title %></h1>
 <div class="col-md-3 col-md-offset-1">
-  <h3><strong>Company:</strong><%= @review.company_name %></h3>
+  <h3><strong>Company:</strong><%= link_to @review.company_name , {controller: 'employerprofile', action: 'show', id: @review.company_id} %></h3>
 </div>
 <div class="col-md-7">
 	  
