@@ -11,13 +11,11 @@
          
          <div>
            <label for "company">Company</label>
-          <input  type="text" name="company" placeholder="Company" value='<%=session[:company]%>' class="form-control col-md-3" />
+          <input  type="text" name="company" placeholder="Company" value='<%=session[:company]%>' class="form-control" />
           </div>
           <br>
-          <br>
-          <br>
           <div>
-        <button type="submit" class="btn btn-primary col-md-3">Refine</button>
+        <button type="submit" class="btn btn-primary" id = "refine">Refine</button>
         </div>
 </div>
 </div>
@@ -75,7 +73,7 @@
     }
     
     
-    .btn-primary {
+    #refine {
         border-radius: 0;
         border: 4px solid black;
         background-color: white;
@@ -83,9 +81,9 @@
         font-family: 'Oswald', sans-serif;
         text-transform: uppercase;
         
-        
         width: 70%;
         margin-left: 15%;
+        
     }
 
     
