@@ -68,7 +68,8 @@
                   <li><%= link_to "Profile",  {controller: 'employers', action: 'show', id: current_user.company.id} %></li>
               <% elsif is_current_user_job_seeker? %>
                 <li><%= link_to "Profile", {controller: 'job_seekers', action: 'show', id: current_user.job_seeker.id} %></li>
-                <li><%= link_to "Short Listed Jobs", shortlistedjobs_path %></li></li>
+                <li><%= link_to "Short Listed Jobs", shortlistedjobs_path %></li>
+                 <li><%= link_to "Interview messages", {controller: "job_seekers", action: "messages", id: current_user.job_seeker.id} %></li></li>
               <%end%>
            
               <li class="divider"></li>

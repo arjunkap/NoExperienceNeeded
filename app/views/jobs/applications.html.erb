@@ -2,7 +2,7 @@
 	
 	<% @applications.each do |application| %>
 		<% seeker  = JobSeeker.find(application.job_seeker_id) %>
-		<%= link_to seeker.user.first_name, {controller: "job_seekers", action: "show", id: seeker.user.id, job_id: @job.id} %>
+		<%= link_to seeker.user.first_name, {controller: "job_seekers", action: "show", id: seeker.id, job_id: @job.id} %>
 		<%= seeker.user.first_name %>
 	<% end %>
 
