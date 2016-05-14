@@ -1,4 +1,6 @@
 class JobsController < ApplicationController
+	
+	require 'date'
 	before_action :find_job, only: [:show, :edit, :update, :destroy, :apply, :applications]
 
 	def index
@@ -11,13 +13,15 @@ class JobsController < ApplicationController
 	end
 
 	def create
-		@job = current_user.jobs.new(job_params)
-		if @job.save
-			 flash[:success] = "Job created!"
-			 redirect_to controller: 'employers', action: 'show', id: current_user.company.id
-		else
-			render 'new'
-		end
+			@job = current_user.jobs.new(job_params)
+			@job.closing_date = Date.parse(job_params[:closing_date])
+				if @job.save
+					 flash[:success] = "Job created!"
+					 redirect_to controller: 'employers', action: 'show', id: current_user.company.id
+				else
+					render 'new'
+				end
+	
 		
 	end
 
@@ -30,6 +34,7 @@ class JobsController < ApplicationController
 
 	end
 
+	
 	def edit
 
 	end
@@ -148,10 +153,14 @@ class JobsController < ApplicationController
 
 	private
 		def job_params
-			params.require(:job).permit(:title, :description, :city, :country, :question1, :question2, :question3)
+			params.require(:job).permit(:title, :description, :city, :country, :question1, :question2, :question3, :category, :closing_date, :work_type)
 		end
 
 		def find_job
-			@job = Job.find(params[:id])
+			if Job.exists?(params[:id])
+				@job = Job.find(params[:id])
+			else
+				render :file => "#{Rails.root}/public/404.html",  :status => 404
+			end
 		end
 end
