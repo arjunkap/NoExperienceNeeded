@@ -1,113 +1,143 @@
 
 <div id="something"><%= @something %></div>
 
-<div class="wrapper">
+<div class="wrapper" id = "search">
+<% if @search_type == "jobs" %>
+<div class = "search-heading"><h1 id = "search-heading">JOB SEARCH</h1></div>
 
 <form method="get" action="/search">
    
 <!-- 	<input type="text" name="refined_query" value='<%=session[:query]%>' ></input>
 	<input type="hidden" name="search_from" value="refine_search"></input> -->
-
-     <% if @search_type == "jobs" %>
-     <div class="row">
-     <div class="col-md-3">
+    
+     
+    <div class = "left">
+        <div id = "searchPanel">
+ 
+     <!--<div class="row">-->
+     <div>
+         <h2>FILTER BY</h2>
+     <!--<div class="col-md-3">-->
             <label for="city">City</label>
-          <select name="city" id="city" class="form-control">
+            <select name="city" id="city" class="form-control">
           		<option value="any">Any</option>
                <% (Job.uniq_with_column :city).each do |city| %>
-               		<option value='<%=city %>'><%= city %></option>
+                <option value='<%=city %>'><%= city %></option>
 
                <%end%>
 
-            </select>
+        </select>
     </div>
-                        <div class="col-md-3">
+    <br>
+        <div>
+     <!--<div class="col-md-3">-->
             <label for="sub_industry">Sub Industry</label>
-              <select name="sub_industry" id="sub_industry" class="form-control">
-              	<option value="any">Any</option>
-               <% (SubIndustry.uniq_with_column :name).each do |si| %>
-               		<option value='<%=si %>'><%= si %></option>
+            <select name="sub_industry" id="sub_industry" class="form-control">
+            <option value="any">Any</option>
+              <% (SubIndustry.uniq_with_column :name).each do |si| %>
+            <option value='<%=si %>'><%= si %></option>
                <%end%>
             </select>
-            </div>
-            <div class="col-md-3">
+        </div>
+        <br>
+        <div>
+     <!--<div class="col-md-3">-->
             <label for="work_type">Work type</label>
                <select name="work_type" id="work_type" class="form-control">
+                <option value="" disabled selected>Work Type</option>
               <option value="any">Any</option>
-              <option value="FT">Full Time</option>
-              <option value="PT">Part Time</option>
+              <option value="FT">Full-Time</option>
+              <option value="PT">Part-Time</option>
                <option value="CT">Casual</option>
               <option value="COT">Contract</option>
             </select>
-            </div>
-       
-              <input type="hidden" name="search_from" value="refine_search" />
-
-
- <div class="col-md-3">
- <label for="sub_industry" type="hidden"></label>
-              <input  type="text" name="company" placeholder="company" value='<%=session[:company]%>' class="form-control" />
-              </div>
-              <br>
-        
-        <div class="row"></div>
-      <div class="row">
-	<button type="submit" class="btn btn-primary">Refine</button>
-  </div>
         </div>
+       
+        <input type="hidden" name="search_from" value="refine_search" />
+     <br>
+    <div>
+     <!--<div class="col-md-3">-->
+         <label for="company">Company</label>
+         <input  type="text" name="company" placeholder="Company" value='<%=session[:company]%>' class="form-control" />
+    </div>
+    <br>
+              
+              <!-- <div class="row"> -->
+        <div>
+     <!--<div class="col-md-3">-->
+     <label for="sort_preference">Closing Date</label>
+          <select id="sort_preference" name="sort_preference" class="form-control">
+            <option value="no">No Preference</option>
+            <option value="recent">Recent</option>
+            <option value="closing_soon">Closing soon</option>
+          </select>
+        </div>
+        <!--</div>-->
+    <br><br>
+        
+        <!--<div class="row"></div>
+     <div class="row"> -->
+     
+	<button type="submit" class="btn btn-primary">Refine</button>
+  <!--</div>-->
+        <!-- </div> -->
 </form>
-<br>
+</div> 
+</div>
+<div class = "centre">
 
-<div class="row">
-<div class="col-md-3">
-  <select id="sort_preference" name="sort_preference" class="form-control">
-    <option value="no">No Preference</option>
-    <option value="recent">Recent</option>
-    <option value="closing_soon">Closing soon</option>
-  </select>
-</div>
-</div>
-<br>
+
 
 <div id="jobs">
 <%#= render partial: 'jobs', collection: @jobs %>
 <% if @jobs %>
 
 <div class="content">
+     
+    <% @jobs.each do |job| %>
+    <!--<br>
+    <div class="item">  
+    <h4> <%= link_to job.title, job %></h4> 
+    <br>
+    <h6 class="description">Descripton</h6>
+    <%= job.description %>
+    <h6>Work Type</h6>
+    <%= job.work_type %> -->
+    <div class="item">
+    <table>
+    <tr><th class = "resultTitle"><h1><%= link_to job.title, job, class: 'link'%></h1></th>
+    <th class = "resultCity"><h3><%= job.city %> </h3></th></tr> 
+    <th class = "resultDescription"><h3><%= job.description %></h3></th><th></th></tr>
+    
+    </table>
 
-<% @jobs.each do |job| %>
-<br>
-<div class="item">  
-<h4> <%= link_to job.title, job %></h4> 
-<br>
-<h6 class="description">Descripton</h6>
-<%= job.description %>
-<h6>Work Type</h6>
-<%= job.work_type %>
+<!--<h6>City</h6>
+<%= job.city %> -->
 
-<h6>Industry</h6>
+<!--<h6>Industry</h6>-->
 <% if is_current_user_job_seeker? and !already_short_listed? job.id %>
-<form data-remote="true" action="/jobs/shortlist" method="post">
-<input type="hidden"  name="job" value='<%= job.id %>' />
+    <form data-remote="true" action="/jobs/shortlist" method="post">
+        <input type="hidden"  name="job" value='<%= job.id %>' />
 
-<button id='btn<%= job.id %>' class="button">Add to short list</button>
+        <button id='btn<%= job.id %>' class="button">Add to short list</button>
 
-</form>
+    </form>
 </div>
 </div>
 </div>
-
-
+</div>
 
 <%end%>
 
 <br>
 <hr>
+<div class = "right"></div>
 </div>
 
+<%end%>
+<%end%>
 
-<%end%>
-<%end%>
+
 
 <script>
   $(document).ready(function() {
@@ -124,7 +154,7 @@
 
 $(document).on('page:load', function() {
     // your stuff here
-
+    
 });
 
 var ready = function() {
@@ -146,12 +176,15 @@ $('#city').val('<%=city%>');
 		$('#work_type').val('<%=wt%>');
 
 	<%end%>
+	
+	
 
 
 };
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
+
 
 
 </script>
@@ -165,22 +198,182 @@ $(document).on('page:load', ready);
 <%= render partial: 'reviews', locals: {reviews: @reviews, search_type: @search_type} %>
 <%= render partial: 'company', locals: {company: @company, search_type: @search_type} %> 
            
-      <style type="text/css">
+<style type="text/css">
+    @import url(https://fonts.googleapis.com/css?family=Oswald);
+    @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
+
+    #search label {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-size: 12px;
+        text-align: center;
+        color: black;
+        width: 100%;
+    }
+    
+    h1 {
+        font-family: 'Pacifico', sans-serif;
+        font-size: 30px;
+        color:black;
+    }
+    
+    h2 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 20px;
+        text-align: center;
+        color: black;
+        width: 100%;
+        
+    }
+    
+    h3 {
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 20px;
+        color: black;
+        width: 100%;
+        
+    }
+
+    
+    /*
+    #search.form-control {
+        border-radius: 0;
+        border: 1px solid black;
+    }*/
+    
+    #search .btn-primary {
+        border-radius: 0;
+        border: 4px solid black;
+        background-color: white;
+        color: black;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        
+        
+        width: 70%;
+        margin-left: 15%;
+    }
+    
+    table {
+        width: 90%;
+        margin-left: 5%;
+        
+    }
+    
+    .resultTitle {
+        float: left;
+        color:black;
+    }
+    
+    .resultDescription {
+        width: 100;
+    }
+    
+    .resultDescription h2 {
+        text-align: left;
+        
+    }
+    
+    .resultCity {
+        float: right;
+    }
+    
+    .link {
+        color: black;
+        text-decoration: underline;
+    }
+    
+    /*
+    .left, .right {
+        width: 20%;
+        float: left;
+    } */
+    
+    
+    .left {
+        width: 32%;
+        float: left;
+
+    }
+    
+    .right {
+        width: 0%;
+    }
+
+    
+    .centre {
+        width: 50%;
+        float: left;
+        
+    }
+    
+    #jobs {
+        width: 99%;
+        float:right;
+        background-color: white;
+        border: 4px solid black;
+    }
+    
+    .content {
+        /*background-color: orange;*/
+    }
+    
+    #searchPanel {
+        width: 50%;
+        background-color: white;
+        border: 4px solid black;
+        float: right;
+        padding-bottom: 15%; 
+    }
+    
+    #search.left div {
+        position: relative;
+        display: block;
+    }
+    
+    .form-control {
+        border-radius: 0;
+        border: 1px solid black;
+        width: 70%;
+        margin-left: 15%;
+    }
+    
+    .search-heading {
+        width: 66%;
+        margin-left: 16%;
+        background-color: white;
+        border: 4px solid black;
+        margin-bottom: 1%;
+    }
+    
+    .search-heading h1 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 60px;
+        text-align: center;
+        color: black;
+        text-transform: uppercase;
+    }
       
+      //
+     
       .content{
         margin-left: 10%;
         margin-right: 10%;
-           margin-bottom: 5%;
-      }
+        margin-bottom: 5%;
+      } 
+      
       .item{
           text-align: center;
       }
       .filter{
 
       }
+      /*
       .btn-primary{
         width: 200px;
-      }
+      } */
+      
+      
       .wrapper{
         margin-top :  6%;
       }
