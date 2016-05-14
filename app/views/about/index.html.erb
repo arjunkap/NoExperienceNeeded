@@ -228,9 +228,11 @@ $(document).keydown(function(e){
   switch(e.which) {
     case 37: 
       swap('counter-clockwise');
+      getInfo();
       break;
     case 39:
       swap('clockwise');
+      getInfo();
       break;
   }
 

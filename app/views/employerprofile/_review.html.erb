@@ -3,10 +3,10 @@
 			<%if review != nil%>
 			<% review.each do |r|%>
 			<div>
-				<%=r.title%>
-				<%=r.description%>
-				
+				<div><%= link_to r.title , {controller: 'company_reviews', action: 'show', id: r.id } , class: "link"%></div>
+				<div>
+				<%=r.description%></div>
 			</div>
 			<%end%>
 			<%end%>
-		</div>
+</div>

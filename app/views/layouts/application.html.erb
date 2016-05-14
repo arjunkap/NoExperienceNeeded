@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NoExperienceNeeded</title>
+  <title>No Experience Needed</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>-->
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <style>
@@ -11,6 +11,10 @@
 </style>
 </head>
 <body>
+  <% current_uri = request.env['PATH_INFO'] %>
+  <% if current_uri != "/" %>
+  
+ 
   <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -29,7 +33,7 @@
    
         <% if !(logged_in? and is_current_user_employer?) %>
 
-      <% current_uri = request.env['PATH_INFO'] %>
+      
 
 
       <% if current_uri != "/" %>
@@ -88,6 +92,8 @@
      
     </div>
   </nav>
+  
+  <% end %>
 
 <div class="partial">
 <%= yield %>
@@ -123,9 +129,13 @@ $(document).on('page:load', ready);
   .partial{
     margin-top: 6%;
   }
+  
   body {
-  background: #eee;  
-}
+   background: #eee;  
+  }
+
+
+
 </style>
 </body>
 
