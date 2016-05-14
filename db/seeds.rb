@@ -6,11 +6,19 @@
 # #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 # #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+<<<<<<< HEAD
 Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne")
 Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne")
 Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne")
 Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne")
 Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne")
+=======
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+>>>>>>> 451e9329b0a367ba0b15bff23e00a4fc2cf16f3b
 Job.create(:title => "Life", :description => "good stuff", :country => "Australia", :city => "Perth") 
 
 u = User.create(:first_name => "Yash", email: "4s56sdsd7a8sdfsd@gmail.com", password: "123456", :city => "Sydney")
