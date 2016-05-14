@@ -32,12 +32,41 @@
 	
 	</div>
 	</div>
-</div>
+	<% if @jobseeker and @job %>
+	<%= link_to "Ask for interview", {controller: "employers", action: "message_prompt", job_id: @job.id, seeker_id: @jobseeker.id}, id: "ask_for_interview", remote: true %> </div>
+
+	<%= form_for(:interview,  :url => url_for(:controller => "employers", :action => "send_message")) do |f| %>
+<%= f.hidden_field :job_id, value: @job.id %>
+<%= f.hidden_field :seeker_id, value: @jobseeker.id %>
+<%= f.text_field :message %>
+<button type="submit" class="btn btn-default">Submit</button>
+	<% end %>
+
+	<!-- <form id="interview_messsage_form" method="post" action="/employers/sendmessage">
+	<input type="hidden" name="job_id" name="job_seeker" value='<%= @job.id %>' />
+	<input type="hidden" name="job_seeker" value='<%= @jobseeker.id %>' />
+	<input name="message" />
+	
+</form>	 -->
+	<%end%>
+
+	<div id="interview"></div>
 
 <style type="text/css">
+	@import url(https://fonts.googleapis.com/css?family=Oswald);
+    @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
+	
 	.glyphicon {
 		font-size:3em;
 		height:90px;
 		padding-top:10px;
+		color:#78a300;
+	}
+	
+	.profile_name {
+		 font-family: 'Oswald', sans-serif;
+        font-size: 60px;
+        text-align: center;
+        text-transform: uppercase;
 	}
 </style>

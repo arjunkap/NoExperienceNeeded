@@ -172,11 +172,12 @@ $('.items').click(function() {
   }
 });
 $('#left').click(function() {
-     swap('clockwise');
+  swap('counter-clockwise');
+    
         getInfo();
   });
 $('#right').click(function() {
-     swap('counter-clockwise');
+     swap('clockwise');
         getInfo();
   });
 var currentSlide = 1;

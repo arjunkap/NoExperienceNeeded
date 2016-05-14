@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513124935) do
+ActiveRecord::Schema.define(version: 20160514034453) do
 
   create_table "attachments", force: :cascade do |t|
     t.datetime "created_at",        null: false
@@ -81,6 +81,14 @@ ActiveRecord::Schema.define(version: 20160513124935) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "interview_messages", force: :cascade do |t|
+    t.text     "message"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "job_seeker_id"
+    t.integer  "job_id"
+  end
+
   create_table "interview_reviews", force: :cascade do |t|
     t.string   "company_name"
     t.text     "description"
@@ -106,6 +114,9 @@ ActiveRecord::Schema.define(version: 20160513124935) do
     t.integer  "job_seeker_id"
     t.integer  "job_id"
     t.text     "motivation_text"
+    t.string   "question1"
+    t.string   "question2"
+    t.string   "question3"
   end
 
   add_index "job_applications", ["job_id"], name: "index_job_applications_on_job_id"

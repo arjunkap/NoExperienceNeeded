@@ -1,0 +1,596 @@
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
+
+html {
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    min-width: 855px;
+    position: relative;
+}
+
+body {
+    background-color: whitesmoke;
+    min-height: 100%;
+    margin-bottom: 100px;
+    
+    
+}
+
+/* Default heading settings */
+h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 60px;
+    text-align: center;
+    color: black;
+}
+
+h2 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    color: black;
+}
+
+h3 {
+    font-family: 'Pacifico', sans-serif;
+    font-size: 24px;
+}
+
+h4 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+}
+
+/* Wrapper class for whole page */
+.wrapper {
+    width: 100%;
+    min-width: 855px;
+    overflow: hidden;
+    display: block;
+} 
+
+/* Footer */
+.footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 100px;
+    display: block;
+}
+
+#footerContainer {
+    width: 100%;
+    height: 100%;
+}
+
+#footerLogo {
+    height: 100px;
+    float: right;
+    margin-bottom: 1%;
+}
+
+/* Format divs into a three-part column */
+.footer div {
+   position: relative; 
+    width: 33%;
+    float: left;
+    height: auto;
+}
+
+.footer-left div {
+    margin-top: 8%;
+    width: 100%;
+    text-align: center;
+}
+
+.footer-centre h4 {
+    width: 100%;
+    margin-top: 5.5%;
+    text-align: center;
+    line-height: 20px;
+}
+
+.footer-right div {
+    margin-top: 1%;
+    width: 100%;
+}
+
+/* Default layout settings for Course, Interview, Review search */
+#results:empty {
+    border: none;
+    height: 0;
+}
+#topSearchBar {
+    background-color: white;
+    width: 76%;
+    padding-bottom: 1%;
+    margin-left: 8%; 
+    margin-top: 2%;
+    position: static;
+    border: 4px solid black;
+}
+
+#topSearchBar input {
+    border-radius: 0;
+    width: 80%;
+    margin-left: 10%;
+    border: 1px solid black;
+    
+}
+
+/* divs for layout  */
+.left, {
+    width: 20%;
+    float: left;
+}
+
+.centre {
+    background-color: white;
+    width: 60%;
+    border: 4px solid black;
+}
+
+/* Overriding default column divs for all search pages */
+.searchPage.left {
+    width: 23%;
+    float: left;
+    margin-top: 1%;
+    min-width: 180px;
+}
+
+.searchPage.centre {
+    width: 60%;
+    margin-left: 24%;
+    margin-top: 1%;
+    min-width: 575px;
+    margin-bottom: 10%;
+}
+
+/* Filter By search panel */
+#searchPanel {
+    background-color: white;
+    width: 65%; 
+    height: 30%;
+    margin-top: auto;
+    float: right;
+    border: 4px solid black; 
+    padding-bottom: 5%; 
+    margin-bottom: 70%;
+}
+
+.filter {
+    margin-top: 5%;
+    border-radius: 0;
+    border: 1px solid black;
+}
+
+#refineButton {
+    border: 4px solid black;
+    border-radius: 0;
+    margin-top: 5%;
+}
+
+#results {
+    padding-left: 3%;
+    padding-right: 5%;
+    width: 100%;
+    height: 800px;
+    overflow: auto;
+    
+}
+
+.dropdown-menu {
+    border-radius:0;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif; 
+    text-transform: uppercase;
+}
+
+/* Media queries for responsive webpage */
+@media only screen and (max-width: 1280px) {
+    #searchPanel button {
+        font-size: 10px;
+    }
+}
+
+
+@media only screen and (max-width: 1000px) {
+        
+    #searchPanel {
+        width: 100%;
+        margin-left: 0;
+        font-size: auto;
+    }
+    
+    #searchPanel button {
+        font-size: 14px;
+    }
+    
+    .searchPage.centre {
+        width: 40%
+        position: absolute;
+    }
+    
+    .searchPage.centre {
+        width: 76%;
+        position: absolute;
+    }
+    
+    #results {
+        width: 100%;
+        margin-right: 0;
+         
+    }
+    
+    #topSearchBar {
+        width: 100%;
+        margin-left: 0%;
+        margin-right: 0;
+    }
+    
+    .wrapper {
+       padding-bottom: 50%;
+    }
+    
+}
+
+/* CSS to format the results (tables were used for layout) */
+#results table {
+    width: 100%;
+    padding-bottom: 3%;
+    margin-top: 2%;
+    border-bottom: 1px solid black;
+    
+}
+
+/* Ensures border doesn't show up on the last box */
+#results table:last-child {
+    border: none;
+}
+
+/* Spacing out the results */
+#results th {
+    padding-bottom: 2%;
+}
+
+/* Positioning content within the table */
+.resultDate, .resultCompany, .resultAuthor, .resultRating {
+    float: right;
+    width: 50%;
+    text-align: right;
+}
+
+/* NAVBAR */
+#navbar {
+    background-color: white;
+    position : static;
+    border-bottom: 4px solid #46c5b2;
+}
+
+#directory {
+    padding-top: 4.3%;
+    padding-left: 20%;
+}
+
+a {
+    color: black;
+}
+
+#navbarLogo {
+    width: 15%;
+    float: left;
+    padding-top:1%;
+    margin-bottom: -1%;
+}
+
+/* POST JOB */
+.post-job-centre {
+    margin-top: 2%;
+    margin-bottom: 5%;
+    
+}
+
+label.postJob {
+    text-transform: uppercase;
+    padding-top: 2%;
+    color: black;
+    width: 100%;
+    text-align: center;
+}
+
+/* Styling all submit buttons */
+input[type="submit"] {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    background: none;
+    border: 4px solid black;
+    margin-bottom: 2%;
+    width: 20%;
+    float: right;
+    margin-top: 5%;
+}
+
+#addQuestionBox {
+    width: 20%;
+    border: 2px solid black;
+    margin-left: 40%;
+}
+
+/* DASHBOARD */
+.centre-dashboard {
+    padding-bottom: 5%;
+    margin-top: 2%;
+    margin-bottom: 3%;
+    
+}
+
+#dashboardMenu {
+    padding-top: 30%;
+    margin: 0 auto;
+    padding: 0;
+    width: 50%;
+    padding-top: 8%;
+}
+
+/* Styling all buttons */
+button {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    border: 4px solid black;
+    margin-bottom: 6%;
+    background-color: white;
+    width: 100%;
+}
+
+/* JOB APPLICATION */
+/* Altering headings for this page */
+h1.jobApplication-resultTitle {
+    font-family: 'Pacifico', sans-serif;
+    font-size: 50px;
+    padding-bottom:3%;
+}
+
+h2.jobApplication, label.jobApplication {
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    padding-top: 3%;
+    
+}
+
+/* Formatting job information */
+.jobApplication-resultCompany {
+    float: right;
+    width: 50%;
+    font-size: 30px;
+}
+
+.jobApplication-resultDateDue, .jobApplication-resultDatePosted {
+    float: right;
+    text-align: right;
+    width: 50%;
+}
+
+.jobApplication-resultDescription {
+    margin-top: 8%;
+    width: 100%;
+}
+
+/* Formatting body of application */
+#application {
+    padding-bottom: 8%;
+    width: 60%;
+    margin: 0 auto;
+    padding-top: 4%;
+    margin-bottom: 5%;
+    background-color: white; 
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 3%;
+    border: 4px solid black;
+}
+
+.question {
+    border-radius: 0;
+    border: 1px solid black;
+}
+
+
+/* LOGIN MODAL */
+/* Formatting all text and password inputs */
+input[type="text"],input[type="password"] {
+    font-size:auto;
+    text-align:center;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-transform: uppercase;
+    background-color: white;
+    border-radius: 0;
+    border: 1px solid black;
+}
+
+#login {
+    background: white; 
+    background: rgba(0,0,0,0); 
+    border:none;
+    box-shadow: none;
+    font-size : 20px;
+    padding-top: 5%;
+}
+
+/* Get rid of border on modal */
+.modal-footer  {
+    border: none;
+}
+
+/* div for the user's details */
+#user {
+    float: right;
+    margin-top: -3%;
+    margin-right: 2%;
+}
+
+/* Formatting all modal content */
+.modal-content {
+    width: 100%;
+    align-content: center;
+    line-height: 35px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 0; 
+    border: 4px solid black;
+}
+
+#submit {
+    font-size: 20px;
+    margin-left: 33%;
+    background-color: rgba(0,0,0,0);
+    border: 3px solid black;
+    border-radius: 0;
+    color: black;
+}
+
+#loginButton {
+    background-color: rgba(0,0,0,0);
+    background-color: white; /* for browser compatibility*/
+    color: black;
+    border-color: rgba(0,0,0,0);
+    border-color: white;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+}
+
+#loginCloseButton {
+    float: right;
+    width: auto;
+}
+
+#loginModalBox {
+    border: 0;
+    border: 4px solid black;
+}
+
+/* Make sure links float to opposite sides of the modal */
+#firstTime {
+    float: left;
+}
+
+#forgottenPassword {
+    float: right;
+}
+
+#login h1 {
+    font-family: 'Pacifico';
+    
+}
+
+/* SIGN UP PAGE */
+.signUp-centre {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+/* Position these buttons properly */
+.company, .jobSeeker {
+    float: left;
+    width: 35%;
+    margin-left: 10%;
+    margin-top: 3%;
+}
+
+/* Edit label format for sign up pages */
+label.signUp {
+    text-transform: uppercase;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 19px;
+    color: black;
+    padding-top: 2%;
+    width: 100%;
+    text-align: center;
+}
+
+/* Format input boxes */
+input.signUp {
+    margin-top: -0.3%;
+    margin-bottom: -2%;
+    width: 80%;
+    margin-left: 10%;
+}
+
+ /* index */
+.index-centre {
+    margin-top: 7%;
+    margin-bottom: 5%;
+}
+
+h4.index {
+    text-align: center;
+    margin-top: 2%;
+}
+
+/*Search bar */
+#search {
+    width: 100%;
+}
+
+/* Centre submit button */
+input[type="submit"].index {
+    float: none;
+    margin-left: 40%;
+}
+
+/* Override bootstrap's default button settings for rating filter 
+Flashes orange when hovered or selected */
+#ratingFilter > .btn.active,
+#ratingFilter >.btn:focus,
+#ratingFilter >.btn:active,
+#ratingFilter >.btn:hover {
+    box-shadow: none;
+    background-color: none;
+    color: orange;
+    
+}
+
+/* Evenly spacing the checkbox within the filter search panel */
+#ratingFilter {
+    padding-bottom: 2%;
+    padding-top: 7%;
+    position: relative;
+    margin-left: 3%;
+}
+
+/* Making star glyphicon (represented by span) fit neatly in checkbox buttons */
+#ratingFilter span {
+    margin-left: -45%;
+    position: absolute;
+}
+
+/* Contact Us MODAL */
+#comment {
+    border-radius: 0;
+    border: 1px solid black;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-transform: uppercase;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 5%;
+    color: black;
+}
+
+#contactUsModal {
+    border-radius: 0;
+    border: 4px solid black;
+}
+
+/* Positiong close button */
+#contactUs-CloseButton {
+    float: right;
+    width: auto;
+    margin-top: -6%;
+}
+
+/* Index search */
+#indexSearch div{
+    width: 15%;
+    margin-left: 42.5%;
+}
