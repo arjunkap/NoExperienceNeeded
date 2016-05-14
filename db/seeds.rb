@@ -6,12 +6,12 @@
 # #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 # #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne")
-# Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne")
-# Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne")
-# Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne")
-# Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne")
-# Job.create(:title => "Life", :description => "good stuff", :country => "Australia", :city => "Perth") 
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+Job.create(:title => "Life", :description => "good stuff", :country => "Australia", :city => "Perth") 
 
 # u = User.create(:first_name => "Yash", email: "4s56sdsd7a8sdfsd@gmail.com", password: "123456", :city => "Sydney")
 # u.company = Company.new(:title => "Facebook", :abn => "12345678")
