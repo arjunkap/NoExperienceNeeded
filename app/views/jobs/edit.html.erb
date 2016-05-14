@@ -1,5 +1,30 @@
-<h1>Update your job</h1>
+ <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-3"><h2>New Job</h2></div>
+      
+    <div class="col-md-3"></div>
+    <div class="col-md-3"> <%= link_to "Cancel", {controller: "employers", action: "show", id: current_user.company.id} , class: "btn btn-danger", id: "cancel_button" %></div>
+  
 
+  </div>
+
+    <% if @job.errors.any? %>
+  <div id="error_explanation row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="alert alert-danger">
+      The form contains <%= pluralize(@job.errors.count, "error") %>.
+    
+    <ul>
+    <% @job.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+  </div>
+<% end %>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
    <%= form_for(@job) do |f| %>
@@ -82,11 +107,3 @@
     <% end %>
   </div>
 </div>
-
- <div class="row">
-      <div class="col-md-2"></div>
-
-      <div class="col-md-3">
-        <%= link_to "Cancel", {controller: "employers", action: "show", id: current_user.company.id} , class: "btn btn-danger", id: "cancel_button" %>
-      </div>
-    </div>
