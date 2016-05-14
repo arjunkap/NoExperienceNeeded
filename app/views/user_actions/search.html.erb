@@ -13,24 +13,20 @@
      
     <div class = "left">
         <div id = "searchPanel">
- 
-     <!--<div class="row">-->
-     <div>
+         <div>
          <h2>FILTER BY</h2>
-     <!--<div class="col-md-3">-->
             <label for="city">City</label>
             <select name="city" id="city" class="form-control">
           		<option value="any">Any</option>
                <% (Job.uniq_with_column :city).each do |city| %>
                 <option value='<%=city %>'><%= city %></option>
-
                <%end%>
 
-        </select>
+            </select>
     </div>
     <br>
-        <div>
-     <!--<div class="col-md-3">-->
+    <div>
+    
             <label for="sub_industry">Sub Industry</label>
             <select name="sub_industry" id="sub_industry" class="form-control">
             <option value="any">Any</option>
@@ -41,7 +37,6 @@
         </div>
         <br>
         <div>
-     <!--<div class="col-md-3">-->
             <label for="work_type">Work type</label>
                <select name="work_type" id="work_type" class="form-control">
                 <option value="" disabled selected>Work Type</option>
@@ -56,15 +51,11 @@
         <input type="hidden" name="search_from" value="refine_search" />
      <br>
     <div>
-     <!--<div class="col-md-3">-->
          <label for="company">Company</label>
          <input  type="text" name="company" placeholder="Company" value='<%=session[:company]%>' class="form-control" />
     </div>
     <br>
-              
-              <!-- <div class="row"> -->
         <div>
-     <!--<div class="col-md-3">-->
      <label for="sort_preference">Closing Date</label>
           <select id="sort_preference" name="sort_preference" class="form-control">
             <option value="no">No Preference</option>
@@ -88,48 +79,48 @@
 <% if @jobs %>
 
 <div class="content">
-     
+     <br>
+     <!-- Iterate through DB results and create search result -->
     <% @jobs.each do |job| %>
-    <!--<br>
-    <div class="item">  
-    <h4> <%= link_to job.title, job %></h4> 
-    <br>
-    <h6 class="description">Descripton</h6>
-    <%= job.description %>
-    <h6>Work Type</h6>
-    <%= job.work_type %> -->
+
     <div class="item">
     <table>
-    <tr><th class = "resultTitle"><h1><%= link_to job.title, job, class: 'link'%></h1></th>
-    <th class = "resultCity"><h3><%= job.city %> </h3></th></tr> 
-    <th class = "resultDescription"><h3><%= job.description %></h3></th><th></th></tr>
+    <tr>
+        <td class = "resultTitle"><h1><%= link_to job.title, job, class: 'link'%></h1></td>
+        <td class = "resultCity"><h3><%= job.city %> </h3></td>
+    </tr> 
+    <tr>
+        <td class = "resultDescription"><h3><%= job.description %></h3></td>
+        <td class = "resultDueDate"><h3><%= job.closing_date %></h3></td>
     
+    </tr>
     </table>
-
-<!--<h6>City</h6>
-<%= job.city %> -->
-
-<!--<h6>Industry</h6>-->
-<% if is_current_user_job_seeker? and !already_short_listed? job.id %>
-    <form data-remote="true" action="/jobs/shortlist" method="post">
-        <input type="hidden"  name="job" value='<%= job.id %>' />
-
-        <button id='btn<%= job.id %>' class="button">Add to short list</button>
-
-    </form>
+    <br>
+    
+    <!-- Checks if a job has been added to shortlisted jobs, creates button to add if not yet added
+    If yes, marks the box as shortlisted -->
+     <div class = "shortList">
+        <% if is_current_user_job_seeker? and !already_short_listed? job.id %>
+            <form data-remote="true" action="/jobs/shortlist" method="post">
+                <input type="hidden"  name="job" value='<%= job.id %>' />
+                <button id='btn<%= job.id %>' class="button">Add to short list</button>
+            </form>
+        <% else %>
+            <p class = "shortlisted">Shortlisted</p>
+        <%end%>  
+    </div>
 </div>
-</div>
-</div>
-</div>
 
+<hr>
 <%end%>
 
-<br>
-<hr>
+</div>
+</div>
+</div>
 <div class = "right"></div>
 </div>
 
-<%end%>
+
 <%end%>
 
 
@@ -181,6 +172,16 @@ $(document).ready(ready);
 $(document).on('page:load', ready);
 
 
+/* Changes the way the button looks when hovered over 
+(to indicate it can be clicked) */
+$(".shortList button").hover(function(){
+        $(this).css("color", "#78a300");
+        $(this).css("border-color", "#78a300");
+    }, function(){
+        $(this).css("color", "black");
+        $(this).css("border-color", "black");
+});
+
 
 </script>
 
@@ -209,7 +210,7 @@ $(document).on('page:load', ready);
     h1 {
         font-family: 'Pacifico', sans-serif;
         font-size: 30px;
-        color:black;
+        color: black;
     }
     
     h2 {
@@ -245,8 +246,7 @@ $(document).on('page:load', ready);
     
     table {
         width: 90%;
-        margin-left: 5%;
-        
+        margin-left: 3%;
     }
     
     .resultTitle {
@@ -254,22 +254,44 @@ $(document).on('page:load', ready);
         color:black;
     }
     
-    .resultDescription {
-        width: 100;
-    }
-    
-    .resultDescription h2 {
+    .resultDescription h3 {
+        float: left;
         text-align: left;
-        
+        text-overflow: ellipsis;
+    }
+
+    .resultCity h3 {
+        text-align: right;
     }
     
-    .resultCity {
-        float: right;
+    .shortList {
+        margin-top: 2%;
+        /*float: right;*/
     }
+    
+    .shortlisted {
+        border-radius: 0;
+        border: 2px solid black;
+        background-color: white;
+        color: black;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        text-align: center;
+        width: 26%;
+        margin-left: 39%;
+    }
+    
+    .shortList button {
+        border-radius: 0;
+        border: 2px solid black;
+        background-color: white;
+        color: black;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+    }    
     
     .link {
-        color: black;
-        text-decoration: underline;
+        color: #35a192;
     }
     
     .left {
@@ -290,11 +312,7 @@ $(document).on('page:load', ready);
         background-color: white;
         border: 4px solid black;
     }
-    
-    .content {
-        /*background-color: orange;*/
-    }
-    
+
     #searchPanel {
         width: 50%;
         background-color: white;
@@ -330,26 +348,13 @@ $(document).on('page:load', ready);
         color: black;
         text-transform: uppercase;
     }
-      
-      //
+
      
       .content{
         margin-left: 10%;
         margin-right: 10%;
         margin-bottom: 5%;
       } 
-      
-      .item{
-          text-align: center;
-      }
-      .filter{
-
-      }
-      /*
-      .btn-primary{
-        width: 200px;
-      } */
-      
       
       .wrapper{
         margin-top :  6%;
