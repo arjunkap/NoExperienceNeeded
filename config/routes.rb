@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   get '/member' => 'about#team_member'
 
-  get 'jobs/:id/applications' => 'jobs#applications'
+  get 'jobs/applications/:id' => 'jobs#applications'
 
   post 'jobs/apply' => "jobs#create_application"
 
@@ -40,9 +40,15 @@ Rails.application.routes.draw do
   get '/employerprofile/interview/:id' => 'employerprofile#interview'
   get '/employerprofile/review/:id' => 'employerprofile#review'
 
+  get '/message' => 'employers#message_prompt'
+
+  post '/employers/sendmessage' => 'employers#send_message'
 
   get 'jobseeker' => 'users#job_seeker'
   
+
+  get 'jobseeker/:id/messages' => "job_seekers#messages"
+
   get 'employer' => 'users#employer'
 
   get 'signup'  => 'users#new'
