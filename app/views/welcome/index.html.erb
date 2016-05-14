@@ -1,5 +1,4 @@
-
-<div class="container" class = "index" id="welcome_page">
+<div class="container col-md-10" class = "index" id="welcome_page">
 
           <form method="get" class = "index" action="/search" name="welcome_form">
           <div class="row">
@@ -45,8 +44,15 @@
 
     @import url(https://fonts.googleapis.com/css?family=Oswald);
     @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
-
-
+    
+    html { 
+      background: url(http://www.ozimag.com/wp-content/uploads/2015/03/stock-footage-mixed-race-group-of-people-aerial-view-timelapse-hipster-office-small-business-start-up-company1-960x540.jpg) no-repeat center center fixed; 
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+    
     #welcome_page h1 {
         font-family: 'Oswald', sans-serif;
         font-size: 60px;
@@ -79,11 +85,10 @@
         padding-bottom: 2%;
     }
     
-    //
-
-    body {
-      background: #eee !important;  
+    .container {
+        margin-left:10%;
     }
+    
 
 
   .btn-primary{

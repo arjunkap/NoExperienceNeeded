@@ -1,10 +1,14 @@
-<div class="content">
-<% if @review %>
 
+<div class="wrapper">
+<% if @review %>
+<div class = "left"></div>
+<div class = "title">
 <h1><%= @review.title %></h1>
-<div class="col-md-3 col-md-offset-1">
-  <h3><strong>Company:</strong><%= @review.company_name %></h3>
 </div>
+<div class="col-md-3 col-md-offset-1">
+  <h3><strong>Company:</strong><%= link_to @review.company_name , {controller: 'employerprofile', action: 'show', id: @review.company_id} %></h3>
+</div>
+
 <div class="col-md-7">
 	  
 	<div><strong>Description:</strong><p><%= @review.description %></p></p></div>
@@ -17,8 +21,16 @@
 <%= link_to 'Back', session[:current_uri], class: 'btn btn-default' %>
 
 </div>
+</div>
+<div class = "right"></div>
 
 <style type="text/css">
+.title{
+	font-family: 'Montserrat', sans-serif;
+	font-size: 50px;
+	text-align: center;
+}
+
   .content{
     margin-left: 10%;
    
