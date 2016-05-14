@@ -1,9 +1,19 @@
+<div class="container">
 <% if @applications %>
-	
+	<table width="500">
+		<thead>
+			<tr>
+				<th>Applicant Name</th>
+			</tr>
+		</thead>
+		<tbody>
 	<% @applications.each do |application| %>
+	<tr>
 		<% seeker  = JobSeeker.find(application.job_seeker_id) %>
-		<%= link_to seeker.user.first_name, {controller: "job_seekers", action: "show", id: seeker.id, job_id: @job.id} %>
-		<%= seeker.user.first_name %>
+		<td><%= link_to seeker.user.first_name, {controller: "job_seekers", action: "show", id: seeker.user.id, job_id: @job.id} %></td>
+	</tr>
 	<% end %>
-
+	</tbody>
+	</table>
 <%end%>
+</div>

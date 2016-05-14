@@ -1,31 +1,109 @@
-<h1>Update your job</h1>
+ <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-3"><h2>New Job</h2></div>
+      
+    <div class="col-md-3"></div>
+    <div class="col-md-3"> <%= link_to "Cancel", {controller: "employers", action: "show", id: current_user.company.id} , class: "btn btn-danger", id: "cancel_button" %></div>
+  
 
+  </div>
+
+    <% if @job.errors.any? %>
+  <div id="error_explanation row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="alert alert-danger">
+      The form contains <%= pluralize(@job.errors.count, "error") %>.
+    
+    <ul>
+    <% @job.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+  </div>
+<% end %>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
    <%= form_for(@job) do |f| %>
 
-      <%= f.label :title %>
-      <%= f.text_field :title, class: 'form-control' %>
+        <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <%= f.text_field :title, class: 'form-control new_job', placeholder: "Title" %>
+    </div>
+      
+      <div class="col-md-4">
+         <%= f.text_area :description, class: 'form-control new_job', placeholder: "Description" %>
+      </div>
+      <div class="col-md-2"></div>
+          
+  </div>
 
-      <%= f.label :description %>
-      <%= f.text_area :description, class: 'form-control' %>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+       <%= f.text_field :city, class: 'form-control new_job', placeholder: "city" %>
+    </div>
+      
+      <div class="col-md-4">
+      <%= f.text_field :country, class: 'form-control new_job',placeholder: "country"  %>
+      </div>
+      <div class="col-md-2"></div>
+          
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+       <%= f.text_field :question1, class: 'form-control new_job', placeholder: "question1" %>
+    </div>
+      
+      <div class="col-md-4">
+      <%= f.text_field :question2, class: 'form-control new_job', placeholder: "question2" %>
+      </div>
+      <div class="col-md-2"></div>
+          
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+       <%= f.text_field :question3, class: 'form-control new_job', placeholder: "question3" %>
+    </div>
+      
+      <div class="col-md-4">
+        <%= f.date_field :closing_date, class: 'form-control new_job', placeholder: "question3" %>
+       <div class="col-md-2"></div>
+       </div>
+       </div>
+    
+ <% sub_industries = []  %>
+     <%  SubIndustry.all.each do |sub| %>
+      <% sub_industries = sub_industries + [sub.name] %>
+     <% end %>
+      <div class="row">
+       <div class="col-md-2"></div>
+       <div class="col-md-4">
+       <% work_types = ["Full time", "Part time", "Contract", "Casual"] %>
+         <%= f.select(:work_type,work_types, {:include_blank => 'Work Type'}, {class: "form-control"})  %>
+      </div>
+     <div class="col-md-4">
+    
+          <%= f.select(:category,sub_industries, {:include_blank => 'Category'}, {class: "form-control"})  %>
+      
+      </div>
+      <div class="col-md-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          
+        </div>
+             <div class="col-md-4">
+            <%= f.submit "Post", class: "btn btn-primary" %>
+            </div>
+      </div>
 
-      <%= f.label :city %>
-      <%= f.text_field :city, class: 'form-control' %>
-
-
-      <%= f.label :country %>
-      <%= f.text_field :country, class: 'form-control' %>
-
-      <%= f.submit "Post", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
-
- <div class="row">
-      <div class="col-md-2"></div>
-
-      <div class="col-md-3">
-        <%= link_to "Cancel", {controller: "employers", action: "show", id: current_user.company.id} , class: "btn btn-danger", id: "cancel_button" %>
-      </div>
-    </div>

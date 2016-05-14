@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160514034453) do
+ActiveRecord::Schema.define(version: 20160514103831) do
 
   create_table "attachments", force: :cascade do |t|
     t.datetime "created_at",        null: false
@@ -157,6 +157,7 @@ ActiveRecord::Schema.define(version: 20160514034453) do
     t.string   "question1"
     t.string   "question2"
     t.string   "question3"
+    t.string   "category"
   end
 
   add_index "jobs", ["sub_industry_id"], name: "index_jobs_on_sub_industry_id"
