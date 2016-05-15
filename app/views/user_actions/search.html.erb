@@ -17,7 +17,7 @@
          <h2>FILTER BY</h2>
             <label for="city">City</label>
             <select name="city" id="city" class="form-control">
-          		<option value="any">Any</option>
+          		<option value="">Any</option>
                <% (Job.uniq_with_column :city).each do |city| %>
                 <option value='<%=city %>'><%= city %></option>
                <%end%>
@@ -26,12 +26,12 @@
     </div>
     <br>
     <div>
-    
+
             <label for="sub_industry">Sub Industry</label>
             <select name="sub_industry" id="sub_industry" class="form-control">
-            <option value="any">Any</option>
-              <% (SubIndustry.uniq_with_column :name).each do |si| %>
-            <option value='<%=si %>'><%= si %></option>
+            <option value="">Any</option>
+              <% SubIndustry.all.each do |si| %>
+            <option value='<%=si.id%>'><%= si.name %></option>
                <%end%>
             </select>
         </div>
@@ -39,8 +39,7 @@
         <div>
             <label for="work_type">Work type</label>
                <select name="work_type" id="work_type" class="form-control">
-                <option value="" disabled selected>Work Type</option>
-              <option value="any">Any</option>
+                <option value=""  selected>Work Type</option>
               <option value="FT">Full-Time</option>
               <option value="PT">Part-Time</option>
                <option value="CT">Casual</option>
@@ -72,7 +71,9 @@
 </div>
 <div class = "centre">
 
+<div id="sort_jobs">
 
+</div>
 
 <div id="jobs">
 <%#= render partial: 'jobs', collection: @jobs %>
@@ -131,7 +132,7 @@
   $(document).ready(function() {
     $('#sort_preference').change(function() {
         $.ajax({
-           url: "<%=  '/search' %>",
+           url: "<%=  '/jobs/sort' %>",
            data: {
                preference: $("#sort_preference option:selected").val()
            },
@@ -153,9 +154,11 @@ $('#city').val('<%=city%>');
 
 <%end%>
 
-<% si = session[:sub_industry] %>
+<% si = params[:sub_industry] %>
 	 <% if si %>
+
 		$('#sub_industry').val('<%=si%>');
+        // $("#sub_industry option[text=" + si +"]").attr("selected","selected");
 	<%end%>
 
 <% wt = session[:work_type] %>
@@ -212,7 +215,7 @@ $(".shortList button").hover(function(){
     h1 {
         font-family: 'Pacifico', sans-serif;
         font-size: 30px;
-        color: black;
+        color: #78a300;
     }
     
     h2 {
@@ -268,7 +271,8 @@ $(".shortList button").hover(function(){
     
     .shortList {
         margin-top: 2%;
-        /*float: right;*/
+        width: 26%;
+        margin-left: 39%;
     }
     
     .shortlisted {
@@ -279,8 +283,8 @@ $(".shortList button").hover(function(){
         font-family: 'Oswald', sans-serif;
         text-transform: uppercase;
         text-align: center;
-        width: 26%;
-        margin-left: 39%;
+        /*width: 26%;*/
+        /*margin-left: 39%;*/
     }
     
     .shortList button {
@@ -290,10 +294,11 @@ $(".shortList button").hover(function(){
         color: black;
         font-family: 'Oswald', sans-serif;
         text-transform: uppercase;
+        
     }    
     
     .link {
-        color: #35a192;
+        color: #78a300;
     }
     
     .left {
