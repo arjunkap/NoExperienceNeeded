@@ -1,12 +1,7 @@
 
   <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-3"><h2>New Job</h2></div>
-      
-    <div class="col-md-3"></div>
-    <div class="col-md-3"> <%= link_to "Cancel", {controller: "employers", action: "show", id: current_user.company.id} , class: "btn btn-danger", id: "cancel_button" %></div>
-  
-
+    <div class="col-md-3 col-md-offset-3"><h2>New Job</h2></div>
+    <div class="col-md-3 col-md-offset-3"> <%= link_to "Cancel", {controller: "employers", action: "show", id: current_user.company.id} , class: "btn btn-danger", id: "cancel_button" %></div>
   </div>
 
     <% if @job.errors.any? %>
@@ -138,16 +133,6 @@ h2{
   width: 100%;
   height: 40px;
 }
-.error_wx
+
 </style>
-
-<script type="text/javascript">
- 
-// $("#job_category option").eq(0).before($("<option></option>").val("").text("Category"));
-// $("#job_category option[value='']").attr("selected","selected");
-
-// $("#job_work_type option").eq(0).before($("<option></option>").val("").text("Work Type"));
-// $("#job_work_type option[value='']").attr("selected","selected");
-  
-</script>
 
