@@ -72,8 +72,7 @@ class JobsController < ApplicationController
 		@button_id = "#btn#{job.id}"
 		job_seeker = current_user.job_seeker
 		job_seeker.short_listed_jobs.create(job_id: job.id)
-		flash[:success] = "Added"
-		puts "%%%%%%%%%%%%%%%%%%555"
+		flash.now[:success] = "Added"
 		puts @button_id
 		respond_to do |format|
 			
