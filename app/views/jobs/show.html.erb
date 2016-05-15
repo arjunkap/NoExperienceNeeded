@@ -33,37 +33,52 @@
 
 <% end %>
 
+<div class = "wrapper">
+  <div class = "left">
+    
+    <div class = "return">
+<% if !user_logged_in %>
+<%= link_to 'Go Back', session[:current_uri], class: 'btn btn-primary' %>
 
+<% else %>
 
+  <% if job_seeker %>
 
+  <%= link_to 'Go Back', session[:current_uri], class: 'btn btn-primary' %>
+
+  <% end %>
+
+  <% if job_creator %>
+     <%= link_to 'Go Back', {controller: "employers", action: "show", id: current_user.company.id }, class: "btn btn-default"  %>
+  <%end%>
+
+<%end%>
+
+</div>
+    
+  </div>
+  <div class = "centre">
 <div class="content">
 <br>
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%= notice %></p>
+
 <% flash.each do |key, value| %>
   <%= content_tag :div, value, class: "flash #{key}" %>
-<% end %>
-<p>
-  <h3> <%= @job.title %></h3>
- <hr>
-</p>
+<% end %>-->
 
+  <h1> <%= @job.title %></h1>
+  <br>
+  <hr>
+    
+  <div class = "dates">
+    <h3>Applications Close: </h3>
+    <h3><%= @job.closing_date %></h3>
+  </div>
+  
+  <div class = "description">
+    <h3><%= @job.description %></h3>
+  </div>
 
-
-
-<p>
-  <strong>City:</strong>
-  <%= @job.city %>
-</p>
-
-<p>
-  <strong>County:</strong>
-  <%= @job.country %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @job.description %>
-</p>
 <% if is_job_creator @job %>
 <%=  link_to 'Edit', edit_job_path(@job), class: "btn btn-default" %> 
 
@@ -74,37 +89,6 @@
   
 <% end %>
 
-<% if job_seeker %>
-  
-  <% if already_applied_for_job %>
-      <button class="btn btn-default" disabled>Already applied</button>
-  <%else %>
-
-  <%=  link_to 'Apply',  {:controller => "jobs", :action => "apply", :job_id => @job.id } , class: "btn btn-default", remote: true, id: "apply_button" %>
-
-  <%end %>
-
-  <% if already_short_listed_job and !already_applied_for_job %>
-
-  <button class="btn btn-default" disabled="">Short listed</button>
-
-  <% end %>
-
-  <% if !already_applied_for_job  and !already_short_listed_job %>
-
-     <form data-remote="true" action="/jobs/shortlist" method="post">
-<input type="hidden"  name="job" value='<%= @job.id %>' />
-<button id='btn<%= @job.id %>' class="button">Add to short list</button>
-</form>
-
-  <%end%>
-
-<%end %>
-
-<% if job_creator %>
-  
-<%end %>
-
 
 <div id="job_application">
 	
@@ -112,43 +96,122 @@
 
 
 </div>
-<div class="row"></div>
-<div class="row">
-<div class="col-md-3">
-<% if !user_logged_in %>
-<%= link_to 'Back', session[:current_uri], class: 'btn btn-primary' %>
+</div>
 
-<% else %>
+  <div class = "right">
+    <div class = "userAction">
+    <% if job_seeker %>
+  
+    <% if already_applied_for_job %>
+      <button class="btn btn-default apply" disabled>Already applied</button>
+    <%else %>
 
-  <% if job_seeker %>
+    <%=  link_to 'Apply',  {:controller => "jobs", :action => "apply", :job_id => @job.id } , class: "btn btn-default apply", remote: true, id: "apply_button" %>
 
-  <%= link_to 'Back', session[:current_uri], class: 'btn btn-primary' %>
+    <%end %>
+    <br>
+    <br>
+    <% if already_short_listed_job and !already_applied_for_job %>
 
-  <% end %>
+    <button class="btn btn-default" disabled="">Short listed</button>
 
-  <% if job_creator %>
-     <%= link_to 'Back', {controller: "employers", action: "show", id: current_user.company.id }, class: "btn btn-default"  %>
+    <% end %>
+
+    <% if !already_applied_for_job  and !already_short_listed_job %>
+
+     <form data-remote="true" action="/jobs/shortlist" method="post">
+      <input type="hidden"  name="job" value='<%= @job.id %>' />
+      <button id='btn<%= @job.id %>' class="btn button">Add to short list</button>
+    </form>
+
   <%end%>
 
-<%end%>
+  <%end %>
+
+  <% if job_creator %>
+  
+  <%end %>
 
 
+    
+    
+    </div>
+  </div>
 </div>
-</div>
-
-</div>
-
 
 <style type="text/css">
-  .content{
-    margin-left: 10%;
+  @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
+  
+  h1 {
+    font-family: 'Pacifico';
+    font-size: 60px;
+    text-align: center;
+    color: black;
+  }
+  
+  .description h3 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 20px;
+    color: black;
+  }
+  
+  .dates {
+    float:right;
+    
+  }
 
-    margin-top: 6%;
+
+  .content{
+    border: 4px solid black;
+    background-color: white;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 10%;
   }
-  .btn-primary{ 
-    width: 25%;
+  
+  
+  .wrapper .btn {
+    border: 2px solid black;
+    border-radius: 0;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    color:black;
+    background-color: white;
+    width: 60%;
+    
   }
-  h3{
-    font-size: 30px;
+
+  
+  .userAction {
+    margin-left: 20%;
+    margin-top: 35%;
   }
+  
+  .return {
+    margin-left: 20%;
+    margin-top: 35%;
+  }
+  
+  /* layout */
+  .wrapper {
+    width: 100%;  
+  }
+  
+  #job_application {
+    padding-top: 5%;
+  }
+
+  
+  .left, .right {
+    float: left;
+    width: 20%;
+  }
+  
+  .centre {
+    width: 60%;
+    float: left;
+    }
+  
+
+  
 </style>

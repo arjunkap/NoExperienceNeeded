@@ -1,8 +1,12 @@
-
 <div class="container">
 
   <div class="text">
-    <h2>Us</h2>
+    <h1>ABOUT US</h1>
+    <hr>
+    <div ><h2 id="name"></h2></div>
+    <div ><h3 id="role"></h3></div>
+    <div ><h3 id="about"></h3></div>
+    <br>
   </div>
 <section class="big_screen">
 
@@ -25,13 +29,33 @@
 
 
 </section>
-<div class='dots'>
-  
+
+<div id = "arrows">
+        <div class="col-md-4"></div>
+       <div class="col-md-2">
+       <div class="col-md-4 col-md-offset-1" id="left">
+      <p class="glyphicon glyphicon-chevron-left"></p>
+    </div>
+    </div>
+    <div class="col-md-2">
+      <div class="col-md-4 col-md-offset-4" id="right">  
+    <p class="glyphicon glyphicon-chevron-right"></p>
+  </div>
+</div>
     
+  
+  
+</div>
+
+<div class='dots'>
 <div class="row">
+  
 <div class="col-md-4"></div>
+
     <div class="col-md-4">
+      
       <nav class="carousel">
+        
         <input id="carousel-item-1" type="radio" name="carousel-dots" checked disabled="true">
         <label for="carousel-item-1">Go to item 1</label>
 
@@ -50,35 +74,12 @@
       </nav>
 
     </div>
-    <div class="col-md-4"></div>
+    
     </div>
-    <div class="row">
-      <div class="col-md-4"></div>
-       <div class="col-md-2">
-       <div class="col-md-4 col-md-offset-1" id="left">
-      <p class="glyphicon glyphicon-chevron-left"></p>
-    </div>
-    </div>
-    <div class="col-md-2">
-      <div class="col-md-4 col-md-offset-4" id="right">  
-    <p class="glyphicon glyphicon-chevron-right"></p>
-  </div>
-</div>
-</div>
-     <div class="col-md-4"></div>
+    
+
     </div>
 
-
-
-    <div id="name"></div>
-
-    <br>
-
-    <div id="role"></div>
-
-    <br>
-
-    <div id="about"></div>
 
 <div class="buttons">
   <button class="btn" id="next">Next</button>
@@ -86,8 +87,6 @@
  <button class="btn" id="back">Back</button>
 </div></div>
 <script>
-
-
 var items = [];
 var startItem = 1;
 var position = 0;
@@ -96,31 +95,24 @@ var leftpos = itemCount;
 var resetCount = itemCount;
 var totalSlides = 5;
 var imageWidth = 485;
-
 $('li.items').each(function(index) {
     items[index] = $(this).text();
 });
-
 $(document).ready(function(){
   var slideCheck = 1;
   $('#carousel-item-'+ slideCheck).prop("checked", true);
 })
-
 function swap(action) {
   var direction = action;
-
-
   if(direction == 'counter-clockwise') {
     var leftitem = $('.left-pos').attr('id') - 1;
     if(leftitem == 0) {
       leftitem = itemCount;
     }
-
     $('.right-pos').removeClass('right-pos').addClass('back-pos');
     $('.main-pos').removeClass('main-pos').addClass('right-pos');
     $('.left-pos').removeClass('left-pos').addClass('main-pos');
     $('#'+leftitem+'').removeClass('back-pos').addClass('left-pos');
-
     startItem--;
     if(startItem < 1) {
       startItem = itemCount;
@@ -140,15 +132,12 @@ function swap(action) {
           position = itemCount;
         }
       }
-
       return position;
     }
-
    $('#'+ startItem +'').removeClass('main-pos').addClass('left-pos');
    $('#'+ (startItem+pos()) +'').removeClass('right-pos').addClass('main-pos');
    $('#'+ (startItem+pos()) +'').removeClass('back-pos').addClass('right-pos');
    $('#'+ pos('leftposition') +'').removeClass('left-pos').addClass('back-pos');
-
     startItem++;
     position=0;
     if(startItem > itemCount) {
@@ -158,10 +147,7 @@ function swap(action) {
     slideCheck = $('.main-pos').attr('id');
   $('#carousel-item-'+ slideCheck).prop("checked", true);
 }
-
-
 $('.items').click(function() {
-
   if($(this).attr('class') == 'items left-pos') {
         swap('counter-clockwise');
         getInfo();
@@ -181,7 +167,6 @@ $('#right').click(function() {
         getInfo();
   });
 var currentSlide = 1;
-
 $('#next').click(function(){
   if(currentSlide == totalSlides){
     $('#slider .slides').css('margin-left', "0px");
@@ -191,7 +176,6 @@ $('#next').click(function(){
     $('#slider .slides').css('margin-left', "-=" + imageWidth + "px")
     currentSlide++;
   }
-
 }
 );
 $('#back').click(function(){
@@ -205,9 +189,7 @@ $('#back').click(function(){
   }
   console.log("currentSlide : " + currentSlide + " " + "margin : " + $('#slider .slides').css('margin-left'));
 }
-
 );
-
 function getInfo(){
    var a =  $('.main-pos')[0];
   var memberName = $($(a).children()[0]).attr('id')
@@ -223,7 +205,6 @@ function getInfo(){
     getInfo();
    
   });
-
 $(document).keydown(function(e){
   switch(e.which) {
     case 37: 
@@ -235,8 +216,39 @@ $(document).keydown(function(e){
       getInfo();
       break;
   }
-
-
 });
-
 </script>
+
+<style type="text/css">
+
+  h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: black;
+    /*text-decoration: underline;*/
+  }
+  
+  h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 60px;
+    text-transform: uppercase;
+  }
+  
+  h3 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+  }
+  
+  h2, h3 {
+    line-height: 5px; 
+  }
+  
+  .container {
+    margin-top: -2%;
+    /*border: 4px solid black;*/
+    /*background-color: white;
+  }
+
+</style>
