@@ -3,11 +3,15 @@
 			<%if jobs != nil%>
 			<% jobs.each do |j|%>
 			<div id = '<%=j.id%>'>
-				<%=j.title%>
-				<%=j.city%>
-				<%=j.closing_date%>
-				<%=j.description%>
-				<%=@company.title%>
+					<div><%= link_to j.title, job, class: 'link'%></div>
+					<div><%=j.city%></div>
+				<div>
+				<%=j.closing_date%></div>
+				<div>
+				<%=j.description%></div>
+				<div>
+				<%=@company.title%></div>
+				
 			</div>
 			<%end%>
 			<%end%>
