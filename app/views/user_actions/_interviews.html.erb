@@ -27,14 +27,18 @@
             <div class="item">
             <table><tr>
             <td class = "resultTitle"><h1>"<%= link_to i.title , {controller: 'interview_reviews', action: 'show', id: i.id}, class: "link" %>"</h1></td>
-             <td class = "resultCompany"><h2><%= i.company_name %></h2></td></tr>
-              <tr><td class = "resultDescription"><h3><%= i.description %></h3></td>
-              <td class = "resultDifficulty">
+                 <td class = "resultDifficulty">
+                  <!-- make this a for loop -->
+                   <!-- <p class="glyphicon glyphicon-asterisk" style = "color: orange"></p>-->
+                   <h4>DIFFICULTY</h4>
+                  <h3><%= i.difficulty %>/5</h3>
+              </td>
+            </tr>
+            <tr>
+                <td class = "resultDescription"><h3><%= i.description %></h3></td>
               
-              <!-- make this a for loop -->
-               <!-- <p class="glyphicon glyphicon-asterisk" style = "color: orange"></p>-->
-              <h4>DIFFICULTY</h4><h3><%= i.difficulty %>/5</h3>
-              </td></tr>
+              <td class = "resultCompany"><h3><%= i.company_name %></h3></td>
+             </tr>
               <br>  
              </table>
 
@@ -59,7 +63,7 @@
     }
     
     .resultDifficulty h3, h4 {
-        lineheight: 0px;
+        line-height: 0px;
     }
 
     .left {
@@ -89,31 +93,10 @@
         margin-left: 15%;
     }
     
-    .resultCompany h2 {
-        
-        float: right;
+    .resultCompany h3 {
         text-align: right;
         
     }
-    
-    .resultCompany {
-        
-        float: right;
-        text-align: right;
-        
-    }
-    
-    /*td {*/
-    /*    border: 1px solid black;*/
-    /*    background-color: yellow;*/
-       
-     
-    /*}*/
-    
-    /*.resultCompany, .resultTitle {*/
-    /*    width: 50%;*/
-    /*    display: table;*/
-    /*}*/
     
     .resultDescription h3 {
         float: left;
@@ -126,18 +109,11 @@
 
     
     .resultDifficulty h3 {
-        float: right;
-        text-align: right;
+        text-align: center;
     }
     
     .link {
         color: #35a192;
-    }
-    
-    .table {
-        width: 90%;
-        margin-left: 5%;
-        
     }
     
     .searchPanel div {
