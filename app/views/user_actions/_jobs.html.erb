@@ -1,1 +1,42 @@
-Hello
+<% if @jobs %>
+
+<div class="content">
+     <br>
+     <!-- Iterate through DB results and create search result -->
+    <% @jobs.each do |job| %>
+
+    <div class="item">
+    <table>
+
+    <tr>
+        <td class = "resultTitle"><h1><%= link_to job.title, job, class: 'link'%></h1></td>
+        <td class = "resultCity"><h3><%= job.city %> </h3></td>
+    </tr> 
+    <tr>
+        <td class = "resultDescription"><h3><%= job.description %></h3></td>
+        <td class = "resultDueDate"><h3><%= job.closing_date %></h3></td>
+
+    
+    </tr>
+    </table>
+    <br>
+    
+    <!-- Checks if a job has been added to shortlisted jobs, creates button to add if not yet added
+    If yes, marks the box as shortlisted -->
+     <div class = "shortList">
+        <% if is_current_user_job_seeker? and !already_short_listed? job.id %>
+            <form data-remote="true" action="/jobs/shortlist" method="post">
+                <input type="hidden"  name="job" value='<%= job.id %>' />
+                <button id='btn<%= job.id %>' class="button">Add to short list</button>
+            </form>
+        <% else %>
+            <p class = "shortlisted">Shortlisted</p>
+        <%end%>  
+    </div>
+</div>
+
+<hr>
+<%end%>
+
+
+<%end%>

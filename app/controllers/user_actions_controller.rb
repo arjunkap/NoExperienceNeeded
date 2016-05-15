@@ -22,28 +22,33 @@ class UserActionsController < ApplicationController
     elsif @search_type == "company"
       if search_from == "navbar"
         search_companies params[:query]
-      elsif search_from = "welcome_page_search"
+      elsif search_from == "welcome_page_search"
         search_companies params[:search_query]
       end
     end
-    respond_to do |format|
-      format.html
-      format.js
+   
+  end
 
-      if params[:sort_preference]
-        if params[:sort_preference] == "recent"
-          puts "----------------------"
-          @jobs = Job.last
-        elsif params[:sort_preference] == "closing_soon"
-          @jobs = Job.first
-        else
-          @jobs = Job.all
-        end
-      end 
-      
+  def sort
+    puts "....................................................."
+    if params[:preference]
+      if params[:preference] == "recent"
+        puts "recent----"
+        @jobs = Job.order(:created_at)
+      elsif params[:preference] == "closing_soon"
+        puts "..............closing date"
+        @jobs = Job.order(closing_date: :desc)
+      else
+        @jobs = Job.all
+      end
+    end
+    puts @jobs.count
+   respond_to do |format|
+      format.js
     end
 
   end
+
 
 def search_companies word
       
@@ -198,6 +203,7 @@ def search_companies word
       @jobs2 = refine_with_work_industry @jobs1, params[:sub_industry]
 
       @jobs = refine_with_work_type @jobs2, params[:work_type]
+
   
       # @jobs = @jobs.paginate(:page => params[:page], :per_page => 25)
 
@@ -224,7 +230,7 @@ def search_companies word
 
     refined_jobs = []
 
-    if city == "any"
+    if city == ""
       return jobs
     end
     jobs.each do |job|
@@ -243,13 +249,15 @@ def search_companies word
       return jobs
     end
     refined_jobs = []
-    jobs.each do |job|
-      if job.category == industry
-        refined_jobs.push job
+    if SubIndustry.exists?(industry)
+      sub_name = SubIndustry.find(industry).name
+      jobs.each do |job|
+        if job.category = sub_name
+          refined_jobs.push job
+        end
       end
+      return refined_jobs
     end
-    return refined_jobs
-
   end
 
   def find_interview_or_review_for_companies company, model

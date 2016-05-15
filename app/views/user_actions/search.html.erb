@@ -71,7 +71,9 @@
 </div>
 <div class = "centre">
 
+<div id="sort_jobs">
 
+</div>
 
 <div id="jobs">
 <%#= render partial: 'jobs', collection: @jobs %>
@@ -130,7 +132,7 @@
   $(document).ready(function() {
     $('#sort_preference').change(function() {
         $.ajax({
-           url: "<%=  '/search' %>",
+           url: "<%=  '/jobs/sort' %>",
            data: {
                preference: $("#sort_preference option:selected").val()
            },
