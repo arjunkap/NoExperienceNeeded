@@ -1,49 +1,49 @@
-  <div class="content">
+<div class="content">
    
-       <form method="get" action="/shortlistedjobs">
-         <div class="row">
-         <div class="col-md-3">
-          <input  type="text" name="query" placeholder="query" value='' class="form-control" />
-          </div>
-          <div class="col-md-3">
-  <button type="submit" class="btn btn-primary">Refine</button>
+    <form method="get" action="/shortlistedjobs">
+        <div class="row">
+            <div class="col-md-3">
+                <input  type="text" name="query" placeholder="query" value='' class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary">Refine</button>
+            </div>
+        </div>
+    </form>
+    <br>
+    <br>
+    <% @sjobs.each do |sjob| %>
+
+    <div class="item">
+        <% j = Job.find(sjob.job_id) %>
+        <p> <%=  link_to j.title ,  {:controller => "jobs", :action => "show", :id => j.id } %></p >
+        <p> 
+            <% company =  User.find(j.user_id).company %>
+            <% if company %>
+            <%= company.title %> 
+        </p>
+        <%else%>
+        Company title was not found
+        <%end%>
+    </div>
+    <%end%> 
 </div>
-</div>
-          </form>
-<br>
-  <br>
-        <% @sjobs.each do |sjob| %>
 
-        <div class="item">
-            <% j = Job.find(sjob.job_id) %>
-          <p> <%=  link_to j.title ,  {:controller => "jobs", :action => "show", :id => j.id } %></p >
-          <p> 
-          <% company =  User.find(j.user_id).company %>
-          <% if company %>
-
-           <%= company.title %> </p>
-
-           <%else%>
-
-          Company title was not found
-
-           <%end%>
-          </div>
-        <%end%> 
-
-        <style type="text/css">
+<style type="text/css">
       
-      .content{
+    .content{
         margin-left: 10%;
         margin-right: 10%;
-           margin-bottom: 5%;
-           
-    margin-top: 6%;
-      }
-      .item{
-          text-align: center;
-      }
-      .btn-primary{
+        margin-bottom: 5%;
+        
+        margin-top: 6%;
+    }
+    
+    .item{
+        text-align: center;
+    }
+    
+    .btn-primary{
         width: 200px;
-      }
-      </style>
+    }
+</style>
