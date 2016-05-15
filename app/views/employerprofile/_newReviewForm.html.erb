@@ -1,0 +1,61 @@
+<div id = "review_form">
+<form action = "/cr/create" method = "post">
+
+<input name="authenticity_token" value='<%= form_authenticity_token %>' type="hidden">
+<input name = "company_id" value = '<%= company_id %>' type = "hidden">
+<div class="addrerview">
+<div><label for="title">Title:</label>
+<input name = "title" id="title" class="form-control" type = "text"></div>
+<br>
+
+<div><label for="rating">Rating (Out of 5):</label>
+<select name = "rating" id="raitng" class="form-control">
+		<option value = "1">1</option>
+		<option value = "2">2</option>>
+		<option value = "3">3</option>
+		<option value = "4">4</option>
+		<option value = "5">5</option>
+</select></div>
+<br>
+
+<div><label for="description">Description:</label>
+<br>
+<textarea name = "description" id="description" class="form-control-textarea"></textarea></div>
+<br>
+
+<button type="submit" class="btn btn-primary">Review!</button>
+</form>
+</div>
+
+<style type="text/css">
+#select label {
+     text-align: left;
+}
+
+    #search .btn-primary {
+        border-radius: 0;
+        border: 4px solid black;
+        background-color: white;
+        color: black;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        
+        
+        width: 30%;
+        margin-left: 15%;
+    }
+    .review{
+    	padding-right:3%;
+    	margin-bottom:3%;
+    }
+ .form-control {
+        border-radius: 0;
+        border: 1px solid black;
+        width: 40%;
+    }
+.form-control-textarea {
+        border-radius: 0;
+        border: 1px solid black;
+        width: 70%;
+    }
+</style>

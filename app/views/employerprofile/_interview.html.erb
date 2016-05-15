@@ -1,19 +1,21 @@
 <div id = "interview">
-	<% interview = InterviewReview.where(:company_id => session[:comp_id])%>
+	<div class="review">
+	<%# interview = InterviewReview.where(:company_id => session[:comp_id])%>
 			<%if interview != nil%>
 			<% interview.each do |i|%>
 			<div id = '<%=i.id%>'>
-				<div><%= link_to i.title , {controller: 'interview_reviews', action: 'show', id: i.id}, class: "link" %></div>
-				<div><%=i.interview_date%></div>
-				<div>
-			<%=i.position%></div>
-				<div>
-				<%=i.description%></div>
-				<div>
-				<%=i.company_name%></div>
-				
+				<div><h2><%= link_to i.title , {controller: 'interview_reviews', action: 'show', id: i.id}, class: "link" %>
+				</h2></div>
+				<div><p><strong>Position: </strong>
+				<%=i.position%></p></div>
+				<div><p><strong>Description: </strong>
+				<%=i.description%></p></div>
+            <div><p><strong>Duration: </strong><%=i.duration %></p></div>
+            <div><p><strong>Difficulty: </strong><%= i.difficulty %></p></div>
+           <div><p><strong>Voted by: </strong><%= i.upvotes.count %></p></div>
+				<br>
 			</div>
 			<%end%>
 			<%end%>
-			
+	</div>		
 </div>

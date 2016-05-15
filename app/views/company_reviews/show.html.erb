@@ -6,7 +6,7 @@
 <h1><%= @review.title %></h1>
 </div>
 <div class="col-md-3 col-md-offset-1">
-  <h3><strong>Company:</strong><%= link_to @review.company_name , {controller: 'employerprofile', action: 'show', id: @review.company_id} %></h3>
+  <h3><strong>Company:</strong><%= link_to @review.company_name , {controller: 'employerprofile', action: 'show', id: @review.company_id},class:"link" %></h3>
 </div>
 
 <div class="col-md-7">
@@ -42,4 +42,8 @@
   h3{
     font-size: 30px;
   }
+     .link {
+        color: #35a192;
+    }
+    
 </style>
