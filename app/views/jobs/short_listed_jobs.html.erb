@@ -1,54 +1,68 @@
-<div class="content">
-   
-       <form method="get" action="/shortlistedjobs">
-         <div class="row">
-         <div class="col-md-3">
-          <input  type="text" name="query" placeholder="query" value='' class="form-control" />
-          </div>
-          <div class="col-md-3">
-  <button type="submit" class="btn btn-primary">Refine</button>
-</div>
-</div>
-          </form>
-<br>
-  <br>
-        <% @sjobs.each do |sjob| %>
-
-        <div class="item">
+<div class="container">
+    <div class="row">
+        <h2>My Shortlisted Jobs</h2>
+    </div>
+    <div class="row">
+        <form method="get" action="/shortlistedjobs" class="col-md-4 border">
+                <div class="row">
+                    <input  type="text" name="query" placeholder="Search" value='' class="form-control" />
+                </div>
+                <div class="row button">
+                    <button type="submit" class="btn btn-primary">Refine</button>
+                </div>
+        </form>
+        
+        
+        <div class="item row col-md-7 border">
+            <% @sjobs.each do |sjob| %>
             <% j = Job.find(sjob.job_id) %>
-          <p> <%=  link_to j.title ,  {:controller => "jobs", :action => "show", :id => j.id } %></p >
-          <p> 
-          <% if User.exists?(j.user_id) %>
-
-          <% company =  User.find(j.user_id).company %>
-          <% if company %>
-
-           <%= company.title %> </p>
-
-           <%else%>
-
-          Company title was not found
-
-           <%end%>
-          </div>
+            <p> 
+                <%=  link_to j.title ,  {:controller => "jobs", :action => "show", :id => j.id } %>
+                <% if User.exists?(j.user_id) %>
+                <% company =  User.find(j.user_id).company %>
+                <% if company %>
+                <%= company.title %> 
+            
+                <%else%>
+                
+                Company title was not found
+                
+                <%end%>
+            </p>
+        </div>
         <%end%> 
         <% end %>
+    </div>
+</div>
 
 <style type="text/css">
-      
-    .content{
-        margin-left: 10%;
-        margin-right: 10%;
-        margin-bottom: 5%;
-        
-        margin-top: 6%;
-    }
+
+    @import url(https://fonts.googleapis.com/css?family=Oswald);
+    @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
     
     .item{
+        text-align: center;
+        margin-left:5%;
+    }
+    
+    .button{
         text-align: center;
     }
     
     .btn-primary{
         width: 200px;
+    }
+    
+    h2 {
+        font-family: 'Oswald', sans-serif;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    
+    .border{
+        border: 2px solid black;
+        background-color: white;
+        color: black;
+        font-family: 'Oswald', sans-serif;
     }
 </style>
