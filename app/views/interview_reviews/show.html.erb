@@ -7,7 +7,7 @@
 	
 	<hr>
 	<div class="col-md-3 col-md-offset-1">
-	  <div><strong>Company:</strong><%= link_to @interview.company_name , {controller: 'employerprofile', action: 'show', id: @interview.company_id} %></div>
+	  <div><strong>Company:</strong><%= link_to @interview.company_name , {controller: 'employerprofile', action: 'show', id: @interview.company_id},class:"link" %></div>
 	  <div class="intervewee"><p><strong>Interviewee id:</strong><%= @interview.job_seeker_id %></p></div>
 	  <!--<div>-->
 	  <!--  %= job_seeker.id = "@interview.job_seeker" %>-->
@@ -70,5 +70,9 @@
   p#total_votes{
   	float: inherit;
   }
+   .link {
+        color: #35a192;
+    }
+    
 
 </style>

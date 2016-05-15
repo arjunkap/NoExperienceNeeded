@@ -3,41 +3,77 @@
 
 <input name="authenticity_token" value='<%= form_authenticity_token %>' type="hidden">
 <input name = "company_id" value = '<%= company_id %>' type = "hidden">
+<div class="addinterview">
+<div><label for="title">Title:</label><input name = "title" id="title" class="form-control" type = "text"></div>
+<br>
 
-Title:
-<input name = "title" type = "text"><br>
+<div><label for="position">Position:</label>
+<input name = "position" id="position" class="form-control" type = "text"></div><br>
 
-Position:
-<input name = "position" type = "text"><br>
-
-Experience:
-<select name = "experience">
+<div><label for="experience">Experience:</label><select name = "experience" id="experience" class="form-control">
 		<option value = "Excelent">Excellent</option>
 		<option value = "Good">Good</option>
 		<option value = "Bad">Bad</option>
-</select>
-
-Difficulty (Out of 5):
-<select name = "difficulty">
+</select></div>
+<br>
+<div>
+<label for="difficulty">Difficulty (Out of 5):</label>
+<select name = "difficulty" id="difficulty" class="form-control">
 		<option value = "1">1</option>
 		<option value = "2">2</option>>
 		<option value = "3">3</option>
 		<option value = "4">4</option>
 		<option value = "5">5</option>
-</select>
+</select></div>
 <br>
 
-Did you recieve an offer ?
-<select name = "offer">
+<div><label for="offer">Did you recieve an offer ?</label></div>
+<div>
+<select name = "offer" id="offer"  class="form-control">
 		<option value = "false">No</option>
 		<option value = "true">Yes</option>>
-</select>
+</select></div>
+<br>
+<div><label for="description">
+Description:</label></div>
+<div>
+<textarea name = "description" id="description" class="form-control-textarea"></textarea></div>
 <br>
 
-Description:
-<textarea name = "description"></textarea>
-<br>
-
-<button>Review!</button>
+<button type="submit" class="btn btn-primary">Review!</button>
 </form>
 </div>
+</div>
+
+<style type="text/css">
+#select label {
+     text-align: left;
+}
+
+    #search .btn-primary {
+        border-radius: 0;
+        border: 4px solid black;
+        background-color: white;
+        color: black;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        
+        
+        width: 30%;
+        margin-left: 15%;
+    }
+    .addinterview{
+    	padding-right:3%;
+    	margin-bottom:3%;
+    }
+ .form-control {
+        border-radius: 0;
+        border: 1px solid black;
+        width: 40%;
+    }
+.form-control-textarea {
+        border-radius: 0;
+        border: 1px solid black;
+        width: 70%;
+    }
+</style>

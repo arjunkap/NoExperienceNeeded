@@ -3,7 +3,7 @@ $("#result").html("<%=escape_javascript(render partial: 'review', locals: {revie
 	<% if is_current_user_job_seeker? %>
 		$("#respectiveForm").html("<%= escape_javascript(render partial: 'newReviewForm', locals: {company_id: @company_id} ) %>");
 	<% else %>
-		$("#respectiveForm").html("This functionality is disbaled for you");
+		$("#respectiveForm").html("");
 	<% end %>
 <% else %>
 	$("#respectiveForm").html("<%= escape_javascript(link_to 'Login to review', '/login' ) %>");
