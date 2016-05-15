@@ -3,49 +3,52 @@
    
      <div class = "search-heading"><h1 id = "search-heading">REVIEW SEARCH</h1></div>
         <div class = "left">
-          <div id = "searchPanel">
-           <h2>FILTER BY</h2>
-       <form method="get" action="/search">
-
-         <input type="hidden" name="search_from" value="refine_search" value='<%=session[:company]%>'></input>
-         
-         <div>
-           <label for "company">Company</label>
-          <input  type="text" name="company" placeholder="Company" value='<%=session[:company]%>' class="form-control" />
-          </div>
-          <br>
-          <div>
-        <button type="submit" class="btn btn-primary" id = "refine">Refine</button>
+            <div id = "searchPanel">
+               <h2>FILTER BY</h2>
+               <form method="get" action="/search">
+                <input type="hidden" name="search_from" value="refine_search" value='<%=session[:company]%>'></input>
+                <div>
+                   <label for "company">Company</label>
+                    <input  type="text" name="company" placeholder="Company" value='<%=session[:company]%>' class="form-control" />
+                </div>
+                <br>
+                <div>
+                    <button type="submit" class="btn btn-primary" id = "refine">Refine</button>
+                </div>
+            </div>
         </div>
-</div>
-</div>
           </form>
           </div>
           </div>
+          
+<!--Centre div for formatting -->
 <div class = "centre">
     <div id = "results">
         <div class = "content">  
+        
+        <!--Loop through each result from DB query, add it to table (for formatting) -->
         <% @reviews.each do |i| %>
-
+        <br>
         <div class="item">
-          <table><tr>
-   <th><h1>"<%= link_to i.title , {controller: 'company_reviews', action: 'show', id: i.id } , class: "link"%>"</h1></th>
-  <th class = "resultCompany"><h2><%= i.company_name %></h2></th></tr>
-  <th class = "resultDescription"><%= i.description %></th></tr>
-  <hr>
+          <table>
+            <tr>
+              <td class = "resultTitle"><h1>"<%= link_to i.title , {controller: 'company_reviews', action: 'show', id: i.id } , class: "link"%>"</h1></td>
+              <td class = "resultCompany"><h2><%= i.company_name %></h2></td></tr>
+              <td class = "resultDescription"><h3><%= i.description %></h3></td>
+              <td class = "resultRating"><%= i.rating %></td>
+             </tr>
          </table>
-         <br>
-          </div>
-          <!--</div>-->
-        <%end%> 
-      <%end%>
-      </div>
+         <hr>
+        </div>
+        <%end%>
+        </div>
     </div> 
-</div>
-      <div class = "right"></div>
-<style type="text/css">
+    </div>
+<div class = "right"></div>
+<%end%>
       
-      /* standard (repeated )*/
+      
+<style type="text/css">
       
     .left {
         width: 32%;
@@ -93,9 +96,17 @@
         
     }
     
+    .resultDescription {
+        float:left;
+        text-overflow: ellipsis;
+    }
+    
+    .resultTitle h1 {
+        text-align: left;
+    }
+    
     .link {
-        color: black;
-        text-decoration: underline;
+        color: #35a192;
     }
     
     table {
@@ -110,8 +121,7 @@
         color: black;
         width: 100%;
     }
-    
-    /* new */
+
       .searchPanel div {
           margin-bottom: 2%;
       }
@@ -126,8 +136,6 @@
           width: 99%;
           margin-left: 1%;
       }
-
-      //
       
       .content{
         margin-left: 10%;
@@ -135,8 +143,5 @@
         margin-bottom: 5%;
     
       }
-      .item{
-          text-align: center;
-      }
-      
+ 
 </style>

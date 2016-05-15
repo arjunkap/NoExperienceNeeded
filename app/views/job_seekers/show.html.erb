@@ -1,72 +1,125 @@
-<div id="Profile">
-	<h1 class="text-center profile_name"><%= @user.first_name %></h1>
-	<div class="col-md-4">
-		<!--<img src="http://coparentcoalition.org/wp-content/uploads/2012/09/blank-profile-of-woman.jpg" alt="Profile Picture" style="width:304px;height:228px;">-->
-		<!-- Side Bar-->
-		<div class="skills_bar">
-			<div>
-				<h4>Website</h4>
-				<%=@user.web_url %>
-				<br>
-				<h4>Location</h4>
-	  			<%= "#{@user.state} / #{@user.city}"%><br>
-	  	
+<div class="container">
+	<div class="row">
+	  <div class="col-md-4">
+	    <div class="thumbnail">
+	      <img src="http://www.ssa-nsw.org.au/uploads/50166/female-photo17.png" alt="Profile Picture">
+	      <div class="caption">
+	        <p><%= @user.about%></p>
+	      
+        	
+        	<div>
+        		<p><strong>Website:</strong> <%=@user.web_url %></p>
+        		<p><strong>Location:</strong> <%= "#{@user.state} / #{@user.city}"%></p>
+        	</div>
+        	
 			</div>
-		</div>
+	    </div>
+	  </div>
+	  	
+	  	<div class="col-md-8">
+			<div class="row">
+				<h2 class="profile_name"><%= @user.first_name %></h2>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6 text-left">
+					<h3>Portfolio</h3>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12 text-right">
+					<div id = "form_spot">
+						<%if @showEditFeatures%>
+							<%=link_to "", "/profile/newItem", :id => @jobseeker.id ,remote:true, method: :post, class: "btn btn-default btn-large glyphicon glyphicon-plus"%>
+						<%end %>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				
+				<div id = "portfolio">
+					<%= render partial: "jobportfolio", locals: {items: @portfolio, iftrue: @showEditFeatures}%>
+				</div>
+			</div>
+			
+			<div class="row">
+				<form>
+					<textarea class="message"> 
+					
+					</textarea>
+					<button class="btn btn-default sendButton"> Send </button>
+				</form>
+			</div>
 	</div>
-	
-	<!-- About Section -->
-	<div class="col-md-8"> 
-	<p><%= @user.about%></p> 
-	<!-- Profile Section-->
-	<div class="portfolio">
-		<h3 >Portfolio</h3>
-		<%= render partial: "jobportfolio", locals: {items: @portfolio, iftrue: @showEditFeatures}%>
-		<div id = "portfolio">
-		<div id = "form_spot">
-		<%if @showEditFeatures%>
-			<%=link_to "", "/profile/newItem", :id => @jobseeker.id ,remote:true, method: :post, class: "btn btn-default btn-large glyphicon glyphicon-plus"%>
-		<%end %>
-		</div>
-	</div>
-	
-	</div>
-	</div>
+</div>
+
+
 	<% if @jobseeker and @job %>
 	<%= link_to "Ask for interview", {controller: "employers", action: "message_prompt", job_id: @job.id, seeker_id: @jobseeker.id}, id: "ask_for_interview", remote: true %> </div>
 
-	<%= form_for(:interview,  :url => url_for(:controller => "employers", :action => "send_message")) do |f| %>
-<%= f.hidden_field :job_id, value: @job.id %>
-<%= f.hidden_field :seeker_id, value: @jobseeker.id %>
-<%= f.text_field :message %>
-<button type="submit" class="btn btn-default">Submit</button>
-	<% end %>
-
-	<!-- <form id="interview_messsage_form" method="post" action="/employers/sendmessage">
-	<input type="hidden" name="job_id" name="job_seeker" value='<%= @job.id %>' />
-	<input type="hidden" name="job_seeker" value='<%= @jobseeker.id %>' />
-	<input name="message" />
+	<%= form_for(:interview,  :url => url_for(:controller => "employers", :action => "send_message"), :html => {:id => "interview_form" }) do |f| %>
+	<%= f.hidden_field :job_id, value: @job.id %>
+	<%= f.hidden_field :seeker_id, value: @jobseeker.id %>
+	<%= f.text_area :message %>
+	<button type="submit" class="btn btn-default">Submit</button>
+		<% end %>
+		<%end%>
 	
-</form>	 -->
-	<%end%>
 
-	<div id="interview"></div>
+
+	
 
 <style type="text/css">
 	@import url(https://fonts.googleapis.com/css?family=Oswald);
     @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
 	
 	.glyphicon {
-		font-size:3em;
-		height:90px;
-		padding-top:10px;
+		font-size:1em;
 		color:#78a300;
 	}
 	
+	.sendButton {
+		margin-bottom:6%;
+	}
+	
 	.profile_name {
-		 font-family: 'Oswald', sans-serif;
-        font-size: 60px;
+		font-family: 'Oswald', sans-serif;
         text-align: center;
         text-transform: uppercase;
 	}
+	
+	.thumbnail {
+		border: 4px solid black;
+        background-color: white;
+        color: black;
+        font-family: 'Oswald', sans-serif;	
+	}
+	
+	.left-panel {
+		margin-right:5%;
+		margin-left:2%;
+		padding-bottom:5%;
+		border: 4px solid black;
+        background-color: white;
+        color: black;
+        font-family: 'Oswald', sans-serif;	
+	}
+	
+	#interview_form{
+		display: none;
+	}
+	
+	.about {
+		border: 4px solid black;
+	    background-color: white;
+	    color: black;
+	    font-family: 'Oswald', sans-serif;
+	}
+	
+	img {
+		width:100%;
+	} 
+	
 </style>
