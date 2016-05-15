@@ -3,7 +3,7 @@ class Job < ActiveRecord::Base
   has_many :short_listed_jobs
   belongs_to :user
   belongs_to :sub_industry
-  # self.per_page = 10
+  self.per_page = 10
   validates :title, :presence => true
   validates :question1, :presence => true
   validates :question2 , :presence => true

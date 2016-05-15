@@ -3,7 +3,7 @@
 			<%if jobs != nil%>
 			<% jobs.each do |j|%>
 			<div id = '<%=j.id%>'>
-					<div><%= link_to j.title, job, class: 'link'%></div>
+					<div><%= link_to j.title, {:controller => "jobs", :action => "show", id: j.id}, class: 'link'%></div>
 					<div><p><%=j.city%></p></div>
 				<div>
 				<%=j.closing_date%></div>
