@@ -93,9 +93,18 @@
     </tr> 
     <tr>
         <td class = "resultDescription"><h3><%= job.description %></h3></td>
-        <td class = "resultDueDate"><h3><%= job.closing_date %></h3></td>
-
-    
+        
+        <!--<% if job.closing_date %>-->
+        <!--    <td class = "resultDueDate"><h3><%= job.closing_date.strftime("%B %-d, %Y") %></h3></td>-->
+        <!--<% else %> -->
+        <!--    <td class = "resultDueDate"><h3><%= job.closing_date %></h3></td>-->
+        <!--<% end %>    -->
+        <td class = "resultCompany">
+            <% if @job.user_id %>
+              <h3><%= User.find(@job.user_id).company.title %></h3>
+            <% end %> 
+            
+        </td>
     </tr>
     </table>
     <br>
@@ -108,7 +117,7 @@
                 <input type="hidden"  name="job" value='<%= job.id %>' />
                 <button id='btn<%= job.id %>' class="button">Add to short list</button>
             </form>
-        <% else %>
+        <% elsif is_current_user_job_seeker? and !already_short_listed? job.id %>
             <p class = "shortlisted">Shortlisted</p>
         <%end%>  
     </div>
@@ -253,7 +262,7 @@ $(".shortList button").hover(function(){
         width: 90%;
         margin-left: 3%;
     }
-    
+  
     .resultTitle {
         float: left;
         color:black;
@@ -263,6 +272,9 @@ $(".shortList button").hover(function(){
         float: left;
         text-align: left;
         text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap; 
+        width: 22em;
     }
 
     .resultCity h3 {
