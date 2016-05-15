@@ -1,102 +1,71 @@
 
-<!--<div class="content"> -->
+<% if search_type == "interviews" %>
 
-   <% if search_type == "interviews" %>
-<!--<div class = "wrapper">-->
-    
 <div class = "search-heading"><h1 id = "search-heading">INTERVIEW SEARCH</h1></div>
     <div class = "left">
-  <div id = "searchPanel">
-   <h2>FILTER BY</h2>
+      <div id = "searchPanel">
+       <h2>FILTER BY</h2>
        <form method="get" action="/search">
-
          <input type="hidden" name="search_from" value="refine_search" value='<%=session[:company]%>'></input>
-         <!--<div class="row">-->
-            <!--<div class="col-md-3">-->
-            <div>
-                <label for "company">Company</label>
-              <input  type="text" name="company" placeholder="Company" value='<%=session[:company]%>' class="form-control" />
-            </div>          
-            <br> 
-            <!--<div class="col-md-3">-->
-            <div>
-               <button type="submit" class="btn btn-primary">Refine</button>
-            </div>
-         <!--</div>-->
-
+      <div>
+        <label for "company">Company</label>
+        <input  type="text" name="company" placeholder="Company" value='<%=session[:company]%>' class="form-control" />
+    </div>          
+    <br> 
+    <div>
+        <button type="submit" class="btn btn-primary">Refine</button>
+    </div>
        </form>     
  </div>
 </div>
 <div class = "centre">
     <div id = "results">
         <div class = "content">
-            <!--<div id = "results">-->
+            <!-- Iterate through return results and add to table (for formatting) -->
             <% interviews.each do |i| %>
                 
             <div class="item">
                 <table><tr>
-            <th class = "resultTitle"><h1>"<%= link_to i.title , {controller: 'interview_reviews', action: 'show', id: i.id}, class: "link" %>"</h1></th>
-             <th class = "resultCompany"><h2><%= i.company_name %></h2></th></tr>
-              </tr><th class = "resultDescription"><%= i.description %></th>
-              <th class = "resultDifficulty">
+            <td class = "resultTitle"><h1>"<%= link_to i.title , {controller: 'interview_reviews', action: 'show', id: i.id}, class: "link" %>"</h1></td>
+             <td class = "resultCompany"><h2><%= i.company_name %></h2></td></tr>
+              <tr><td class = "resultDescription"><h3><%= i.description %></h3></td>
+              <td class = "resultDifficulty">
               
               <!-- make this a for loop -->
                <!-- <p class="glyphicon glyphicon-asterisk" style = "color: orange"></p>-->
-               
-               <%= i.difficulty %>       
-
-              </th></tr>
+              <h3>Difficulty: <%= i.difficulty %>/5</h3>
+              </td></tr>
               <br>  
              </table>
-              
-            <!--<h4>-->
-            <!--  <%= link_to i.title , {controller: 'interview_reviews', action: 'show', id: i.id} %></h4>-->
-            <!--  Company: <%= i.company_name %> <br>-->
-            <!--  Description: <%= i.description %> <br>-->
-            <!--  <br>-->
+
             </div>
           
           <hr>
 
-        <%end%> 
-      <%end%>
-
-      <!--</div>-->
-      </div>
+        <%end%>
+        
+        </div>
      </div> 
 </div>
-      <div class = "right"></div>
-<!--</div>-->
-      
+<div class = "right"></div>    
+        
+<%end%>
+
 <style type="text/css">
-      /* standard (repeated )*/
-      
+
     .left {
         width: 32%;
-
-
-
     }
     
     .right {
         width: 0%;
     }
 
-    
     .centre {
         width: 50%;
         float: left;
         
     }
-    
-    /*.searchPanel {*/
-    /*    width: 50%;*/
-    /*    background-color: white;*/
-    /*    border: 4px solid black;*/
-    /*    float: right;*/
-    /*    padding-bottom: 15%; */
-    /*}*/
-    
     
     #search .btn-primary {
         border-radius: 0;
@@ -111,16 +80,6 @@
         margin-left: 15%;
     }
     
-    /*
-    .resultTitle {
-        float: left;
-        color:black;
-    }
-    
-    .resultDescription {
-        width: 100;
-    }*/
-    
     .resultCompany h2 {
         float: right;
         text-align: right;
@@ -128,13 +87,13 @@
     }
 
     
-    .resultDifficulty {
+    .resultDifficulty h3 {
         float: right;
+        text-align: right;
     }
     
     .link {
-        color: black;
-        text-decoration: underline;
+        color: #35a192;
     }
     
     table {
@@ -143,25 +102,17 @@
         
     }
     
-   
-    
-    /* new */
-      .searchPanel div {
+    .searchPanel div {
           margin-bottom: 2%;
-      }
+    }
+
       
-      .centre {
-          
-      }
-      
-      #results {
-          background-color: white;
-          border: 4px solid black;
-          width: 99%;
-          margin-left: 1%;
-      }
-      
-      //
+    #results {
+        background-color: white;
+        border: 4px solid black;
+        width: 99%;
+        margin-left: 1%;
+    }
       
       .content{
         margin-left: 10%;
@@ -170,10 +121,4 @@
         
       }
       
-      .item{
-          text-align: center;
-      }
-       .btn-primary{
-        width: 200px;
-      }
 </style>

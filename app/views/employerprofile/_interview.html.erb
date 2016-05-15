@@ -1,12 +1,15 @@
 <div id = "interview">
-	<%#interview = InterviewReview.where(:company_id => session[:comp_id])%>
+	<% interview = InterviewReview.where(:company_id => session[:comp_id])%>
 			<%if interview != nil%>
-			<%interview.each do |i|%>
+			<% interview.each do |i|%>
 			<div id = '<%=i.id%>'>
-				<%=i.title%>
-				<%=i.interview_date%>
-				<%=i.description%>
-				<%=i.company_name%>
+				<div><%= link_to i.title , {controller: 'interview_reviews', action: 'show', id: i.id}, class: "link" %></div>
+				<div><%=i.interview_date%></div>
+				<div>
+				<%=i.position%></div>
+				<div>
+				<%=i.description%></div>
+				
 			</div>
 			<%end%>
 			<%end%>

@@ -24,15 +24,13 @@ class EmployerprofileController < ApplicationController
 
 	def review
 		@review = Review.where(:company_id => params[:id])
-		@company_id = params[:id]
 		respond_to do |format|
 			format.js
 		end
 	end
 
 	def interview
-		@interview = InterviewReview.where(:company_id => params[:id])
-		@company_id = params[:id]
+		@interview = InterviewReview.where(:company_id => @company.id)
 		respond_to do |format|
 			format.js
 		end
