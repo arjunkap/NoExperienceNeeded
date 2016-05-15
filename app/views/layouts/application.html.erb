@@ -25,7 +25,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">NEN</a>
+        <a class="navbar-brand" href="/">Nen</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -39,7 +39,7 @@
       <% if current_uri != "/" %>
          <form class="navbar-form navbar-left" role="search" action="/search">
         <div class="form-group">
-          <input type="text" class = "form-control" name="query" placeholder="search" value='<%=session[:query]%>' />
+          <input type="text" class = "form-control" name="query" placeholder="Search" value='<%=session[:query]%>' />
         </div>
          <div class="form-group">
           <select class="form-control" name="search_type" id="search_type">
@@ -50,12 +50,12 @@
             </select>
               <input type="hidden" name="search_from" value="navbar" />
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default" id = "navbarSubmit">Submit</button>
       </form>
       <%end%>
 
       <%end%>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right navigationLink">
           <li><a href="/about">About</a></li>
              <% if !logged_in? %>
           <li><%= link_to  "Login", "/login"%></li>
@@ -65,7 +65,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               Hi <%= current_user.first_name %>  <b class="caret"></b>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu navDropdown">
                 <% if is_current_user_employer? %>
                   <li><%= link_to "Profile",  {controller: 'employers', action: 'show', id: current_user.company.id} %></li>
               <% elsif is_current_user_job_seeker? %>
@@ -113,6 +113,12 @@ console.log("cool");
 $(document).ready(ready);
 $(document).on('page:load', ready);
 
+$(".navbar-brand").hover(function() {
+  $(this).css("text-transform", "lowercase");
+  $(this).css("font-size", "30px");
+  }, function(){
+      $(this).removeAttr('style');
+});
 
 </script>
 <style type="text/css">
@@ -131,7 +137,26 @@ $(document).on('page:load', ready);
   body {
    background: #eee;  
   }
-
+  
+  .navbar-brand {
+    font-family: 'Pacifico';
+  }
+  
+  .navigationLink {
+    font-family: 'Roboto Condensed';
+    text-transform: uppercase;
+  }
+  
+  #navbarSubmit {
+    border-radius: 0;
+    border: 2px solid black;
+    font-family: 'Roboto Condensed';
+    text-transform: uppercase;
+  }
+  
+  .navbar {
+    font-family: 'Roboto Condensed';
+  }
 
 
 </style>
