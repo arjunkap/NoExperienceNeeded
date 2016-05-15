@@ -1,7 +1,6 @@
 <div id = "profile">
 	
-	<div class="companyname"><h1><%= @user.first_name %></div>
-	<%= @user.last_name %><br /></h1>
+	<div class="companyname"><h1><%= Company.find(@user.id).title %></h1></div>
 <div class="col-md-3 col-md-offset-1">
 	<div><strong>location:</strong><p><%= "#{@user.state} / #{@user.city}"%><p>
 	</div>
@@ -12,7 +11,7 @@
 	</div>
 </div>
 
-	<div class="col-md-7"><p>About me:</p>
+	<div class="col-md-7"><h3><p>About me:</p></h3>
 	<%= @user.about%>
 
 
