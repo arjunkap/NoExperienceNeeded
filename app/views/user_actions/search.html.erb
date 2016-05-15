@@ -100,10 +100,9 @@
         <!--    <td class = "resultDueDate"><h3><%= job.closing_date %></h3></td>-->
         <!--<% end %>    -->
         <td class = "resultCompany">
-            <% if @job.user_id %>
-              <h3><%= User.find(@job.user_id).company.title %></h3>
+            <% if job.user_id %>
+              <h3><%= User.find(job.user_id).company.title %></h3>
             <% end %> 
-            
         </td>
     </tr>
     </table>
