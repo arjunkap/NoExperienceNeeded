@@ -1,0 +1,27 @@
+<div id = "review_form">
+<form action = "/cr/create" method = "post">
+
+<input name="authenticity_token" value='<%= form_authenticity_token %>' type="hidden">
+<input name = "company_id" value = '<%= company_id %>' type = "hidden">
+
+Title:
+<input name = "title" type = "text"><br>
+
+Rating (Out of 5):
+<select name = "rating">
+		<option value = "1">1</option>
+		<option value = "2">2</option>>
+		<option value = "3">3</option>
+		<option value = "4">4</option>
+		<option value = "5">5</option>
+</select>
+<br>
+
+
+Description:
+<textarea name = "description"></textarea>
+<br>
+
+<button>Review!</button>
+</form>
+</div>
