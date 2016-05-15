@@ -1,12 +1,13 @@
-<div class="content">
+<div>
 
 <% if @interview %>
 	<br>
 	
-<h1><%= @interview.title %></h1>
+<div class="title"><h1><%= @interview.title %></h1></div>
 	
 	<hr>
 	<div class="col-md-3 col-md-offset-1">
+	  <div class="companyname">
 	  <div><strong>Company:</strong><%= link_to @interview.company_name , {controller: 'employerprofile', action: 'show', id: @interview.company_id},class:"link" %></div>
 	  <div class="intervewee"><p><strong>Interviewee id:</strong><%= @interview.job_seeker_id %></p></div>
 	  <!--<div>-->
@@ -14,10 +15,10 @@
 	  <!--  <p>%= link_to "Interviewee", '/profile/job_seeker.id' %>-->
 	  <!--</p>-->
    <!--     </div>-->
-	  </div>
+	  </div></div>
 	
 	<div class="col-md-7">
-	  
+	  <div class="content">
 			<div><strong>Description:</strong><p><%= @interview.description %></p></div>
             <div><strong>Create date</strong>:<p><%= @interview.created_at %></p></div>
             <div><strong>Duration:</strong><p><%= @interview.duration %></p></div>
@@ -25,9 +26,7 @@
             <div><strong>Experience:</strong><p><%= @interview.experience %></p></div>
             <div><strong>Position:</strong><p><%= @interview.position %></p></div>
             <!--<div>Suggestion for other interviewees:<p>Paragraph of suggestion or expierence.</p></div>     	-->
-           <div><strong>Voted by:<p><%=  @interview.upvotes.count %></strong></p></div>
-     </div>
-
+           <div><strong>Voted by:<p><%=  @interview.upvotes.count %></strong></p></div><br>
 
 <div id="upvoted_message"></div>
 
@@ -45,11 +44,13 @@
 <%= link_to 'Back', session[:current_uri], class: 'btn btn-default' %>
 <%end%>
 </div>
+</div>
+</div>
 
 
 <style type="text/css">
 .intervewee{
-	padding-top: 30%;
+	padding-top: 3%;
 }
 .button{
   float:inherit;
@@ -73,6 +74,42 @@
    .link {
         color: #35a192;
     }
-    
+.title{
+	font-family: 'Montserrat', sans-serif;
+	font-size: 50px;
+	text-align: center;
+	 background-color: white;
+        color: black;
+         border: 4px solid black;
+         width:70%;
+         margin-left:15%;
+         margin-bottom:0;
+}
+
+.companyname{
+	font-size: 20px;
+	text-align: center;
+	border-radius: 0;
+        border: 4px solid black;
+        background-color: white;
+        color: black;
+        font-family: 'Oswald', sans-serif;
+  padding-top:3%;
+        width: 95%;
+        margin-left: 25%;
+}
+
+  .content{
+    background-color: white;
+    border: 4px solid black;
+        width: 80%;
+        font-family: 'Oswald', sans-serif;
+        padding-top:3%;
+        padding-left: 5%;
+        margin-left:10%;
+        margin-top:0;
+        margin-bottom:3%;
+        padding-bottom:5%;
+  } 
 
 </style>

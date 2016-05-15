@@ -1,11 +1,9 @@
-  <div class="content">
+<div class="content">
    
-       <form method="get" action="/search">
-
-         <input type="hidden" name="search_from" value="refine_search" value='<%=session[:company]%>'></input>
+       <form method="get" action="/shortlistedjobs">
          <div class="row">
          <div class="col-md-3">
-          <input  type="text" name="company" placeholder="company" value='<%=session[:company]%>' class="form-control" />
+          <input  type="text" name="query" placeholder="query" value='' class="form-control" />
           </div>
           <div class="col-md-3">
   <button type="submit" class="btn btn-primary">Refine</button>
@@ -20,6 +18,8 @@
             <% j = Job.find(sjob.job_id) %>
           <p> <%=  link_to j.title ,  {:controller => "jobs", :action => "show", :id => j.id } %></p >
           <p> 
+          <% if User.exists?(j.user_id) %>
+
           <% company =  User.find(j.user_id).company %>
           <% if company %>
 
@@ -32,20 +32,23 @@
            <%end%>
           </div>
         <%end%> 
+        <% end %>
 
-        <style type="text/css">
+<style type="text/css">
       
-      .content{
+    .content{
         margin-left: 10%;
         margin-right: 10%;
-           margin-bottom: 5%;
-           
-    margin-top: 6%;
-      }
-      .item{
-          text-align: center;
-      }
-      .btn-primary{
+        margin-bottom: 5%;
+        
+        margin-top: 6%;
+    }
+    
+    .item{
+        text-align: center;
+    }
+    
+    .btn-primary{
         width: 200px;
-      }
-      </style>
+    }
+</style>

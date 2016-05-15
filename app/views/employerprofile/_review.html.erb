@@ -4,7 +4,7 @@
 			<%if review != nil%>
 			<% review.each do |r|%>
 			<div>
-			<div><h2><%= link_to r.title , {controller: 'interview_reviews', action: 'show', id: r.id}, class: "link" %>
+			<div><h2><%= link_to r.title , {controller: 'company_reviews', action: 'show', id: r.id}, class: "link" %>
 				</h2></div>
 			<div><p><strong>Description: </strong>
 				<%=r.description%></p></div><br>

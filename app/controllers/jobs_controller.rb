@@ -13,14 +13,14 @@ class JobsController < ApplicationController
 	end
 
 	def create
-			@job = current_user.jobs.new(job_params)
-				if @job.save
-					 flash[:success] = "Job created!"
-					 redirect_to controller: 'employers', action: 'show', id: current_user.company.id
-				else
-					render 'new'
-				end
-	
+		@job = current_user.jobs.new(job_params)
+			if @job.save
+				 flash[:success] = "Job created!"
+				 redirect_to controller: 'employers', action: 'show', id: current_user.company.id
+			else
+				render 'new'
+			end
+
 		
 	end
 
@@ -72,8 +72,7 @@ class JobsController < ApplicationController
 		@button_id = "#btn#{job.id}"
 		job_seeker = current_user.job_seeker
 		job_seeker.short_listed_jobs.create(job_id: job.id)
-		flash[:success] = "Added"
-		puts "%%%%%%%%%%%%%%%%%%555"
+		flash.now[:success] = "Added"
 		puts @button_id
 		respond_to do |format|
 			
@@ -107,7 +106,6 @@ class JobsController < ApplicationController
 		job_seeker = current_user.job_seeker
 
 		jp = JobApplication.new(question1: question1,question2: question2,question3: question3, job_id: job_id, job_seeker_id: job_seeker.id)
-		puts "------------cool"
 		if jp.save
 			
 			if  job_seeker.short_listed_jobs.exists?(job_id)
@@ -144,8 +142,24 @@ class JobsController < ApplicationController
 
 
 	def short_listed_jobs
-
-		@sjobs = current_user.job_seeker.short_listed_jobs
+		if current_user and current_user.job_seeker
+			all_short_listed_jobs = current_user.job_seeker.short_listed_jobs
+			@sjobs = []
+			if params[:query] != "" and params[:query] != nil
+				query = params[:query].downcase
+				all_short_listed_jobs.each do |sjob|
+					job = Job.find(sjob.job_id)
+					if job.title.downcase.include? query
+						@sjobs.push sjob
+					end
+				end
+			else
+				@sjobs = all_short_listed_jobs 
+			end
+		else
+			render :file => "#{Rails.root}/public/404.html",  :status => 404
+		end
+		
 
 	end
 

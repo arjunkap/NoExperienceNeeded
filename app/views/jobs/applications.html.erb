@@ -4,6 +4,9 @@
 		<thead>
 			<tr>
 				<th>Applicant Name</th>
+				<th>Question 1</th>
+				<th>Question 2</th>
+				<th>Question 3</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -11,6 +14,10 @@
 	<tr>
 		<% seeker  = JobSeeker.find(application.job_seeker_id) %>
 		<td><%= link_to seeker.user.first_name, {controller: "job_seekers", action: "show", id: seeker.user.id, job_id: @job.id} %></td>
+		<td><% application.question1 %></td>
+		<td><% application.question2 %></td>
+		<td><% application.question3 %></td>
+
 	</tr>
 	<% end %>
 	</tbody>

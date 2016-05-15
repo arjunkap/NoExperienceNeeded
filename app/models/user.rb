@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_one :job_seeker
   has_many :jobs
   has_many :short_listed_jobs
+  
   # attr_accessor :password
   EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\Z/i
   validates :first_name, :presence => true

@@ -1,45 +1,3 @@
-<div class="container col-md-10" class = "index" id="welcome_page">
-
-          <form method="get" class = "index" action="/search" name="welcome_form">
-          <div class="row">
-             <h1 class = "index">no experience needed</h1>
-            <p class = "index">GET THE EXPERIENCE YOU NEED</p>
-          </div>
-          <div class="row index">
-          <div class="col-md-2 index"></div>
-                <div class="col-md-4 index">
-              <input type="text" class = "form-control index" name="search_query" placeholder="Field of Choice">
-                 </div>
-       
-              <div class="col-md-4 index">
-              <select class="form-control index" name="search_type" class="form-control">
-                <option value="jobs">Jobs</option>
-                <option value="interviews">Interviews</option>
-                <option value="comp_reviews">Company Reviews</option>
-                <option value = "company">Companies</option>
-              </select>
-              </div>
-               <div class="col-md-2"></div>
-                   
-            </div>
-              <input type="hidden" value="welcome_page_search" name="search_from" class="form-control" />
-
-              <div class="row"></div>
-              <div class="row">
-              <div class="col-md-4"></div>
-              <div class="col-md-4">
-             <button type="submit" class="btn btn-primary index">SEARCH</button>
-             </div>
-             <div class="col-md-4">
-             </div>
-             </div>
-    
-            </form>
-</div>
-
-
-
-
 <style type="text/css">
 
     @import url(https://fonts.googleapis.com/css?family=Oswald);
@@ -107,3 +65,63 @@
 
 
 </style>
+<div class="container col-md-10" class = "index" id="welcome_page">
+
+          <form method="get" class = "index" action="/search" name="welcome_form">
+          <div class="row">
+             <h1 class = "index">no experience needed</h1>
+            <p class = "index">GET THE EXPERIENCE YOU NEED</p>
+          </div>
+          <div class="row index">
+          <div class="col-md-2 index"></div>
+                <div class="col-md-4 index">
+              <input type="text" class = "form-control index" name="search_query" placeholder="Field of Choice">
+                 </div>
+       
+              <div class="col-md-4 index">
+              <select class="form-control index" name="search_type" class="form-control">
+                <option value="jobs">Jobs</option>
+                <option value="interviews">Interviews</option>
+                <option value="comp_reviews">Company Reviews</option>
+                <option value = "company">Companies</option>
+              </select>
+              </div>
+               <div class="col-md-2"></div>
+                   
+            </div>
+              <input type="hidden" value="welcome_page_search" name="search_from" class="form-control" />
+
+              <div class="row"></div>
+              <div class="row">
+              <div class="col-md-3"></div>
+              <div class="col-md-3">
+             <button type="submit" class="btn btn-primary index">SEARCH</button>
+             </div>
+             <% if logged_in? %>
+              <% if current_user.company %>
+              <div class="col-md-3">
+              <%= link_to "Take me to profile", {controller: "employers", action: "show", id: current_user.company.id},class: "btn btn-primary index" %>
+                </div>
+              <% end %>
+              <div class="col-md-3">
+              <% if current_user.job_seeker %>
+              <%= link_to "Take me to profile", {controller: "job_seekers", action: "show", id: current_user.job_seeker.id},class: "btn btn-primary index" %>
+              </div>
+              <% end %>
+             <%else %>
+            <div class="col-md-3">
+                 <%= link_to "Login", login_path, class: "btn btn-primary index" %>
+             </div>
+          <%end %>
+             <div class="col-md-3">
+             </div>
+             </div>
+    
+            </form>
+
+           
+</div>
+
+
+
+
