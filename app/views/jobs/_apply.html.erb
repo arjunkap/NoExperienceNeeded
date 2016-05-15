@@ -1,20 +1,52 @@
 <% if @job %>
-
+<h2>Apply below</h2>
 <form class="" method="post" action="/jobs/apply" data-remote="true">
 	<label><%= @job.question1 %></label>
+	<label><h3>Why should we hire you?</h3></label>
 	<textarea name="question1" class="form-control"></textarea>
 	<label><%= @job.question2 %></label>
 	<textarea name="question2" class="form-control"></textarea>
-	<label><%= @job.question3 %></label>
+	<%= @job.question3 %>
 	<textarea name="question3" class="form-control"></textarea>
 	<input type="hidden" name="job_id" value='<%=@job.id%>' />
-	<button type="submit" class="btn btn-default">Submit</button>
+	<br>
+	<br>
+	<button type="submit" class="btn btn-default " id = "submit">Submit Application</button>
 </form>
 
 <%end%>
 
 <style type="text/css">
+
+	label {
+		font-family: 'Oswald', sans-serif;
+		text-align: center;
+		width: 100%;
+		font-size: 30px;
+		text-transform: uppercase;
+		color: black;
+	}
+	
+	h2 {
+		font-family: 'Oswald', sans-serif;
+		text-transform: uppercase;
+		text-align: center;
+		width: 100%;
+		
+	}
+	
+	#submit {
+		border: 3px solid black;
+		font-size: 15px;
+		margin-left:35%;
+		width: 30%;
+	}
+
 	.form-control{
-		width: 50%;
+		width: 70%;
+		margin-left: 15%;
+		border-radius: 0;
+		border: 1px solid black;
+		padding-bottom: 4%;
 	}
 </style>

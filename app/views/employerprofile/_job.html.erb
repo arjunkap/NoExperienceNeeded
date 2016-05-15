@@ -1,8 +1,10 @@
 <div id = "jobs">
-<% jobs = Job.where(user_id: Company.find(session[:comp_id]).user_id)%>
+	<div class="job">
+<%#jobs = Job.where(user_id: Company.find(session[:comp_id]).user_id)%>
 			<%if jobs != nil%>
 			<% jobs.each do |j|%>
 			<div id = '<%=j.id%>'>
+<<<<<<< HEAD
 					<div><%= link_to j.title, {:controller => "jobs", :action => "show", id: j.id}, class: 'link'%></div>
 					<div><p><%=j.city%></p></div>
 				<div>
@@ -11,8 +13,18 @@
 				<%=j.description%></div>
 				<div>
 				<%=@company.title%></div>
+=======
+				<div><h2><%= link_to j.title , {controller: 'jobs', action: 'show', id: j.id}, class: "link" %>
+				</h2></div>
+				<div><p><strong><%=j.city%></strong></p></div><br>
+				<div><p><strong>Closing Date: 
+				<%=j.closing_date%></strong></p></div><br>
+				<div><p><strong>Description: 
+				<%=j.description%></strong></p></div><br><br>
+>>>>>>> a7372311d6d83b15abe7f077b3ae3ca6c4786d51
 				
 			</div>
 			<%end%>
 			<%end%>
+	</div>
 	</div>

@@ -21,7 +21,7 @@
         <div class="content">
             <% company.each do |i| %>
             <div class="item">
-            <table><th class = "resultCompany"><h1><%= link_to i.title , {controller: 'employerprofile', action: 'show', id: i.id} %></h1></th>
+            <table><th class = "resultCompany"><h1><%= link_to i.title , {controller: 'employerprofile', action: 'show', id: i.id},class:"link" %></h1></th>
           <tr>
           <td class = "resultDescription"><h3></h3>Description: <%= User.find(i.user_id).about %> <br></h3></td>
             </tr>
@@ -36,6 +36,7 @@
 </div>
 <div class = "right"></div>   
     <%end%> 
+
 
       
 <style type="text/css">

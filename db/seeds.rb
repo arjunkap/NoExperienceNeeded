@@ -6,27 +6,19 @@
 # # # #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 # # # #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# # Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
-# # Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
-# # Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
-# # Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
-# # Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
-# # Job.create(:title => "Life", :description => "good stuff", :country => "Australia", :city => "Perth") 
 
-# u = User.create(:first_name => "Yash", email: "4s56sdsd7a8sdfsd@gmail.com", password: "123456", :city => "Sydney")
-# u.company = Company.new(:title => "Facebook", :abn => "12345678")
-# u.company.save
-# s = SubIndustry.create(name: "IT")
-# u.jobs.create(:title => "IT Staff", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Sydney", sub_industry_id: s.id, :work_type => "FT")
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+Job.create(:title => "Software engineer", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Melbourne", :question1 => "This is a first question", :question2 => "Second question", :question3 => "adfadsfasd")
+Job.create(:title => "Life", :description => "good stuff", :country => "Australia", :city => "Perth") 
 
 # User.create(:first_name => "Yash", email: "4567a8sdfsd@gmail.com", password: "123456", :city => "Sydney")
 # u.company = Company.new(:title => "Wunderman", :abn => "12345678")
 # u.company.save
 # s = SubIndustry.create(name: "IT")
 # u.jobs.create(:title => "IT Staff", :description => "This sis aasdfadsfas", :country => "Australia", :city => "Sydney", sub_industry_id: s.id, :work_type => "FT")
-
-
-
 
 # u = User.create(:first_name => "Yash", email: "4ssd5sdf6a7890@gmail.com", password: "123456", :city => "Canberra")
 # u.company = Company.new(:title => "Yahoo", :abn => "12345678")
