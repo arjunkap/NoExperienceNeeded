@@ -60,11 +60,6 @@ class EmployersController < ApplicationController
 
 
 	def is_valid_id id
-		Company.all.each do |seeker|
-			if seeker.id == id
-				return true
-			end
-		end
-		return false
+		return Company.exists?(id)
 	end
 end

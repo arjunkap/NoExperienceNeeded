@@ -2,11 +2,11 @@
 
 
 <div class="row user-type">
-    <%= render 'shared/error_messages' %>
-  
+ <%= render 'shared/error_messages' %>
+
     <h2>Sign up</h2>
 
-    <%= form_for(:user,  :url => url_for(:controller => "users", :action => @action)) do |f| %>
+    <%= form_for(:user,  :url => url_for(:controller => "users", :action => session[:action])) do |f| %>
   
     <div class="form-group">
         <%= f.text_field :first_name , class: 'form-control registeration',:placeholder => "Name" %>
@@ -31,9 +31,12 @@
     </div>
     
     
-    <% if @company %>
+    <% if session[:action] == "create_employer" %>
         
- 
+    <div class="form-group">
+
+      <input type="text" name="company_name", class='form-control registeration', placeholder="COMPANY" />
+      </div>
      <div class="form-group">
 
       <input type="text" name="abn", class='form-control registeration', placeholder="ABN" />

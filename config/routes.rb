@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get 'jobs/sort' => 'user_actions#sort'
 
+  
   get 'createprofile/employer'
 
   get 'createprofile/jobSekker'

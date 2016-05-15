@@ -20,7 +20,8 @@ class UsersController < ApplicationController
 		  flash[:success] = "Welcome to the NEN!"
 	 	  if @company
 	    	abn = params[:abn]
-	    	@user.company = Company.new(abn: abn)
+	    	company = params[:company]
+	    	@user.company = Company.new(abn: abn, title: params[:company])
 	    	@user.save
 	    	log_in @user
 	    	redirect_to controller: 'employers', action: 'show'
@@ -38,22 +39,20 @@ class UsersController < ApplicationController
 		end
 
 	def job_seeker
-		@company = false
-		@action = "create_job_seeker"
+		session[:action] = "create_job_seeker"
 		@user = User.new
 		render "new"
 	end
 
 
 	def create_job_seeker
-		 @company = false
 		 @user = User.new(user_params)
 		 if @user.save
-		 		@user.job_seeker = JobSeeker.new
+	 		@user.build_job_seeker
     		@user.job_seeker.save
-	      log_in @user
-	      flash[:success] = "Welcome to the NEN!"
-	      redirect_to @user
+		      log_in @user
+		      flash[:success] = "Welcome to the NEN!"
+		      redirect_to controller: "job_seekers", action: "show", id: @user.job_seeker.id
     else
       render 'new'
     end
@@ -61,24 +60,22 @@ class UsersController < ApplicationController
 	end
 
 	def create_employer
-		 @company = true
-		 @user = User.new(user_params)
+	 @user = User.new(user_params)
+	 if @user.save
+	 	  @user.build_company(abn: params[:abn], title: params[:company_name])
+	 	  @user.company.save
+		  log_in @user
+		  flash.now[:success] = "Welcome to the NEN!"
+		  redirect_to controller: "employers",action: "show", id: @user.company.id
+		
+	 else
+	      render 'new'
+	 end
 
-		 if @user.save
-		 		abn = params[:abn]
-	    	@user.company = Company.new(abn: abn)
-	    	@user.company.save
-	      log_in @user
-	      flash[:success] = "Welcome to the NEN!"
-	      redirect_to @user
-    else
-      render 'new'
-    end
 	end
 
 	def employer
-		@action = "create_employer"
-		@company = true
+		session[:action] = "create_employer"
 		@user  = User.new
 		render "new"
 	end
@@ -86,7 +83,7 @@ class UsersController < ApplicationController
 	private
 
 	def user_params
-      params.require(:user).permit(:first_name, :email, :password, :password_confirmation, :country, :state, :city)
+      params.require(:user).permit(:first_name, :email, :password, :password_confirmation, :state, :city)
     end
 
     def company_params

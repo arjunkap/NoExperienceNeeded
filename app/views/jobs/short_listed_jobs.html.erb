@@ -1,11 +1,9 @@
   <div class="content">
    
-       <form method="get" action="/search">
-
-         <input type="hidden" name="search_from" value="refine_search" value='<%=session[:company]%>'></input>
+       <form method="get" action="/shortlistedjobs">
          <div class="row">
          <div class="col-md-3">
-          <input  type="text" name="company" placeholder="company" value='<%=session[:company]%>' class="form-control" />
+          <input  type="text" name="query" placeholder="query" value='' class="form-control" />
           </div>
           <div class="col-md-3">
   <button type="submit" class="btn btn-primary">Refine</button>

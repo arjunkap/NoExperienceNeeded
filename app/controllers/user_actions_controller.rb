@@ -12,6 +12,8 @@ class UserActionsController < ApplicationController
     end
 
     session[:search_type] = @search_type
+
+    
     if @search_type == "jobs"
       search_jobs search_from
 
@@ -191,8 +193,8 @@ def search_companies word
       else
         companies = search_with_title company.downcase, :company
         companies.each do |company|
-        @jobs = @jobs + User.find(company.user_id).jobs
-       end
+          @jobs = @jobs + User.find(company.user_id).jobs
+        end
       end
       if query != "" and query != nil
        @jobs = search_with_query query.downcase, :job
