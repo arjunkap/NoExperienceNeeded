@@ -18,6 +18,8 @@
             <% j = Job.find(sjob.job_id) %>
           <p> <%=  link_to j.title ,  {:controller => "jobs", :action => "show", :id => j.id } %></p >
           <p> 
+          <% if User.exists?(j.user_id) %>
+
           <% company =  User.find(j.user_id).company %>
           <% if company %>
 
@@ -30,6 +32,7 @@
            <%end%>
           </div>
         <%end%> 
+        <% end %>
 
         <style type="text/css">
       
