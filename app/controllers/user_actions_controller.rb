@@ -87,6 +87,7 @@ def search_companies word
       end
        session[:query] = params[:query]
     end
+
   end
 
       
@@ -158,9 +159,9 @@ def search_companies word
         if query == "" || query == nil
           @jobs = Job.all
           session[:company] =  ""
-          session[:work_type] =  "any"
-          session[:city] = "any"
-          session[:sub_industry] = "any"
+          session[:work_type] =  ""
+          session[:city] = ""
+          session[:sub_industry] = ""
         else
           @jobs = search_with_query query.downcase, :job
         end
@@ -176,6 +177,7 @@ def search_companies word
       session[:work_type] =  params[:work_type]
       session[:city] = params[:city]
       session[:sub_industry] = params[:sub_industry]
+      
       query = session[:query]
 
       if company == "" || company == nil
@@ -205,7 +207,7 @@ def search_companies word
 
   def refine_with_work_type jobs, work_type
     refined_jobs = []
-    if work_type == "any"
+    if work_type == ""
       return jobs
     else
       jobs.each do |job|
@@ -237,13 +239,12 @@ def search_companies word
 
   def refine_with_work_industry jobs , industry
 
-    if industry == "any"
+    if industry == ""
       return jobs
     end
     refined_jobs = []
-    sub_industry_id = SubIndustry.find_by(name: industry).id
     jobs.each do |job|
-      if job.sub_industry_id == sub_industry_id
+      if job.category == industry
         refined_jobs.push job
       end
     end
