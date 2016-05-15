@@ -22,13 +22,38 @@ class UserActionsController < ApplicationController
     elsif @search_type == "comp_reviews"
       find_companies_reviews search_from
     elsif @search_type == "company"
-      if search_from == "navbar"
-        search_companies params[:query]
-      elsif search_from == "welcome_page_search"
-        search_companies params[:search_query]
-      end
+      # if search_from == "navbar"
+      #   search_companies params[:query]
+      # elsif search_from == "welcome_page_search"
+      #   search_companies params[:search_query]
+      # end
+      company_search search_from
     end
    
+  end
+
+
+  def company_search search_from
+
+    @companies = []
+    if search_from == "navbar"
+      query = params[:query].downcase
+
+    elsif search_from == "refine_search"
+      query = params[:company].downcase
+    end
+    if query == nil or query == ""
+      @companies = Company.all
+    else
+      Company.all.each do |c|
+
+        if c.title and c.title.downcase.include? query
+          @companies.push c
+        end
+      end
+    end
+    session[:company] = query
+    
   end
 
   def sort
