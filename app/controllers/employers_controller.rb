@@ -5,7 +5,27 @@ class EmployersController < ApplicationController
 	end
 
 	def show
-		@active_jobs = current_user.jobs
+		#@active_jobs = current_user.jobsif params.has_key?(:id) 
+		if params.has_key?(:id) 
+			if is_valid_id params[:id].to_i
+				@Company = Company.find(params[:id])
+				@user = User.find(@Company.user_id)
+				if is_same_as_logged_in_user @user
+					@active_jobs = current_user.jobs
+
+				else
+					redirect_to login_path
+				end
+
+			else
+				redirect_to login_path
+			end
+
+		elsif current_user
+			@active_jobs = current_user.jobs	
+		else
+			redirect_to login_path
+		end
 	end
 
 	def destroy
@@ -31,5 +51,20 @@ class EmployersController < ApplicationController
 		job_id = params[:job_id]
 		seeker_id = params[:seeker_id]
 		redirect_to controller: 'employers', action: 'show', id: current_user.company.id 
+	end
+
+	def is_same_as_logged_in_user user
+		return user == current_user
+	end
+
+
+
+	def is_valid_id id
+		Company.all.each do |seeker|
+			if seeker.id == id
+				return true
+			end
+		end
+		return false
 	end
 end

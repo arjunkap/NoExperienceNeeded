@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
 
 
+  get 'createprofile/employer'
+
+  get 'createprofile/jobSekker'
+
   # get 'user_actions/search'
 
   get 'jobs/:id/apply' => "jobs#apply"
@@ -61,6 +65,8 @@ Rails.application.routes.draw do
 
   get 'cr/:id' => 'company_reviews#show'
   get 'ir/:id' => 'interview_reviews#show'
+  post 'ir/create' => 'interview_reviews#create'
+  post 'cr/create' => 'company_reviews#create'
   get 'ir/:id/upvote' => 'interview_reviews#upvote'
 
 

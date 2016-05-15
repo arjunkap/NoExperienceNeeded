@@ -17,4 +17,20 @@ class InterviewReviewsController < ApplicationController
 		end
 
 	end
+
+	def create
+		interview = InterviewReview.new
+		interview.description = params[:description]
+		interview.position = params[:position]
+		interview.experience = params[:experience]
+		interview.offer = params[:offer]
+		interview.difficulty = params[:difficulty]
+		interview.company_id = params[:company_id]
+		interview.title = params[:title]
+		company_name = Company.find(params[:company_id]).title
+		interview.company_name = company_name
+		interview.save
+		redirect_var = "/employerprofile/#{params[:company_id]}"
+		redirect_to redirect_var
+	end	
 end

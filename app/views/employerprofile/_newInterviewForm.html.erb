@@ -1,0 +1,43 @@
+<div id = "interview_form">
+<form action = "/ir/create" method = "post">
+
+<input name="authenticity_token" value='<%= form_authenticity_token %>' type="hidden">
+<input name = "company_id" value = '<%= company_id %>' type = "hidden">
+
+Title:
+<input name = "title" type = "text"><br>
+
+Position:
+<input name = "position" type = "text"><br>
+
+Experience:
+<select name = "experience">
+		<option value = "Excelent">Excellent</option>
+		<option value = "Good">Good</option>
+		<option value = "Bad">Bad</option>
+</select>
+
+Difficulty (Out of 5):
+<select name = "difficulty">
+		<option value = "1">1</option>
+		<option value = "2">2</option>>
+		<option value = "3">3</option>
+		<option value = "4">4</option>
+		<option value = "5">5</option>
+</select>
+<br>
+
+Did you recieve an offer ?
+<select name = "offer">
+		<option value = "false">No</option>
+		<option value = "true">Yes</option>>
+</select>
+<br>
+
+Description:
+<textarea name = "description"></textarea>
+<br>
+
+<button>Review!</button>
+</form>
+</div>
