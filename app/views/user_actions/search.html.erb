@@ -16,7 +16,7 @@
          <div>
          <h2>FILTER BY</h2>
             <label for="city">City</label>
-            <select name="city" id="city" class="form-control">
+            <select name="city" id="city" class="form-control search">
           		<option value="">Any</option>
                <% (Job.uniq_with_column :city).each do |city| %>
                 <option value='<%=city %>'><%= city %></option>
@@ -28,7 +28,7 @@
     <div>
 
             <label for="sub_industry">Sub Industry</label>
-            <select name="sub_industry" id="sub_industry" class="form-control">
+            <select name="sub_industry" id="sub_industry" class="form-control search">
             <option value="">Any</option>
               <% SubIndustry.all.each do |si| %>
             <option value='<%=si.id%>'><%= si.name %></option>
@@ -38,7 +38,7 @@
         <br>
         <div>
             <label for="work_type">Work type</label>
-               <select name="work_type" id="work_type" class="form-control">
+               <select name="work_type" id="work_type" class="form-control search">
                 <option value=""  selected>Work Type</option>
               <option value="FT">Full-Time</option>
               <option value="PT">Part-Time</option>
@@ -56,7 +56,7 @@
     <br>
         <div>
      <label for="sort_preference">Closing Date</label>
-          <select id="sort_preference" name="sort_preference" class="form-control">
+          <select id="sort_preference" name="sort_preference" class="form-control search">
             <option value="no">No Preference</option>
             <option value="recent">Recent</option>
             <option value="closing_soon">Closing soon</option>
@@ -239,8 +239,7 @@ $(".shortList button").hover(function(){
         font-family: 'Roboto Condensed', sans-serif;
         font-size: 20px;
         color: black;
-        width: 100%;
-        
+
     }
 
 
@@ -344,7 +343,7 @@ $(".shortList button").hover(function(){
         display: block;
     }
     
-    .form-control {
+    .search {
         border-radius: 0;
         border: 1px solid black;
         width: 70%;

@@ -1,15 +1,18 @@
 .dots{
-  // margin-top: -30%;
+  margin-top: 25%;
   text-align: center;
   // z-index: -1;
   position:relative;
 }
 
 #arrows {
-  // z-index: -1;
-  margin-top: 25%;
   text-align: center;
   position:relative;
+  
+}
+
+#left p, #right p {
+  background-color: #eee;
 }
 
 .small_screen, .buttons{
