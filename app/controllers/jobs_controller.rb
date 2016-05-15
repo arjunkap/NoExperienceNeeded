@@ -14,7 +14,6 @@ class JobsController < ApplicationController
 
 	def create
 			@job = current_user.jobs.new(job_params)
-			@job.closing_date = Date.parse(job_params[:closing_date])
 				if @job.save
 					 flash[:success] = "Job created!"
 					 redirect_to controller: 'employers', action: 'show', id: current_user.company.id
