@@ -1,12 +1,20 @@
 <div id = "review">
+		<div class="review">
 			<%#review = Review.where(:company_id => session[:comp_id])%>
 			<%if review != nil%>
 			<% review.each do |r|%>
 			<div>
-				<div><%= link_to r.title , {controller: 'company_reviews', action: 'show', id: r.id } , class: "link"%></div>
-				<div>
-				<%=r.description%></div>
+			<div><h2><%= link_to r.title , {controller: 'interview_reviews', action: 'show', id: r.id}, class: "link" %>
+				</h2></div>
+			<div><p><strong>Description: </strong>
+				<%=r.description%></p></div><br>
+			<%end%>
+			<%end%>
 			</div>
-			<%end%>
-			<%end%>
 </div>
+
+<style type="text/css">
+	    .link {
+        color: #35a192;
+    }
+</style>
