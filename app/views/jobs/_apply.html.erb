@@ -2,11 +2,12 @@
 <h2>Apply below</h2>
 <form class="" method="post" action="/jobs/apply" data-remote="true">
 	<label><%= @job.question1 %></label>
-	<label><h3>Why should we hire you?</h3></label>
 	<textarea name="question1" class="form-control"></textarea>
+	
 	<label><%= @job.question2 %></label>
 	<textarea name="question2" class="form-control"></textarea>
-	<%= @job.question3 %>
+	
+	</label><%= @job.question3 %></label>
 	<textarea name="question3" class="form-control"></textarea>
 	<input type="hidden" name="job_id" value='<%=@job.id%>' />
 	<br>

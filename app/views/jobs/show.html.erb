@@ -47,26 +47,27 @@
 
   <%= link_to 'Go Back', session[:current_uri], class: 'btn btn-primary' %>
 
-<div class="content">
-<br>
-<p id="notice"><%= notice %></p>
-<% flash.each do |key, value| %>
-  <%= content_tag :div, value, class: "flash #{key}" %>
-<% end %>
-<p>
-  <h2> <%= @job.title %></h2>
- <hr>
-</p>
-
-  <% end %>
-
-  <% if job_creator %>
-     <%= link_to 'Go Back', {controller: "employers", action: "show", id: current_user.company.id }, class: "btn btn-default"  %>
-  <%end%>
-<p>Closing time: <%= @job.closing_date %></p>
-<%end%>
-
 </div>
+<!--<div class="content">-->
+<!--<br>-->
+<!--<p id="notice"><%= notice %></p>-->
+<!--<% flash.each do |key, value| %>-->
+<!--  <%= content_tag :div, value, class: "flash #{key}" %>-->
+<!--<% end %>-->
+<!--<p>-->
+<!--  <h2> <%= @job.title %></h2>-->
+<!-- <hr>-->
+<!--</p>-->
+
+<!--  <% end %>-->
+
+<!--  <% if job_creator %>-->
+<!--     <%= link_to 'Go Back', {controller: "employers", action: "show", id: current_user.company.id }, class: "btn btn-default"  %>-->
+<!--  <%end%>-->
+<!--<p>Closing time: <%= @job.closing_date %></p>-->
+<!--<%end%>-->
+
+<!--</div>-->
     
   </div>
   <div class = "centre">
@@ -74,9 +75,9 @@
 <br>
 <!--<p id="notice"><%= notice %></p>
 
-<% flash.each do |key, value| %>
-  <%= content_tag :div, value, class: "flash #{key}" %>
-<% end %>-->
+<!--<% flash.each do |key, value| %>-->
+<!--  <%= content_tag :div, value, class: "flash #{key}" %>-->
+<!--<% end %>-->
 
   <h1> <%= @job.title %></h1>
   <br>
