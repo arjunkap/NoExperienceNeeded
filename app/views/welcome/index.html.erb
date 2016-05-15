@@ -97,10 +97,22 @@
               <div class="col-md-3">
              <button type="submit" class="btn btn-primary index">SEARCH</button>
              </div>
+             <% if logged_in? %>
+              <% if current_user.company %>
+              <div class="col-md-3">
+              <%= link_to "Take me to profile", {controller: "employers", action: "show", id: current_user.company.id},class: "btn btn-primary index" %>
+                </div>
+              <% end %>
+              <div class="col-md-3">
+              <% if current_user.job_seeker %>
+              <%= link_to "Take me to profile", {controller: "job_seekers", action: "show", id: current_user.job_seeker.id},class: "btn btn-primary index" %>
+              </div>
+              <% end %>
+             <%else %>
             <div class="col-md-3">
                  <%= link_to "Login", login_path, class: "btn btn-primary index" %>
              </div>
-          
+          <%end %>
              <div class="col-md-3">
              </div>
              </div>
