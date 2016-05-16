@@ -10,7 +10,8 @@
 			<tr>
 				<%= message.message %>
 			</tr>
-			<tr><%= link_to Job.title,job ,class:"link" %>	 </tr>
+			<tr><%= link_to Job.title,job ,class:"link" %>
+			<%#= link_to Job.title,{controller:"jobs",action:"show",id: Job.id},class:"link" %></tr>
 		</table>
 	<% end %>
 	</div>
@@ -43,6 +44,6 @@
     }
     
     .link {
-        color: #78a300;
+        color: #35a192;
     }
 </style>
