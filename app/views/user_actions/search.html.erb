@@ -89,10 +89,10 @@
 
     <tr>
         <td class = "resultTitle"><h1><%= link_to job.title, job, class: 'link'%></h1></td>
-        <td class = "resultCity"><h3><%= job.city %> </h3></td>
+        <td class = "resultCity"><%= job.city %> </td>
     </tr> 
     <tr>
-        <td class = "resultDescription"><h3><%= job.description %></h3></td>
+        <td class = "resultDescription"><%= job.description %></td>
         
         <!--<% if job.closing_date %>-->
         <!--    <td class = "resultDueDate"><h3><%= job.closing_date.strftime("%B %-d, %Y") %></h3></td>-->
@@ -101,7 +101,7 @@
         <!--<% end %>    -->
         <td class = "resultCompany">
             <% if job.user_id %>
-              <h3><%= User.find(job.user_id).company.title %></h3>
+                <%= User.find(job.user_id).company.title %>
             <% end %> 
         </td>
     </tr>
