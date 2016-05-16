@@ -17,7 +17,7 @@
             <% @sjobs.each do |sjob| %>
             <% j = Job.find(sjob.job_id) %>
             <p> 
-                <%=  link_to j.title ,  {:controller => "jobs", :action => "show", :id => j.id } %>
+                <%=  link_to j.title ,  {:controller => "jobs", :action => "show", :id => j.id },class:"link" %>
                 <% if User.exists?(j.user_id) %>
                 <% company =  User.find(j.user_id).company %>
                 <% if company %>
@@ -64,5 +64,9 @@
         background-color: white;
         color: black;
         font-family: 'Oswald', sans-serif;
+    }
+    
+    .link {
+        color: #78a300;
     }
 </style>
