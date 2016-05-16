@@ -3,27 +3,29 @@
     <div class = "left">
       <div id = "searchPanel">
        <h2>FILTER BY</h2>
-    <!--   <form method="get" action="/search">-->
-    <!--     <input type="hidden" name="search_from" value="refine_search" value='<%=session[:company]%>'></input>-->
-    <!--  <div>-->
-    <!--    <label for "company">Company</label>-->
-    <!--    <input  type="text" name="company" placeholder="Company" value='<%=session[:company]%>' class="form-control" />-->
-    <!--</div>          -->
-    <!--<br> -->
-    <!--<div>-->
-    <!--    <button type="submit" class="btn btn-primary">Refine</button>-->
-    <!--</div>-->
-    <!--   </form>     -->
+       <form method="get" action="/search">
+         <input type="hidden" name="search_from" value="refine_search" value='<%=session[:company]%>'></input>
+      <div>
+        <label for "company">Company</label>
+        <input  type="text" name="company" placeholder="Company" value='<%=session[:company]%>' class="form-control" />
+    </div>          
+    <br> 
+    <div>
+        <button type="submit" class="btn btn-primary">Refine</button>
+    </div>
+      </form>    
  </div>
 </div>
 <div class = "centre">
     <div id = "results">
         <div class="content">
-            <% company.each do |i| %>
+            <% @companies.each do |i| %>
             <div class="item">
             <table><th class = "resultCompany"><h1><%= link_to i.title , {controller: 'employerprofile', action: 'show', id: i.id},class:"link" %></h1></th>
           <tr>
+          <% if User.exists?(i.user_id) %>
           <td class = "resultDescription"><h3></h3>Description: <%= User.find(i.user_id).about %> <br></h3></td>
+            <%end%>
             </tr>
         </table>
           <br>

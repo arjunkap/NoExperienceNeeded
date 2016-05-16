@@ -33,7 +33,8 @@
           <table>
             <tr>
               <td class = "resultTitle"><h1>"<%= link_to i.title , {controller: 'company_reviews', action: 'show', id: i.id } , class: "link"%>"</h1></td>
-              <td class = "resultCompany"><h2><%= i.company_name %></h2></td></tr>
+              <td class = "resultCompany"><h2><%= i.company_name %></h2></td>
+            </tr>
               <td class = "resultDescription"><h3><%= i.description %></h3></td>
               <td class = "resultRating"><%= i.rating %></td>
              </tr>
@@ -93,6 +94,10 @@
         float: right;
         text-align: right;
         
+    }
+    
+    .resultCompany {
+        width: 50%;
     }
     
     .resultDescription h3 {
