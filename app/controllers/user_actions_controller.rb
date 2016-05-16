@@ -1,61 +1,62 @@
+# Controles all searching in the website
 class UserActionsController < ApplicationController
 
-
+  # The website has multiple search forms.
+  # this action recognizes different search forms and
+  # different search items.
   def search
-    session[:current_uri] = request.fullpath
+      session[:current_uri] = request.fullpath
 
-  	search_from = params[:search_from]
-    @search_type = params[:search_type]
+    	search_from = params[:search_from]
+      @search_type = params[:search_type]
 
-    if @search_type == "" || @search_type == nil
-      @search_type = session[:search_type]
-    end
+      if @search_type == "" || @search_type == nil
+        @search_type = session[:search_type]
+      end
 
-    session[:search_type] = @search_type
+      session[:search_type] = @search_type
 
-    
-    if @search_type == "jobs"
-      search_jobs search_from
+      # based on search type and search location
+      # get a result collection
+      if @search_type == "jobs"
+        search_jobs search_from
 
-    elsif @search_type == "interviews"
-      search_interviews search_from
-    elsif @search_type == "comp_reviews"
-      find_companies_reviews search_from
-    elsif @search_type == "company"
-      # if search_from == "navbar"
-      #   search_companies params[:query]
-      # elsif search_from == "welcome_page_search"
-      #   search_companies params[:search_query]
-      # end
-      company_search search_from
-    end
+      elsif @search_type == "interviews"
+        search_interviews search_from
+      elsif @search_type == "comp_reviews"
+        find_companies_reviews search_from
+      elsif @search_type == "company"
+        company_search search_from
+      end
    
   end
 
-
+  # Search all companies in database.
   def company_search search_from
 
-    @companies = []
-    if search_from == "navbar"
-      query = params[:query].downcase
+      @companies = []
 
-    elsif search_from == "refine_search"
-      query = params[:company].downcase
-    end
-    if query == nil or query == ""
-      @companies = Company.all
-    else
-      Company.all.each do |c|
+      # Get search query
+      if search_from == "navbar"
+        query = params[:query].downcase
 
-        if c.title and c.title.downcase.include? query
-          @companies.push c
+      elsif search_from == "refine_search"
+        query = params[:company].downcase
+      end
+      if query == nil or query == ""
+        @companies = Company.all
+      else
+        Company.all.each do |c|
+
+          if c.title and c.title.downcase.include? query
+            @companies.push c
+          end
         end
       end
-    end
-    session[:company] = query
-    
+      session[:company] = query
   end
 
+  # Sort baed on pre selected criteria
   def sort
     puts "....................................................."
     if params[:preference]
@@ -76,14 +77,19 @@ class UserActionsController < ApplicationController
 
   end
 
-
-def search_companies word
+  # Search companies that contain words passed
+  # as arguments to the function
+  def search_companies word
       
       @company = []
+
+      # return all companies if word is empty
       if word == ""
         @company = Company.all
       else 
          Company.all.each do |c|
+
+            # Check if company title includes the word
             if c.title.downcase.include? word.downcase
               @company.push c
             end
@@ -91,46 +97,45 @@ def search_companies word
       end
   end  
 
+  # Find reviews based on where search is carried out
   private
   def find_companies_reviews search_from
 
-  
-    if search_from == "refine_search"
-      query =  session[:query]
-      company = params[:company]
-      session[:company] = company
+      # Apply filter if refined search
+      if search_from == "refine_search"
+          query =  session[:query]
+          company = params[:company]
+          session[:company] = company
 
-      if company == "" and query == ""
-        @reviews = Review.all
-      elsif company == "" and query != ""
-        @reviews = search_with_query query.downcase, :review
-      elsif company != "" and query == ""
-        @reviews =  find_interview_or_review_for_companies company.downcase, :review
-      else
-        @reviews = refine_inter_review_with_companies company.downcase, query.downcase, :review
+          if company == "" and query == ""
+            @reviews = Review.all
+          elsif company == "" and query != ""
+            @reviews = search_with_query query.downcase, :review
+          elsif company != "" and query == ""
+            @reviews =  find_interview_or_review_for_companies company.downcase, :review
+          else
+            @reviews = refine_inter_review_with_companies company.downcase, query.downcase, :review
+          end
+        # Do basic title matching if searched from nav bar and welcome page
+      elsif search_from == "navbar" || search_from == "welcome_page_search"
+          query = params[:query]
+          if query == "" || query == nil
+            @reviews = Review.all
+          else
+            @reviews =  search_with_query query.downcase, :review
+            
+          end
+        session[:query] = params[:query]
       end
-    elsif search_from == "navbar" || search_from == "welcome_page_search"
-      query = params[:query]
-      if query == "" || query == nil
-        @reviews = Review.all
-      else
-        @reviews =  search_with_query query.downcase, :review
-        
-      end
-       session[:query] = params[:query]
-    end
-
   end
 
       
-
   def search_company_review company, query
     collection = []
     reviews = Review.all
-    
   end
 
- 
+ # search interviews based on search location
   def search_interviews search_from
   
     if search_from == "refine_search"
@@ -163,7 +168,7 @@ def search_companies word
   end
 
 
-
+  # refines a collection of interview review based on company filter
   def refine_inter_review_with_companies company, query, model
     collection = []
     if model == :interview_review
@@ -183,7 +188,7 @@ def search_companies word
   end
 
 
-
+  # Search jobs based on location of search
   def search_jobs search_from
     if search_from == "welcome_page_search" || search_from == "navbar"
         query = params[:query]
@@ -230,14 +235,10 @@ def search_companies word
       @jobs2 = refine_with_work_industry @jobs1, params[:sub_industry]
 
       @jobs = refine_with_work_type @jobs2, params[:work_type]
-
-  
-      # @jobs = @jobs.paginate(:page => params[:page], :per_page => 25)
-
     end
   end
 
-
+  # refine job collection based on type of work
   def refine_with_work_type jobs, work_type
     refined_jobs = []
     if work_type == ""
@@ -252,7 +253,7 @@ def search_companies word
     return refined_jobs
   end
 
-
+  # refine job collection based on city of work
   def refine_with_city jobs, city
 
     refined_jobs = []
@@ -270,6 +271,7 @@ def search_companies word
 
   end
 
+  # refine based on industry of the job
   def refine_with_work_industry jobs , industry
 
     if industry == ""
@@ -287,6 +289,7 @@ def search_companies word
     end
   end
 
+  # Finds interview review for a given company
   def find_interview_or_review_for_companies company, model
 
     collection = []
@@ -305,25 +308,10 @@ def search_companies word
 
 
 
-
+  # search based on title of the record
+  # simple match with the title and the word
   def search_with_title word, model
   	collection = []
-  	# if options != nil
-  	# 	collection_ = options[:collection]
-  	# 	collection_.each do |entity|
-  	# 		if city
-	  # 			if entity.title.downcase.include? word.downcase and entity.city and entity.city.downcase.include? city.downcase
-	  # 				collection.push entity
-	  # 			end
-	  # 		else
-	  # 			if entity.title.downcase.include? word.downcase 
-	  # 				collection.push entity
-	  # 			end
-	  # 		end
-  	# 	end
-  	# 	return collection
-  	# end
-  	
   	if model == :job
   		Job.all.each do |job|
   		  if job.title.downcase.include? word
@@ -357,7 +345,8 @@ def search_companies word
   end
 
 
-
+  # Seach with query matches all the terms in the query with
+  # the collection text and returns a new collection of results
   def search_with_query query, model
   	query_words = []
   	collection = []

@@ -1,8 +1,10 @@
+# Controls all jobs posted on the website
 class JobsController < ApplicationController
 	
 	require 'date'
 	before_action :find_job, only: [:show, :edit, :update, :destroy, :apply, :applications]
 
+	# Displays job results based on category
 	def index
 		if params[:category].blank?
 			@jobs = Job.all.order("created_at DESC")
@@ -12,6 +14,7 @@ class JobsController < ApplicationController
 		end
 	end
 
+	# creates a new job record
 	def create
 		@job = current_user.jobs.new(job_params)
 			if @job.save
@@ -24,6 +27,7 @@ class JobsController < ApplicationController
 		
 	end
 
+	# Destroys any jobs record
 	def destroy
 		@job.destroy
 		redirect_to controller: 'employers', action: 'show', id: current_user.company.id
@@ -38,6 +42,8 @@ class JobsController < ApplicationController
 
 	end
 
+	# Displays all active jobs for a given company
+	# Displayed inside company dashboard
 	def active_jobs
 		@jobs = []
 		if current_user
@@ -51,6 +57,8 @@ class JobsController < ApplicationController
 		end
 	end
 
+	# Create a new job using AJAX inside a given 
+	# company dashboard
 	def create_new_job
 		@job = Job.new
 		respond_to do |format|
@@ -58,6 +66,7 @@ class JobsController < ApplicationController
 		end
 	end
 
+	# Creates a new job and saves it for a company
 	def new
 		if is_current_user_employer?
 			@job = Job.new
@@ -67,6 +76,8 @@ class JobsController < ApplicationController
 
 	end
 
+	# Allows for user to shortlist a job for
+	# future reference
 	def short_list
 		job = Job.find(params[:job])
 		@button_id = "#btn#{job.id}"
@@ -83,21 +94,23 @@ class JobsController < ApplicationController
 		
 
 
-
+	# Allows employers to update jobs they have created
+	# redirects to employer dashboard
 	def update
-    if @job.update_attributes(job_params)
-      redirect_to controller: 'employers', action: 'show', id: current_user.company.id
-    else
-      render 'edit'
-    end
-
+	    if @job.update_attributes(job_params)
+	      redirect_to controller: 'employers', action: 'show', id: current_user.company.id
+	    else
+	      render 'edit'
+	    end
 	end
 
+	# Allows employers to see the applications recieved from
+	# Job seekers for any given job
 	def applications
 		@applications = JobApplication.where(job_id: @job.id)
-
 	end
 
+	# Allows for job seekers to apply for jobs created by an employer
 	def create_application
 		job_id = params[:job_id]
 		question1 = params[:question1]
@@ -119,32 +132,24 @@ class JobsController < ApplicationController
 
 		else
 			flash[:failure] = "Sorry, something wrong happened."
-			
 		end
-
 	end
 
+	# Allows user to apply for jobs
 	def apply
-		# if !logged_in?
-		# 	session[:was_applying_for] = @job.id
-		# 	render  template: 'sessions/new'
-		# else
-		# 	redirect_to controller: 'jobs', action: 'show', id: @job.id
-		# end
-
 		respond_to do |format|
 			format.js
-
 		end
-
-		
 	end
 
-
+	# renders a list of short listed job for a given job seeker
+	# if they are logged in
 	def short_listed_jobs
 		if current_user and current_user.job_seeker
 			all_short_listed_jobs = current_user.job_seeker.short_listed_jobs
 			@sjobs = []
+
+			# check for empty query
 			if params[:query] != "" and params[:query] != nil
 				query = params[:query].downcase
 				all_short_listed_jobs.each do |sjob|

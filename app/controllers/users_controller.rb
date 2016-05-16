@@ -1,5 +1,7 @@
+# Controls generic user functions common to both job_seeker and employer
 class UsersController < ApplicationController
 	
+	# Display the type of the job seeker
 	def show
 		@user = User.find(params[:id])
 	end
@@ -9,34 +11,31 @@ class UsersController < ApplicationController
 	end
 
 	def new
-		# @company = params[:company].to_i == 1 ? true : false
-		# puts @company
-		# @user = User.new
 	end
 
 	def create
 		@user = User.new(user_params)
 		 if @user.save
-		  flash[:success] = "Welcome to the NEN!"
-	 	  if @company
-	    	abn = params[:abn]
-	    	company = params[:company]
-	    	@user.company = Company.new(abn: abn, title: params[:company])
-	    	@user.save
-	    	log_in @user
-	    	redirect_to controller: 'employers', action: 'show'
-	     else
-	     	mobile = params[:mobile]
-	    	@user.job_seeker = JobSeeker.new(mobile: mobile)
-	    	@user.save
-	    	log_in @user
-	    	redirect_to controller: 'job_seekers', action: 'show'
-	     end
+		  	flash[:success] = "Welcome to the NEN!"
+	 	  	if @company
+		    	abn = params[:abn]
+		    	company = params[:company]
+		    	@user.company = Company.new(abn: abn, title: params[:company])
+		    	@user.save
+		    	log_in @user
+		    	redirect_to controller: 'employers', action: 'show'
+	     	else
+		     	mobile = params[:mobile]
+		    	@user.job_seeker = JobSeeker.new(mobile: mobile)
+		    	@user.save
+		    	log_in @user
+		    	redirect_to controller: 'job_seekers', action: 'show'
+	     	end
 	    else
 	      render 'new'
 	    end
   
-		end
+	end
 
 	def job_seeker
 		session[:action] = "create_job_seeker"
