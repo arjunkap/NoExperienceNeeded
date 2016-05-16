@@ -11,7 +11,11 @@
   
 }
 
-#left p, #right p {
+#left p {
+  background-color: #eee;
+}
+
+#right p {
   background-color: #eee;
 }
 
@@ -165,7 +169,7 @@ input[type="button"]{
   // text-align: center;
 }
 
-h2{
+.aboutUs h2{
   color: #78a300;
   margin: 40px auto;
   letter-spacing: 1px;
@@ -241,14 +245,14 @@ nav.carousel input:checked + label {
 }
 p.glyphicon{
     padding: 20px 20px;
-    background: #BBBABA!important;
+    // background: #BBBABA!important;
     cursor: pointer;
 }
 .text{
   text-align: center;
 }
 
-  h1 {
+.aboutUs  h1 {
     font-family: 'Oswald', sans-serif;
     font-size: 25px;
     text-transform: uppercase;
@@ -256,23 +260,23 @@ p.glyphicon{
     /*text-decoration: underline;*/
   }
   
-  h2 {
+.aboutUs  h2 {
     font-family: 'Oswald', sans-serif;
     font-size: 60px;
     text-transform: uppercase;
   }
   
-  h3 {
+.aboutUs  h3 {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 22px;
     text-transform: uppercase;
   }
   
-  h2, h3 {
+.aboutUs  h2, .aboutUs h3 {
     line-height: 5px; 
   }
   
-  .container {
+  .aboutUs .container {
     margin-top: -2%;
   }
   
