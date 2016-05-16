@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     		@user.job_seeker.save
 		      log_in @user
 		      flash[:success] = "Welcome to the NEN!"
-		      redirect_to controller: "job_seekers", action: "show", id: @user.job_seeker.id
+		      redirect_to "/profile/"
     else
       render 'new'
     end
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
 	 	  @user.company.save
 		  log_in @user
 		  flash.now[:success] = "Welcome to the NEN!"
-		  redirect_to controller: "employers",action: "show", id: @user.company.id
+		  redirect_to "/employer/#{@user.company.id}"
 		
 	 else
 	      render 'new'

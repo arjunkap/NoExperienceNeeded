@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   get 'jobs/sort' => 'user_actions#sort'
 
   
-  get 'createprofile/employer'
+  get 'createprofile/show'
+  post 'createprofile/save'
 
-  get 'createprofile/jobSekker'
 
   # get 'user_actions/search'
 
