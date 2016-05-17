@@ -1,6 +1,6 @@
 <div id = "profile">
 		
-		<div class="companyname"><h1><%= Company.find(@user.id).title %></h1></div><br><br>
+		<div class="companyname"><h1><%= @company.title %></h1></div><br><br>
 	<div class="col-md-3 col-md-offset-1">
 		<div class="intro">
 		<div><strong>location:</strong><p><%= "#{@user.state} / #{@user.city}"%><p>
