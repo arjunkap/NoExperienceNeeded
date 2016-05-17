@@ -101,7 +101,8 @@
         <!--<% end %>    -->
         <td class = "resultCompany">
             <% if job.user_id %>
-                <%= User.find(job.user_id).company.title %>
+            <% company =  User.find(job.user_id).company %>
+                <%= link_to company.title, {controller: "employerprofile", action: "show",  id: company.id },class: 'link' %>
             <% end %> 
         </td>
     </tr>
