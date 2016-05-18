@@ -3,6 +3,9 @@
 <div>
         <h2>Applicant</h2>
     </div>
+     <div class="pull-left">
+          <%= link_to "Back", {controller: "employers", action: "show", id: current_user.company.id} , class: "btn btn-info", id: "cancel_button" %>
+        </div>
     <div class="border">
 
 	<% @applications.each do |application| %>

@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
   validates :first_name, :presence => true
   validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
 
-  validates_length_of :password, :in => 6..20, :on => :create
 
   has_secure_password
   #validates :password, :confirmation => true , length: { minimum: 6 }#password_confirmation attr
