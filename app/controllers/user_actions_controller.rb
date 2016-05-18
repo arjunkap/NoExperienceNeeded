@@ -62,7 +62,7 @@ class UserActionsController < ApplicationController
     if params[:preference]
       if params[:preference] == "recent"
         puts "recent----"
-        @jobs = Job.order(:created_at)
+        @jobs = Job.order(:created_at => :desc)
       elsif params[:preference] == "closing_soon"
         puts "..............closing date"
         @jobs = Job.order(closing_date: :desc)
