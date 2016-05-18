@@ -43,7 +43,9 @@
           </div>
             
           <div class="form-group">
-          <%= f.text_field :country, class: 'form-control new_job',placeholder: "country"  %>
+         <% states = ["New South Wales", "Vitoria", "Queensland", "Western Australia", "Tasmania", "Australian Capital Territory", "Nothern Territory"] %>
+          <%= f.select(:state,states, {:include_blank => 'State'}, {class: "form-control new_job"})  %>
+
           </div>
       
           <div class="form-group">
@@ -70,11 +72,11 @@
           
           <div class="form-group">
             <% work_types = ["Full time", "Part time", "Contract", "Casual"] %>
-            <%= f.select(:work_type,work_types, {:include_blank => 'Work Type'}, {class: "form-control"})  %>
+            <%= f.select(:work_type,work_types, {:include_blank => 'Work Type'}, {class: "form-control new_job"})  %>
           </div>
           
           <div class="form-group">
-            <%= f.select(:category,sub_industries, {:include_blank => 'Category'}, {class: "form-control"})  %>
+            <%= f.select(:category,sub_industries, {:include_blank => 'Category'}, {class: "form-control new_job"})  %>
           </div>
           
           <div class="form-group">
@@ -126,6 +128,14 @@
   	border-radius: 0;
   	border: 4px solid black;
   	background-color: white;
+  }
+    select.new_job{
+    padding-top: 0;
+    padding-bottom: 0;  
+  } .new_job{
+   
+    
+    font-size: 20px;
   }
 
 </style>
