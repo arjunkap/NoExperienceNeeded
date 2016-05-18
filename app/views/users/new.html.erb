@@ -35,7 +35,10 @@ h2 {
 
   .form-control{
     height: 40px;
+    padding-top: 0;
+    padding-bottom: 0;
   }
+
 </style>
 <% provide(:title, 'Sign up')%>
 
@@ -72,7 +75,7 @@ h2 {
     <div class="form-group">
     <% states = ["New South Wales", "Vitoria", "Queensland", "Western Australia", "Tasmania", "Australian Capital Territory", "Nothern Territory"] %>
       <%#= f.text_field :state, class: 'form-control registeration', :placeholder => "State" %>
-      <%= f.select(:state,states, {:include_blank => 'State'}, {class: "form-control"})  %>
+      <%= f.select(:state,states, {:include_blank => 'State'}, {class: "form-control registeration"})  %>
 
     </div>
     
