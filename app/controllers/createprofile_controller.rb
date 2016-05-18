@@ -8,7 +8,6 @@ class CreateprofileController < ApplicationController
  		@user = User.find(params[:id])
  		@user.about = params[:about]
  		@user.web_url = params[:web_url]
- 		@user.password = "123456"
  		@user.save
  		if is_current_user_job_seeker?
  			redirect_to "/profile/"

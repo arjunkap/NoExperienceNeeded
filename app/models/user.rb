@@ -20,8 +20,9 @@ class User < ActiveRecord::Base
   validates_length_of :password, :in => 6..20, :on => :create
 
   has_secure_password
-  validates :password, :confirmation => true , length: { minimum: 6 }#password_confirmation attr
-   # Returns the hash digest of the given string.
+  #validates :password, :confirmation => true , length: { minimum: 6 }#password_confirmation attr
+   
+   #Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
