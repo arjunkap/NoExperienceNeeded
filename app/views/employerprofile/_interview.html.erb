@@ -10,7 +10,7 @@
 				<%=i.position%></p></div>
 				<div><p><strong>Description: </strong>
 				<%=i.description%></p></div>
-            <div><p><strong>Duration: </strong><%=i.duration %></p></div>
+            <div><p><strong>Offerd: </strong><% if i.offer %> Yes <% else %> No <%end%></p></div>
             <div><p><strong>Difficulty: </strong><%= i.difficulty %></p></div>
            <div><p><strong>Voted by: </strong><%= i.upvotes.count %></p></div>
 				<br>

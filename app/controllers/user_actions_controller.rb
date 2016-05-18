@@ -281,7 +281,7 @@ class UserActionsController < ApplicationController
     if SubIndustry.exists?(industry)
       sub_name = SubIndustry.find(industry).name
       jobs.each do |job|
-        if job.category = sub_name
+        if job.category == sub_name
           refined_jobs.push job
         end
       end
@@ -299,7 +299,7 @@ class UserActionsController < ApplicationController
       pre_collection = Review.all
     end
     pre_collection.each do |item|
-      if item.company_name.downcase.include? company
+      if item.company_name and item.company_name.downcase.include? company
         collection.push item
       end
     end
@@ -321,20 +321,20 @@ class UserActionsController < ApplicationController
   	
   	elsif model == :company
   		Company.all.each do |company|
-  		  if company.title.downcase.include? word
+  		  if company.title and company.title.downcase.include? word
           collection.push company
         end
   		end
     elsif model == :interview
       InterviewReview.all.each do |ir|
-        if ir.description.downcase.include? word
+        if ir.description and ir.description.downcase.include? word
           collection.push ir
         end
       end
     elsif model == :review
 
       Review.all.each do |review|
-        if review.title.downcase.include? word or review.description.downcase.include? word
+        if (review.title and review.title.downcase.include? word) or (review.description and review.description.downcase.include? word)
           collection.push review
         end
       end

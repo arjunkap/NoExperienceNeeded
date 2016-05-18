@@ -21,7 +21,8 @@
 	  <div class="content">
 			<div><strong>Description:</strong><p><%= @interview.description %></p></div>
             <div><strong>Create date</strong>:<p><%= @interview.created_at %></p></div>
-            <div><strong>Duration:</strong><p><%= @interview.duration %></p></div>
+            <div><strong>Offered:</strong><p>
+            <% if @interview.offer %> Yes <% else %> No <%end%> </p></div>
             <div><strong>Difficulty:</strong><p><%= @interview.difficulty %></p></div>
             <div><strong>Experience:</strong><p><%= @interview.experience %></p></div>
             <div><strong>Position:</strong><p><%= @interview.position %></p></div>
