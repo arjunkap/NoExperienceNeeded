@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(user_params)
 		 if @user.save
-		  	flash.now[:success] = "Welcome to the NEN!"
+		  	# flash.now[:success] = "Welcome to the NEN!"
 	 	  	if @company
 		    	abn = params[:abn]
 		    	company = params[:company]
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 	 		@user.build_job_seeker
     		@user.job_seeker.save
 		      log_in @user
-		      flash[:success] = "Welcome to the NEN!"
+		      # flash.now[:success] = "Welcome to the NEN!"
 		      redirect_to :controller => "createprofile", :action => "show", :id => @user.id
 
     	else
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
 	 	  @user.build_company(abn: params[:abn], title: params[:company_name])
 	 	  @user.company.save
 		  log_in @user
-		  flash.now[:success] = "Welcome to the NEN!"
+		  # flash.now[:success] = "Welcome to the NEN!"
 		  redirect_to :controller => "createprofile", :action => "show", :id => @user.id
 		
 	 else
