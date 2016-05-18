@@ -30,6 +30,7 @@ class JobsController < ApplicationController
 	# Destroys any jobs record
 	def destroy
 		@job.destroy
+		ShortListedJob.where(job_id: @job.id).delete_all
 		redirect_to controller: 'employers', action: 'show', id: current_user.company.id
 	end
 
@@ -171,7 +172,7 @@ class JobsController < ApplicationController
 
 	private
 		def job_params
-			params.require(:job).permit(:title, :description, :city, :country, :question1, :question2, :question3, :category, :closing_date, :work_type)
+			params.require(:job).permit(:title, :description, :city, :state, :question1, :question2, :question3, :category, :closing_date, :work_type)
 		end
 
 		def find_job

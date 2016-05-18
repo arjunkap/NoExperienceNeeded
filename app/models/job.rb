@@ -3,7 +3,6 @@ class Job < ActiveRecord::Base
   has_many :short_listed_jobs
   belongs_to :user
   belongs_to :sub_industry
-  self.per_page = 10
   validates :title, :presence => true
   validates :question1, :presence => true
   validates :question2 , :presence => true
@@ -14,7 +13,7 @@ class Job < ActiveRecord::Base
   validate :validate_closing_date
   validates :description, :presence => true
   validates :city, :presence => true
-  validates :country, :presence => true
+  validates :state, :presence => true
   validates_length_of :title, :in => 6..100, :on => :create
 
   def validate_closing_date

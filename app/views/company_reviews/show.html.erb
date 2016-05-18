@@ -13,7 +13,7 @@
 <div class="col-md-7">
   <div  class="content">
 	<div><strong>Description:</strong><p><%= @review.description %></p></p></div>
-	<div>Create date:<%= @review.created_at %></div>
+	<div>Date created : <%= time_ago_in_words(@review.created_at) %></div>
      <br><br>
      <div class="back"><%= link_to 'Back', session[:current_uri], class: 'btn btn-default' %></div>
      </div></div>
