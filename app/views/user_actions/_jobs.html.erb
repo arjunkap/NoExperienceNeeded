@@ -29,7 +29,8 @@
                 <input type="hidden"  name="job" value='<%= job.id %>' />
                 <button id='btn<%= job.id %>' class="button">Add to short list</button>
             </form>
-        <% else %>
+            <%end%>
+        <% if is_current_user_job_seeker? and already_short_listed? job.id %>
             <p class = "shortlisted">Shortlisted</p>
         <%end%>  
     </div>
