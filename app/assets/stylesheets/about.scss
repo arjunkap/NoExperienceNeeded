@@ -124,13 +124,13 @@ img{
 
 .main-pos {
   margin-left: 2em;
-  z-index: 3000;
+  z-index: 1000;
 }
 
 .left-pos {
   opacity: .3;
   margin-left: -17em;
-  z-index: 1000;
+  z-index: 500;
   -webkit-transform: scale(.75);
   -moz-transform: scale(.75);
   transform: scale(.75);
@@ -147,7 +147,7 @@ img{
 .right-pos {
   opacity: .3;
   margin-left:  21em;
-  z-index: 1000;
+  z-index: 500;
   -webkit-transform: scale(.75);
   -moz-transform: scale(.75);
   transform: scale(.75);

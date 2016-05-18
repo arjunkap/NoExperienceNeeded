@@ -29,8 +29,10 @@ class JobsController < ApplicationController
 
 	# Destroys any jobs record
 	def destroy
-		@job.destroy
 		ShortListedJob.where(job_id: @job.id).delete_all
+		JobApplication.where(job_id: @job.id).delete_all
+		InterviewMessage.where(job_id: @job.id).delete_all
+		@job.destroy
 		redirect_to controller: 'employers', action: 'show', id: current_user.company.id
 	end
 
