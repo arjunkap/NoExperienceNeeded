@@ -3,8 +3,9 @@
         <h2>My Messages</h2>
     </div>
     <div class="border">
+   <center> <% if @messages.count > 0 %> <h4>Hi <%= current_user.first_name %> , checkout new messages from following jobs <%else%> Haven't heard from any employer yet. Remember to update your profile :) <%end%> </h4> </center>
 	<% @messages.each do |message| %>
-	<h4>Congrutulations you have made to interview steps for this job</h4>
+	
 	<% job = Job.find(message.job_id) %>
 		<table>
 			<tr>
@@ -12,7 +13,9 @@
 			</tr>
 			<tr><%= link_to job.title,job ,class:"link" %>	 </tr>
 		</table>
+        <hr>
 	<% end %>
+
 	</div>
 <%end%>
 
@@ -38,6 +41,8 @@
         width:80%;
         padding-left:3%;
         padding-top:5%;
+        padding-bottom:5%;
+
         margin-left:10%;
         margin-bottom:3%;
     }
